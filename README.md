@@ -11,6 +11,7 @@ The hamlet engine base is made up of the following components
 
 | Part Type           | Repo                                             |
 |---------------------|--------------------------------------------------|
+| engine-wrapper      | https://github.com/hamlet-io/engine-core         |
 | engine-core         | https://github.com/hamlet-io/engine              |
 | engine-plugin-aws   | https://github.com/hamlet-io/engine-plugin-aws   |
 | engine-plugin-azure | https://github.com/hamlet-io/engine-plugin-azure |
