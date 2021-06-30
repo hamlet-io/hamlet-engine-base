@@ -1,0 +1,202 @@
+{
+  "AWSTemplateFormatVersion": "2010-09-09",
+  "Metadata": {
+    "ConfigurationReference": "configRef_v123",
+    "RequestReference": "SRVREQ01",
+    "Prepared": "2021-06-30T03:08:18Z",
+    "RunId": "runId098"
+  },
+  "Outputs": {
+    "Account": {
+      "Value": {
+        "Ref": "AWS::AccountId"
+      }
+    },
+    "s3XappXs3replicasrcXurl": {
+      "Value": {
+        "Fn::GetAtt": [
+          "s3XappXs3replicasrc",
+          "WebsiteURL"
+        ]
+      }
+    },
+    "s3XappXs3replicadstXurl": {
+      "Value": {
+        "Fn::GetAtt": [
+          "s3XappXs3replicadst",
+          "WebsiteURL"
+        ]
+      }
+    },
+    "s3XappXs3replicadstXregion": {
+      "Value": {
+        "Ref": "AWS::Region"
+      }
+    },
+    "s3XappXs3replicasrcXname": {
+      "Value": {
+        "Ref": "s3XappXs3replicasrc"
+      }
+    },
+    "s3XappXs3replicadst": {
+      "Value": {
+        "Ref": "s3XappXs3replicadst"
+      }
+    },
+    "s3XappXs3replicasrc": {
+      "Value": {
+        "Ref": "s3XappXs3replicasrc"
+      }
+    },
+    "s3XappXs3replicasrcXarn": {
+      "Value": {
+        "Fn::GetAtt": [
+          "s3XappXs3replicasrc",
+          "Arn"
+        ]
+      }
+    },
+    "s3XappXs3replicadstXdns": {
+      "Value": {
+        "Fn::GetAtt": [
+          "s3XappXs3replicadst",
+          "DomainName"
+        ]
+      }
+    },
+    "s3XappXs3replicasrcXdns": {
+      "Value": {
+        "Fn::GetAtt": [
+          "s3XappXs3replicasrc",
+          "DomainName"
+        ]
+      }
+    },
+    "Region": {
+      "Value": {
+        "Ref": "AWS::Region"
+      }
+    },
+    "DeploymentMode": {
+      "Value": "update"
+    },
+    "s3XappXs3replicadstXarn": {
+      "Value": {
+        "Fn::GetAtt": [
+          "s3XappXs3replicadst",
+          "Arn"
+        ]
+      }
+    },
+    "s3XappXs3replicasrcXregion": {
+      "Value": {
+        "Ref": "AWS::Region"
+      }
+    },
+    "s3XappXs3replicadstXname": {
+      "Value": {
+        "Ref": "s3XappXs3replicadst"
+      }
+    },
+    "DeploymentUnit": {
+      "Value": "aws-s3-replication"
+    }
+  },
+  "Resources": {
+    "s3XappXs3replicadst": {
+      "Type": "AWS::S3::Bucket",
+      "Properties": {
+        "BucketName": "##MockOutputXs3XappXs3replicadstXnameX##",
+        "LoggingConfiguration": {
+          "LogFilePrefix": "s3/##MockOutputXs3XappXs3replicadstXnameX##/",
+          "DestinationBucketName": "##MockOutputXs3XaccountXauditX##"
+        },
+        "Tags": [
+          {
+            "Value": "SRVREQ01",
+            "Key": "cot:request"
+          },
+          {
+            "Value": "configRef_v123",
+            "Key": "cot:configuration"
+          },
+          {
+            "Value": "mockten",
+            "Key": "cot:tenant"
+          },
+          {
+            "Value": "mockacct",
+            "Key": "cot:account"
+          },
+          {
+            "Value": "mockedup",
+            "Key": "cot:product"
+          },
+          {
+            "Value": "integration",
+            "Key": "cot:environment"
+          },
+          {
+            "Value": "test",
+            "Key": "cot:category"
+          }
+        ]
+      }
+    },
+    "s3XappXs3replicasrc": {
+      "Type": "AWS::S3::Bucket",
+      "Properties": {
+        "BucketName": "##MockOutputXs3XappXs3replicasrcXnameX##",
+        "LoggingConfiguration": {
+          "LogFilePrefix": "s3/##MockOutputXs3XappXs3replicasrcXnameX##/",
+          "DestinationBucketName": "##MockOutputXs3XaccountXauditX##"
+        },
+        "VersioningConfiguration": {
+          "Status": "Enabled"
+        },
+        "ReplicationConfiguration": {
+          "Role": "arn:aws:iam::123456789012:mock/roleXappXs3replicasrcXarn",
+          "Rules": [
+            {
+              "Status": "Enabled",
+              "Destination": {
+                "Bucket": "arn:aws:iam::123456789012:mock/s3XappXs3replicadstXarn"
+              },
+              "Prefix": ""
+            }
+          ]
+        },
+        "Tags": [
+          {
+            "Value": "SRVREQ01",
+            "Key": "cot:request"
+          },
+          {
+            "Value": "configRef_v123",
+            "Key": "cot:configuration"
+          },
+          {
+            "Value": "mockten",
+            "Key": "cot:tenant"
+          },
+          {
+            "Value": "mockacct",
+            "Key": "cot:account"
+          },
+          {
+            "Value": "mockedup",
+            "Key": "cot:product"
+          },
+          {
+            "Value": "integration",
+            "Key": "cot:environment"
+          },
+          {
+            "Value": "test",
+            "Key": "cot:category"
+          }
+        ]
+      }
+    }
+  }
+}

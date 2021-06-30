@@ -1,0 +1,51 @@
+{
+  "aws_ec2_base_app_ec2base_ec2_ec2base": {
+    "cfn_nag": false,
+    "filename": "soln-aws-ec2-base-ap-southeast-2-template.json",
+    "cfn_lint": true,
+    "json_structure": {
+      "match": [
+        {
+          "path": "Resources.ec2InstanceXappXec2baseXa.Properties.NetworkInterfaces[0].NetworkInterfaceId",
+          "value": "##MockOutputXeniXappXec2baseXaXeth0X##"
+        },
+        {
+          "path": "Resources.eniXappXec2baseXaXeth0.Properties.SubnetId",
+          "value": "##MockOutputXsubnetXappXaX##"
+        }
+      ],
+      "not_empty": [
+        {
+          "path": "Resources.ec2InstanceXappXec2baseXa.Properties.ImageId"
+        },
+        {
+          "path": "Resources.ec2InstanceXappXec2baseXa.Properties.InstanceType"
+        },
+        {
+          "path": "Resources.ec2InstanceXappXec2baseXa.Metadata"
+        }
+      ]
+    },
+    "cfn_structure": {
+      "output": [
+        {
+          "id": "securityGroupXappXec2base"
+        }
+      ],
+      "resource": [
+        {
+          "id": "securityGroupXappXec2base",
+          "type": "AWS::EC2::SecurityGroup"
+        },
+        {
+          "id": "ec2InstanceXappXec2baseXa",
+          "type": "AWS::EC2::Instance"
+        },
+        {
+          "id": "eniXappXec2baseXaXeth0",
+          "type": "AWS::EC2::NetworkInterface"
+        }
+      ]
+    }
+  }
+}

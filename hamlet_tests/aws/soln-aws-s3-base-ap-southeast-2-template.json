@@ -1,0 +1,108 @@
+{
+  "AWSTemplateFormatVersion": "2010-09-09",
+  "Metadata": {
+    "ConfigurationReference": "configRef_v123",
+    "RequestReference": "SRVREQ01",
+    "Prepared": "2021-06-30T03:07:44Z",
+    "RunId": "runId098"
+  },
+  "Outputs": {
+    "Account": {
+      "Value": {
+        "Ref": "AWS::AccountId"
+      }
+    },
+    "s3XappXs3base": {
+      "Value": {
+        "Ref": "s3XappXs3base"
+      }
+    },
+    "s3XappXs3baseXdns": {
+      "Value": {
+        "Fn::GetAtt": [
+          "s3XappXs3base",
+          "DomainName"
+        ]
+      }
+    },
+    "s3XappXs3baseXname": {
+      "Value": {
+        "Ref": "s3XappXs3base"
+      }
+    },
+    "s3XappXs3baseXurl": {
+      "Value": {
+        "Fn::GetAtt": [
+          "s3XappXs3base",
+          "WebsiteURL"
+        ]
+      }
+    },
+    "s3XappXs3baseXarn": {
+      "Value": {
+        "Fn::GetAtt": [
+          "s3XappXs3base",
+          "Arn"
+        ]
+      }
+    },
+    "s3XappXs3baseXregion": {
+      "Value": {
+        "Ref": "AWS::Region"
+      }
+    },
+    "Region": {
+      "Value": {
+        "Ref": "AWS::Region"
+      }
+    },
+    "DeploymentMode": {
+      "Value": "update"
+    },
+    "DeploymentUnit": {
+      "Value": "aws-s3-base"
+    }
+  },
+  "Resources": {
+    "s3XappXs3base": {
+      "Type": "AWS::S3::Bucket",
+      "Properties": {
+        "BucketName": "##MockOutputXs3XappXs3baseXnameX##",
+        "LoggingConfiguration": {
+          "LogFilePrefix": "s3/##MockOutputXs3XappXs3baseXnameX##/",
+          "DestinationBucketName": "##MockOutputXs3XaccountXauditX##"
+        },
+        "Tags": [
+          {
+            "Value": "SRVREQ01",
+            "Key": "cot:request"
+          },
+          {
+            "Value": "configRef_v123",
+            "Key": "cot:configuration"
+          },
+          {
+            "Value": "mockten",
+            "Key": "cot:tenant"
+          },
+          {
+            "Value": "mockacct",
+            "Key": "cot:account"
+          },
+          {
+            "Value": "mockedup",
+            "Key": "cot:product"
+          },
+          {
+            "Value": "integration",
+            "Key": "cot:environment"
+          },
+          {
+            "Value": "test",
+            "Key": "cot:category"
+          }
+        ]
+      }
+    }
+  }
+}

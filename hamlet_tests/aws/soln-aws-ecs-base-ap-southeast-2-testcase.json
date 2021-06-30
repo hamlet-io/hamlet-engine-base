@@ -1,0 +1,76 @@
+{
+  "aws_ecs_base_app_ecsbase_ecs_ecsbase": {
+    "cfn_nag": false,
+    "filename": "soln-aws-ecs-base-ap-southeast-2-template.json",
+    "cfn_lint": true,
+    "json_structure": {
+      "match": [
+        {
+          "path": "Resources.asgXappXecsbase.UpdatePolicy.AutoScalingRollingUpdate.WaitOnResourceSignals",
+          "value": true
+        },
+        {
+          "path": "Resources.securityGroupXappXecsbase.Properties.VpcId",
+          "value": "##MockOutputXvpcXsegmentXvpcX##"
+        },
+        {
+          "path": "Resources.ecsCapacityProviderAssocXappXecsbase.Properties.CapacityProviders",
+          "value": [
+            "FARGATE",
+            "FARGATE_SPOT",
+            "##MockOutputXecsCapacityProviderXappXecsbaseXasgX##"
+          ]
+        }
+      ],
+      "not_empty": [
+        {
+          "path": "Resources.launchConfigXappXecsbase.Properties.ImageId"
+        },
+        {
+          "path": "Resources.launchConfigXappXecsbase.Properties.InstanceType"
+        },
+        {
+          "path": "Resources.asgXappXecsbase.Metadata"
+        }
+      ]
+    },
+    "cfn_structure": {
+      "output": [
+        {
+          "id": "securityGroupXappXecsbase"
+        },
+        {
+          "id": "asgXappXecsbase"
+        },
+        {
+          "id": "ecsXappXecsbase"
+        },
+        {
+          "id": "ecsXappXecsbaseXarn"
+        }
+      ],
+      "resource": [
+        {
+          "id": "launchConfigXappXecsbase",
+          "type": "AWS::AutoScaling::LaunchConfiguration"
+        },
+        {
+          "id": "securityGroupXappXecsbase",
+          "type": "AWS::EC2::SecurityGroup"
+        },
+        {
+          "id": "asgXappXecsbase",
+          "type": "AWS::AutoScaling::AutoScalingGroup"
+        },
+        {
+          "id": "ecsXappXecsbase",
+          "type": "AWS::ECS::Cluster"
+        },
+        {
+          "id": "ecsCapacityProviderXappXecsbaseXasg",
+          "type": "AWS::ECS::CapacityProvider"
+        }
+      ]
+    }
+  }
+}

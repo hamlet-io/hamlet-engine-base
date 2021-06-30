@@ -1,0 +1,34 @@
+{
+  "aws_queuehost_base_app_queuehostbase_queuehost_queuehostbase": {
+    "cfn_nag": false,
+    "filename": "soln-aws-queuehost-base-ap-southeast-2-template.json",
+    "cfn_lint": false,
+    "cfn_structure": {
+      "output": [
+        {
+          "id": "mqBrokerXappXqueuehostbaseXdns"
+        },
+        {
+          "id": "securityGroupXmqBrokerXappXqueuehostbase"
+        },
+        {
+          "id": "secretXappXqueuehostbaseXroot"
+        }
+      ],
+      "resource": [
+        {
+          "id": "mqBrokerXappXqueuehostbase",
+          "type": "AWS::AmazonMQ::Broker"
+        },
+        {
+          "id": "securityGroupXmqBrokerXappXqueuehostbase",
+          "type": "AWS::EC2::SecurityGroup"
+        },
+        {
+          "id": "secretXappXqueuehostbaseXroot",
+          "type": "AWS::SecretsManager::Secret"
+        }
+      ]
+    }
+  }
+}

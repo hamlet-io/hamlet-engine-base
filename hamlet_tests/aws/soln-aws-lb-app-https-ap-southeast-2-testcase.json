@@ -1,0 +1,76 @@
+{
+  "aws_lb_app_https_elb_httpslb_lb_validation": {
+    "cfn_nag": false,
+    "filename": "soln-aws-lb-app-https-ap-southeast-2-template.json",
+    "cfn_lint": true
+  },
+  "aws_lb_app_https_elb_httpslb_lb_httpslb": {
+    "cfn_nag": false,
+    "filename": "soln-aws-lb-app-https-ap-southeast-2-template.json",
+    "cfn_lint": false,
+    "json_structure": {
+      "match": [
+        {
+          "path": "Resources.albXelbXhttpslb.Properties.Name",
+          "value": "mockedup-int-elb-httpslb"
+        },
+        {
+          "path": "Resources.listenerRuleXelbXhttpslbXhttpX100.Properties.Actions[0]",
+          "value": {
+            "Type": "redirect",
+            "RedirectConfig": {
+              "Path": "/#{path}",
+              "Query": "#{query}",
+              "Port": "443",
+              "Host": "#{host}",
+              "Protocol": "HTTPS",
+              "StatusCode": "HTTP_301"
+            }
+          }
+        },
+        {
+          "path": "Resources.listenerRuleXelbXhttpslbXhttpsX500.Properties.Actions[0].Type",
+          "value": "forward"
+        }
+      ],
+      "length": [
+        {
+          "path": "Resources.listenerRuleXelbXhttpslbXhttpX100.Properties.Actions",
+          "value": 1
+        }
+      ],
+      "not_empty": [
+        {
+          "path": "Resources.listenerRuleXelbXhttpslbXhttpX100.Properties.Priority"
+        }
+      ]
+    },
+    "cfn_structure": {
+      "output": [
+        {
+          "id": "securityGroupXlistenerXelbXhttpslbXhttps"
+        },
+        {
+          "id": "listenerRuleXelbXhttpslbXhttpsX500"
+        },
+        {
+          "id": "tgXdefaultXelbXhttpslbXhttps"
+        }
+      ],
+      "resource": [
+        {
+          "id": "listenerRuleXelbXhttpslbXhttpX100",
+          "type": "AWS::ElasticLoadBalancingV2::ListenerRule"
+        },
+        {
+          "id": "listenerXelbXhttpslbXhttps",
+          "type": "AWS::ElasticLoadBalancingV2::Listener"
+        },
+        {
+          "id": "albXelbXhttpslb",
+          "type": "AWS::ElasticLoadBalancingV2::LoadBalancer"
+        }
+      ]
+    }
+  }
+}

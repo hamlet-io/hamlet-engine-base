@@ -1,0 +1,246 @@
+{
+  "Occurrence": {
+    "Configuration": {
+      "SettingNamespaces": [
+        {
+          "Key": "application-internaltestbase",
+          "Match": "partial"
+        },
+        {
+          "Key": "application-internaltestbase-internaltest",
+          "Match": "partial"
+        },
+        {
+          "Key": "app-internaltestbase",
+          "Match": "partial"
+        },
+        {
+          "Key": "app-internaltestbase-internaltest",
+          "Match": "partial"
+        },
+        {
+          "Key": "shared-internaltest-base",
+          "Match": "exact"
+        }
+      ],
+      "Environment": {
+        "Build": {
+          "BUILD_UNIT": "shared-internaltest-base"
+        },
+        "General": {
+          "CREDENTIALS_PREFIX": "settings/mockedup/integration/application/internaltestbase",
+          "SEGMENT": "default",
+          "TIER": "application",
+          "COMPONENT_INSTANCE": "",
+          "APPDATA_PREFIX": "appdata/mockedup/integration/application/internaltestbase",
+          "ENVIRONMENT": "integration",
+          "COMPONENT_VERSION": "",
+          "REQUEST_REFERENCE": "SRVREQ01",
+          "SETTINGS_PREFIX": "settings/mockedup/integration/application/internaltestbase",
+          "TEMPLATE_TIMESTAMP": "2021-06-30T03:03:16Z",
+          "PRODUCT": "mockedup",
+          "CONFIGURATION_REFERENCE": "configRef_v123",
+          "COMPONENT": "internaltestbase",
+          "APPSETTINGS_PREFIX": "settings/mockedup/integration/application/internaltestbase"
+        },
+        "Sensitive": {}
+      },
+      "Solution": {
+        "Instances": {
+          "default": {
+            "DeploymentUnits": [
+              "shared-internaltest-base"
+            ],
+            "Versions": {},
+            "Enabled": true,
+            "Id": "default",
+            "Name": "default"
+          }
+        },
+        "SettingNamespaces": {},
+        "DeploymentUnits": [
+          "shared-internaltest-base"
+        ],
+        "deployment:Group": "internal",
+        "deployment:Unit": "shared-internaltest-base",
+        "Profiles": {
+          "Policy": [],
+          "Placement": "internal",
+          "Enabled": true,
+          "Deployment": [],
+          "Baseline": "default",
+          "Configured": true,
+          "Testing": [
+            "internaltestbase"
+          ]
+        },
+        "deployment:Priority": 100,
+        "Enabled": true,
+        "Links": {},
+        "Export": [],
+        "Extensions": []
+      },
+      "Settings": {
+        "Account": {},
+        "Build": {
+          "BUILD_UNIT": {
+            "Value": "shared-internaltest-base"
+          }
+        },
+        "Product": {},
+        "Core": {
+          "CREDENTIALS_PREFIX": {
+            "Value": "settings/mockedup/integration/application/internaltestbase"
+          },
+          "SEGMENT": {
+            "Value": "default"
+          },
+          "TIER": {
+            "Value": "application"
+          },
+          "COMPONENT_INSTANCE": {
+            "Value": ""
+          },
+          "APPDATA_PREFIX": {
+            "Value": "appdata/mockedup/integration/application/internaltestbase"
+          },
+          "ENVIRONMENT": {
+            "Value": "integration"
+          },
+          "COMPONENT_VERSION": {
+            "Value": ""
+          },
+          "REQUEST_REFERENCE": {
+            "Value": "SRVREQ01"
+          },
+          "SETTINGS_PREFIX": {
+            "Value": "settings/mockedup/integration/application/internaltestbase"
+          },
+          "TEMPLATE_TIMESTAMP": {
+            "Value": "2021-06-30T03:03:16Z"
+          },
+          "PRODUCT": {
+            "Value": "mockedup"
+          },
+          "CONFIGURATION_REFERENCE": {
+            "Value": "configRef_v123"
+          },
+          "COMPONENT": {
+            "Value": "internaltestbase"
+          },
+          "APPSETTINGS_PREFIX": {
+            "Value": "settings/mockedup/integration/application/internaltestbase"
+          }
+        }
+      }
+    },
+    "State": {
+      "Attributes": {},
+      "Roles": {
+        "Outbound": {},
+        "Inbound": {}
+      },
+      "ResourceGroups": {
+        "default": {
+          "Placement": {
+            "DeploymentFramework": "default",
+            "Region": "internal",
+            "Provider": "sharedtest"
+          },
+          "Attributes": {},
+          "Roles": {
+            "Outbound": {},
+            "Inbound": {}
+          },
+          "Resources": {
+            "external": {
+              "Type": "internaltest",
+              "Id": "internaltestXappXinternaltestbase",
+              "Deployed": true
+            }
+          }
+        }
+      },
+      "Resources": {
+        "external": {
+          "Type": "internaltest",
+          "Id": "internaltestXappXinternaltestbase",
+          "Deployed": true
+        }
+      }
+    },
+    "Core": {
+      "TypedFullName": "mockedup-integration-application-internaltestbase-internaltest",
+      "ShortFullName": "mockedup-int-app-internaltestbase",
+      "ShortRawFullName": "mockedup-int-app-internaltestbase",
+      "Instance": {
+        "RawId": "default",
+        "RawName": "default",
+        "Id": "",
+        "Name": ""
+      },
+      "RawName": "application-internaltestbase",
+      "ShortRawName": "application-internaltestbase",
+      "Internal": {
+        "NameExtensions": [],
+        "RawIdExtensions": [],
+        "IdExtensions": [],
+        "RawNameExtensions": []
+      },
+      "ShortName": "app-internaltestbase",
+      "AbsoluteRawPath": "/application/internaltestbase",
+      "Extensions": {
+        "RawId": [
+          "app",
+          "internaltestbase"
+        ],
+        "RawName": [
+          "application",
+          "internaltestbase"
+        ],
+        "Id": [
+          "app",
+          "internaltestbase"
+        ],
+        "Name": [
+          "application",
+          "internaltestbase"
+        ]
+      },
+      "Name": "application-internaltestbase",
+      "FullAbsoluteRawPath": "/mockedup/integration/application/internaltestbase",
+      "Version": {
+        "RawId": "default",
+        "RawName": "default",
+        "Id": "",
+        "Name": ""
+      },
+      "ReltiveRawPath": "application/internaltestbase",
+      "TypedId": "appXinternaltestbaseXinternaltest",
+      "Component": {
+        "RawId": "internaltestbase",
+        "Type": "internaltest",
+        "RawName": "internaltestbase",
+        "Id": "internaltestbase",
+        "Name": "internaltestbase"
+      },
+      "ShortTypedFullName": "mockedup-int-app-internaltestbase-internaltest",
+      "FullRealitveRawPath": "mockedup/integration/application/internaltestbase",
+      "RelativePath": "application/internaltestbase",
+      "Tier": {
+        "Id": "app",
+        "Name": "application"
+      },
+      "TypedName": "application-internaltestbase-internaltest",
+      "AbsolutePath": "/application/internaltestbase",
+      "RawFullName": "mockedup-integration-application-internaltestbase",
+      "Type": "internaltest",
+      "RawId": "appXinternaltestbase",
+      "FullRelativePath": "mockedup/integration/application/internaltestbase",
+      "FullName": "mockedup-integration-application-internaltestbase",
+      "FullAbsolutePath": "/mockedup/integration/application/internaltestbase",
+      "Id": "appXinternaltestbase",
+      "ShortTypedName": "app-internaltestbase-internaltest"
+    }
+  }
+}

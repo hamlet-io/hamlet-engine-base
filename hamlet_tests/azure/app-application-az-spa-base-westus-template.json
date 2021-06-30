@@ -1,0 +1,100 @@
+{
+  "outputs": {
+    "containerXappXspa": {
+      "type": "string",
+      "value": "/subscriptions/0123456789/resourceGroups/mockRG/providers/Microsoft.Mock/mockResourceType/mockName"
+    },
+    "containerXappXspaXname": {
+      "type": "string",
+      "value": "appspasubscriptions01234/default/$web"
+    },
+    "storageXappXspa": {
+      "type": "string",
+      "value": "/subscriptions/0123456789/resourceGroups/mockRG/providers/Microsoft.Mock/mockResourceType/mockName"
+    },
+    "storageXappXspaXregion": {
+      "type": "string",
+      "value": "westus"
+    },
+    "Region": {
+      "type": "string",
+      "value": "[resourceGroup().location]"
+    },
+    "DeploymentMode": {
+      "type": "string",
+      "value": "update"
+    },
+    "storageXappXspaXdictionary": {
+      "type": "object",
+      "value": "/subscriptions/0123456789/resourceGroups/mockRG/providers/Microsoft.Mock/mockResourceType/mockName"
+    },
+    "Subscription": {
+      "type": "string",
+      "value": "[subscription().id]"
+    },
+    "DeploymentUnit": {
+      "type": "string",
+      "value": "application-az-spa-base"
+    },
+    "storageXappXspaXname": {
+      "type": "string",
+      "value": "appspasubscriptions01234"
+    },
+    "ResourceGroup": {
+      "type": "string",
+      "value": "mockedup-integration-default-app-application-az-spa-base"
+    },
+    "blobXappXspa": {
+      "type": "string",
+      "value": "/subscriptions/0123456789/resourceGroups/mockRG/providers/Microsoft.Mock/mockResourceType/mockName"
+    }
+  },
+  "variables": {},
+  "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
+  "resources": [
+    {
+      "apiVersion": "2019-04-01",
+      "identity": {
+        "type": "SystemAssigned"
+      },
+      "kind": "StorageV2",
+      "name": "appspasubscriptions01234",
+      "location": "westus",
+      "type": "Microsoft.Storage/storageAccounts",
+      "sku": {
+        "name": "Standard_LRS"
+      },
+      "properties": {
+        "accessTier": "Cool",
+        "supportsHttpsTrafficOnly": true,
+        "networkAcls": {
+          "bypass": "AzureServices",
+          "defaultAction": "Allow"
+        }
+      }
+    },
+    {
+      "apiVersion": "2019-04-01",
+      "dependsOn": [
+        "/subscriptions/0123456789/resourceGroups/mockRG/providers/Microsoft.Mock/mockResourceType/mockName"
+      ],
+      "name": "appspasubscriptions01234/default",
+      "type": "Microsoft.Storage/storageAccounts/blobServices",
+      "properties": {}
+    },
+    {
+      "apiVersion": "2019-04-01",
+      "dependsOn": [
+        "/subscriptions/0123456789/resourceGroups/mockRG/providers/Microsoft.Mock/mockResourceType/mockName",
+        "/subscriptions/0123456789/resourceGroups/mockRG/providers/Microsoft.Mock/mockResourceType/mockName"
+      ],
+      "name": "appspasubscriptions01234/default/$web",
+      "type": "Microsoft.Storage/storageAccounts/blobServices/containers",
+      "properties": {
+        "publicAccess": "Container"
+      }
+    }
+  ],
+  "contentVersion": "1.0.0.0",
+  "parameters": {}
+}

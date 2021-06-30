@@ -1,0 +1,180 @@
+{
+  "AWSTemplateFormatVersion": "2010-09-09",
+  "Metadata": {
+    "ConfigurationReference": "configRef_v123",
+    "RequestReference": "SRVREQ01",
+    "Prepared": "2021-06-30T03:07:26Z",
+    "RunId": "runId098"
+  },
+  "Outputs": {
+    "transferServerXappXfiletransferbase": {
+      "Value": {
+        "Ref": "transferServerXappXfiletransferbase"
+      }
+    },
+    "Account": {
+      "Value": {
+        "Ref": "AWS::AccountId"
+      }
+    },
+    "transferServerXappXfiletransferbaseXname": {
+      "Value": {
+        "Fn::GetAtt": [
+          "transferServerXappXfiletransferbase",
+          "ServerId"
+        ]
+      }
+    },
+    "Region": {
+      "Value": {
+        "Ref": "AWS::Region"
+      }
+    },
+    "DeploymentMode": {
+      "Value": "update"
+    },
+    "transferServerXappXfiletransferbaseXarn": {
+      "Value": {
+        "Ref": "transferServerXappXfiletransferbase"
+      }
+    },
+    "securityGroupXtransferServerXappXfiletransferbase": {
+      "Value": {
+        "Ref": "securityGroupXtransferServerXappXfiletransferbase"
+      }
+    },
+    "DeploymentUnit": {
+      "Value": "aws-filetransfer-base"
+    }
+  },
+  "Resources": {
+    "transferServerXappXfiletransferbase": {
+      "Type": "AWS::Transfer::Server",
+      "Properties": {
+        "LoggingRole": "arn:aws:iam::123456789012:mock/roleXappXfiletransferbaseXarn",
+        "Protocols": [
+          "SFTP"
+        ],
+        "EndpointType": "VPC",
+        "SecurityPolicyName": "TransferSecurityPolicy-2020-06",
+        "EndpointDetails": {
+          "VpcId": "##MockOutputXvpcXsegmentXvpcX##",
+          "SubnetIds": [
+            "##MockOutputXsubnetXappXaX##"
+          ]
+        },
+        "IdentityProviderType": "SERVICE_MANAGED",
+        "Tags": [
+          {
+            "Value": "SRVREQ01",
+            "Key": "cot:request"
+          },
+          {
+            "Value": "configRef_v123",
+            "Key": "cot:configuration"
+          },
+          {
+            "Value": "mockten",
+            "Key": "cot:tenant"
+          },
+          {
+            "Value": "mockacct",
+            "Key": "cot:account"
+          },
+          {
+            "Value": "mockedup",
+            "Key": "cot:product"
+          },
+          {
+            "Value": "integration",
+            "Key": "cot:environment"
+          },
+          {
+            "Value": "test",
+            "Key": "cot:category"
+          },
+          {
+            "Value": "default",
+            "Key": "cot:segment"
+          },
+          {
+            "Value": "application",
+            "Key": "cot:tier"
+          },
+          {
+            "Value": "filetransferbase",
+            "Key": "cot:component"
+          },
+          {
+            "Value": "mockedup-integration-application-filetransferbase",
+            "Key": "Name"
+          }
+        ]
+      }
+    },
+    "securityGroupXtransferServerXappXfiletransferbase": {
+      "Type": "AWS::EC2::SecurityGroup",
+      "Properties": {
+        "GroupDescription": "mockedup-integration-application-filetransferbase",
+        "VpcId": "##MockOutputXvpcXsegmentXvpcX##",
+        "Tags": [
+          {
+            "Value": "SRVREQ01",
+            "Key": "cot:request"
+          },
+          {
+            "Value": "configRef_v123",
+            "Key": "cot:configuration"
+          },
+          {
+            "Value": "mockten",
+            "Key": "cot:tenant"
+          },
+          {
+            "Value": "mockacct",
+            "Key": "cot:account"
+          },
+          {
+            "Value": "mockedup",
+            "Key": "cot:product"
+          },
+          {
+            "Value": "integration",
+            "Key": "cot:environment"
+          },
+          {
+            "Value": "test",
+            "Key": "cot:category"
+          },
+          {
+            "Value": "default",
+            "Key": "cot:segment"
+          },
+          {
+            "Value": "application",
+            "Key": "cot:tier"
+          },
+          {
+            "Value": "filetransferbase",
+            "Key": "cot:component"
+          },
+          {
+            "Value": "mockedup-integration-application-filetransferbase",
+            "Key": "Name"
+          }
+        ]
+      }
+    },
+    "ingressXsecurityGroupXtransferServerXappXfiletransferbaseXsshXsecurityGroupXmgmtXssh": {
+      "Type": "AWS::EC2::SecurityGroupIngress",
+      "Properties": {
+        "FromPort": 22,
+        "Description": "mockedup-integration-management-ssh",
+        "ToPort": 22,
+        "IpProtocol": "tcp",
+        "SourceSecurityGroupId": "##MockOutputXsecurityGroupXmgmtXsshX##",
+        "GroupId": "##MockOutputXsecurityGroupXtransferServerXappXfiletransferbaseX##"
+      }
+    }
+  }
+}

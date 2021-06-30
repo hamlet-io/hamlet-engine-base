@@ -1,0 +1,45 @@
+{
+  "aws_s3_replication_external_app_s3replicasextrc_s3_s3replicaext": {
+    "cfn_nag": false,
+    "filename": "soln-aws-s3-replication-external-ap-southeast-2-template.json",
+    "cfn_lint": false,
+    "json_structure": {
+      "match": [
+        {
+          "path": "Resources.s3XappXs3replicasextrc.Properties.ReplicationConfiguration.Rules[0].Destination.Bucket",
+          "value": "arn:aws:s3:::external-replication-destination"
+        },
+        {
+          "path": "Resources.s3XappXs3replicasextrc.Properties.ReplicationConfiguration.Rules[0].Destination.AccessControlTranslation.Owner",
+          "value": "Destination"
+        },
+        {
+          "path": "Resources.s3XappXs3replicasextrc.Properties.ReplicationConfiguration.Rules[0].Destination.Account",
+          "value": "0987654321"
+        }
+      ]
+    },
+    "cfn_structure": {
+      "output": [
+        {
+          "id": "s3XappXs3replicasextrc"
+        },
+        {
+          "id": "s3XappXs3replicasextrcXname"
+        },
+        {
+          "id": "s3XappXs3replicasextrcXarn"
+        },
+        {
+          "id": "s3XappXs3replicasextrcXregion"
+        }
+      ],
+      "resource": [
+        {
+          "id": "s3XappXs3replicasextrc",
+          "type": "AWS::S3::Bucket"
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,107 @@
+{
+  "AWSTemplateFormatVersion": "2010-09-09",
+  "Metadata": {
+    "ConfigurationReference": "configRef_v123",
+    "RequestReference": "SRVREQ01",
+    "Prepared": "2021-06-30T03:06:49Z",
+    "RunId": "runId098"
+  },
+  "Outputs": {
+    "Account": {
+      "Value": {
+        "Ref": "AWS::AccountId"
+      }
+    },
+    "securityGroupXappXec2base": {
+      "Value": {
+        "Ref": "securityGroupXappXec2base"
+      }
+    },
+    "Region": {
+      "Value": {
+        "Ref": "AWS::Region"
+      }
+    },
+    "DeploymentMode": {
+      "Value": "update"
+    },
+    "DeploymentUnit": {
+      "Value": "aws-ec2-base"
+    }
+  },
+  "Resources": {
+    "ingressXsecurityGroupXappXec2baseXsshXsecurityGroupXmgmtXssh": {
+      "Type": "AWS::EC2::SecurityGroupIngress",
+      "Properties": {
+        "FromPort": 22,
+        "Description": "mockedup-integration-management-ssh",
+        "ToPort": 22,
+        "IpProtocol": "tcp",
+        "SourceSecurityGroupId": "##MockOutputXsecurityGroupXmgmtXsshX##",
+        "GroupId": "##MockOutputXsecurityGroupXappXec2baseX##"
+      }
+    },
+    "instanceProfileXappXec2base": {
+      "Type": "AWS::IAM::InstanceProfile",
+      "Properties": {
+        "Path": "/",
+        "Roles": [
+          "##MockOutputXroleXappXec2baseX##"
+        ]
+      }
+    },
+    "securityGroupXappXec2base": {
+      "Type": "AWS::EC2::SecurityGroup",
+      "Properties": {
+        "GroupDescription": "mockedup-integration-application-ec2base",
+        "VpcId": "##MockOutputXvpcXsegmentXvpcX##",
+        "Tags": [
+          {
+            "Value": "SRVREQ01",
+            "Key": "cot:request"
+          },
+          {
+            "Value": "configRef_v123",
+            "Key": "cot:configuration"
+          },
+          {
+            "Value": "mockten",
+            "Key": "cot:tenant"
+          },
+          {
+            "Value": "mockacct",
+            "Key": "cot:account"
+          },
+          {
+            "Value": "mockedup",
+            "Key": "cot:product"
+          },
+          {
+            "Value": "integration",
+            "Key": "cot:environment"
+          },
+          {
+            "Value": "test",
+            "Key": "cot:category"
+          },
+          {
+            "Value": "default",
+            "Key": "cot:segment"
+          },
+          {
+            "Value": "application",
+            "Key": "cot:tier"
+          },
+          {
+            "Value": "ec2base",
+            "Key": "cot:component"
+          },
+          {
+            "Value": "mockedup-integration-application-ec2base",
+            "Key": "Name"
+          }
+        ]
+      }
+    }
+  }
+}

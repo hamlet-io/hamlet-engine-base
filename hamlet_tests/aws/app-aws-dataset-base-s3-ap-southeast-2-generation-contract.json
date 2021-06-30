@@ -1,0 +1,101 @@
+{
+  "Stages": [
+    {
+      "Steps": [
+        {
+          "Status": "completed",
+          "Type": "process_template_pass",
+          "Parameters": {
+            "outputConversion": "",
+            "passAlternative": "",
+            "outputFileName": "app-aws-dataset-base-s3-ap-southeast-2-pregeneration.sh",
+            "pass": "pregeneration",
+            "outputType": "script",
+            "deploymentUnitSubset": "pregeneration",
+            "outputFormat": "bash"
+          },
+          "Priority": 10,
+          "Id": "pregenerationXpregeneration",
+          "Mandatory": true
+        },
+        {
+          "Status": "available",
+          "Type": "run_bash_script",
+          "Parameters": {
+            "scriptFileName": "app-aws-dataset-base-s3-ap-southeast-2-pregeneration.sh",
+            "source": true
+          },
+          "Priority": 20,
+          "Id": "pregenerationXpregenerationXrun",
+          "Mandatory": true
+        }
+      ],
+      "ExecutionMode": "serial",
+      "Id": "pregeneration",
+      "Mandatory": true
+    },
+    {
+      "Steps": [
+        {
+          "Status": "available",
+          "Type": "process_template_pass",
+          "Parameters": {
+            "outputConversion": "",
+            "passAlternative": "",
+            "outputFileName": "app-aws-dataset-base-s3-ap-southeast-2-prologue.sh",
+            "pass": "prologue",
+            "outputType": "script",
+            "deploymentUnitSubset": "prologue",
+            "outputFormat": "bash"
+          },
+          "Priority": 100,
+          "Id": "generationXsubsetsXprimaryXprologue",
+          "Mandatory": true
+        }
+      ],
+      "ExecutionMode": "parallel",
+      "Id": "generationXsubsets",
+      "Mandatory": true
+    },
+    {
+      "Steps": [
+        {
+          "Status": "available",
+          "Type": "rename_file",
+          "Parameters": {
+            "currentFileName": "deployment-generation-contract.json",
+            "newFileName": "app-aws-dataset-base-s3-ap-southeast-2-generation-contract.json"
+          },
+          "Priority": 100,
+          "Id": "cleanupXgenerationcontract",
+          "Mandatory": true
+        }
+      ],
+      "ExecutionMode": "serial",
+      "Id": "cleanup",
+      "Mandatory": true
+    }
+  ],
+  "Metadata": {
+    "ConfigurationReference": "configRef_v123",
+    "RequestReference": "SRVREQ01",
+    "Prepared": "2021-06-30T03:11:34Z",
+    "Id": {},
+    "RunId": "runId098",
+    "Providers": {}
+  },
+  "Properties": {
+    "deploymentMode": "update",
+    "deploymentFramework": "cf",
+    "flows": "components",
+    "deploymentUnit": "aws-dataset-base-s3",
+    "deploymentGroup": "application",
+    "accountRegion": "ap-southeast-2",
+    "requestReference": "SRVREQ01",
+    "configurationReference": "configRef_v123",
+    "entrance": "deployment",
+    "region": "ap-southeast-2",
+    "providers": "aws,awstest",
+    "account": ""
+  }
+}

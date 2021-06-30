@@ -1,0 +1,697 @@
+{
+  "AWSTemplateFormatVersion": "2010-09-09",
+  "Metadata": {
+    "ConfigurationReference": "configRef_v123",
+    "RequestReference": "SRVREQ01",
+    "Prepared": "2021-06-30T03:06:49Z",
+    "RunId": "runId098"
+  },
+  "Outputs": {
+    "Account": {
+      "Value": {
+        "Ref": "AWS::AccountId"
+      }
+    },
+    "cfnwaitconditionXappXec2baseXa": {
+      "Value": {
+        "Ref": "cfnwaitconditionXappXec2baseXa"
+      }
+    },
+    "securityGroupXappXec2base": {
+      "Value": {
+        "Ref": "securityGroupXappXec2base"
+      }
+    },
+    "Region": {
+      "Value": {
+        "Ref": "AWS::Region"
+      }
+    },
+    "DeploymentMode": {
+      "Value": "update"
+    },
+    "cfnwaithandleXappXec2baseXa": {
+      "Value": {
+        "Ref": "cfnwaithandleXappXec2baseXa"
+      }
+    },
+    "DeploymentUnit": {
+      "Value": "aws-ec2-base"
+    }
+  },
+  "Resources": {
+    "ingressXsecurityGroupXappXec2baseXsshXsecurityGroupXmgmtXssh": {
+      "Type": "AWS::EC2::SecurityGroupIngress",
+      "Properties": {
+        "FromPort": 22,
+        "Description": "mockedup-integration-management-ssh",
+        "ToPort": 22,
+        "IpProtocol": "tcp",
+        "SourceSecurityGroupId": "##MockOutputXsecurityGroupXmgmtXsshX##",
+        "GroupId": "##MockOutputXsecurityGroupXappXec2baseX##"
+      }
+    },
+    "cfnwaitconditionXappXec2baseXa": {
+      "Type": "AWS::CloudFormation::WaitCondition",
+      "Properties": {
+        "Timeout": "300",
+        "Count": 1,
+        "Handle": "##MockOutputXcfnwaithandleXappXec2baseXaX##"
+      }
+    },
+    "instanceProfileXappXec2base": {
+      "Type": "AWS::IAM::InstanceProfile",
+      "Properties": {
+        "Path": "/",
+        "Roles": [
+          "##MockOutputXroleXappXec2baseX##"
+        ]
+      }
+    },
+    "securityGroupXappXec2base": {
+      "Type": "AWS::EC2::SecurityGroup",
+      "Properties": {
+        "GroupDescription": "mockedup-integration-application-ec2base",
+        "VpcId": "##MockOutputXvpcXsegmentXvpcX##",
+        "Tags": [
+          {
+            "Value": "SRVREQ01",
+            "Key": "cot:request"
+          },
+          {
+            "Value": "configRef_v123",
+            "Key": "cot:configuration"
+          },
+          {
+            "Value": "mockten",
+            "Key": "cot:tenant"
+          },
+          {
+            "Value": "mockacct",
+            "Key": "cot:account"
+          },
+          {
+            "Value": "mockedup",
+            "Key": "cot:product"
+          },
+          {
+            "Value": "integration",
+            "Key": "cot:environment"
+          },
+          {
+            "Value": "test",
+            "Key": "cot:category"
+          },
+          {
+            "Value": "default",
+            "Key": "cot:segment"
+          },
+          {
+            "Value": "application",
+            "Key": "cot:tier"
+          },
+          {
+            "Value": "ec2base",
+            "Key": "cot:component"
+          },
+          {
+            "Value": "mockedup-integration-application-ec2base",
+            "Key": "Name"
+          }
+        ]
+      }
+    },
+    "eniXappXec2baseXaXeth0": {
+      "Type": "AWS::EC2::NetworkInterface",
+      "Properties": {
+        "SourceDestCheck": true,
+        "Description": "eth0",
+        "SubnetId": "##MockOutputXsubnetXappXaX##",
+        "GroupSet": [
+          "##MockOutputXsecurityGroupXappXec2baseX##",
+          "##MockOutputXsecurityGroupXnatX##"
+        ],
+        "Tags": [
+          {
+            "Value": "SRVREQ01",
+            "Key": "cot:request"
+          },
+          {
+            "Value": "configRef_v123",
+            "Key": "cot:configuration"
+          },
+          {
+            "Value": "mockten",
+            "Key": "cot:tenant"
+          },
+          {
+            "Value": "mockacct",
+            "Key": "cot:account"
+          },
+          {
+            "Value": "mockedup",
+            "Key": "cot:product"
+          },
+          {
+            "Value": "integration",
+            "Key": "cot:environment"
+          },
+          {
+            "Value": "test",
+            "Key": "cot:category"
+          },
+          {
+            "Value": "default",
+            "Key": "cot:segment"
+          },
+          {
+            "Value": "application",
+            "Key": "cot:tier"
+          },
+          {
+            "Value": "ec2base",
+            "Key": "cot:component"
+          },
+          {
+            "Value": "a",
+            "Key": "cot:zone"
+          },
+          {
+            "Value": "mockedup-integration-application-ec2base-a-eth0",
+            "Key": "Name"
+          }
+        ]
+      }
+    },
+    "cfnwaithandleXappXec2baseXa": {
+      "Type": "AWS::CloudFormation::WaitConditionHandle"
+    },
+    "ec2InstanceXappXec2baseXa": {
+      "Type": "AWS::EC2::Instance",
+      "Metadata": {
+        "AWS::CloudFormation::Init": {
+          "1_AWSClI": {
+            "packages": {
+              "yum": {
+                "aws-cli": []
+              }
+            }
+          },
+          "1_OSPatching": {
+            "commands": {
+              "DailyUpdates": {
+                "ignoreErrors": false,
+                "command": "echo \"59 13 * * * yum clean all && yum -y update >> /var/log/update.log 2>&1\" >crontab.txt && crontab crontab.txt"
+              },
+              "InitialUpdate": {
+                "ignoreErrors": false,
+                "command": "yum clean all && yum -y update"
+              }
+            }
+          },
+          "2_CloudWatchLogs": {
+            "files": {
+              "/etc/awslogs/awscli.conf": {
+                "mode": "000644",
+                "content": {
+                  "Fn::Join": [
+                    "\n",
+                    [
+                      "[plugins]",
+                      "cwlogs = cwlogs",
+                      "[default]",
+                      {
+                        "Fn::Sub": "region = ${AWS::Region}"
+                      }
+                    ]
+                  ]
+                }
+              },
+              "/etc/awslogs/awslogs.conf": {
+                "mode": "000644",
+                "content": {
+                  "Fn::Join": [
+                    "\n",
+                    [
+                      "[general]",
+                      "state_file = /var/lib/awslogs/agent-state",
+                      "",
+                      "[/var/log/dmesg]",
+                      "file = /var/log/dmesg",
+                      "log_group_name = /mockedup/integration/application/ec2base",
+                      "log_stream_name = {instance_id}/var/log/dmesg",
+                      "",
+                      "[/var/log/messages]",
+                      "file = /var/log/messages",
+                      "log_group_name = /mockedup/integration/application/ec2base",
+                      "log_stream_name = {instance_id}/var/log/messages",
+                      "datetime_format = %b %d %H:%M:%S",
+                      "",
+                      "[/var/log/cron]",
+                      "file = /var/log/cron",
+                      "log_group_name = /mockedup/integration/application/ec2base",
+                      "log_stream_name = {instance_id}/var/log/cron",
+                      "datetime_format = %b %d %H:%M:%S",
+                      "",
+                      "[/var/log/update.log]",
+                      "file = /var/log/update.log",
+                      "log_group_name = /mockedup/integration/application/ec2base",
+                      "log_stream_name = {instance_id}/var/log/update.log",
+                      "datetime_format = %b %d %H:%M:%S",
+                      "",
+                      "[/var/log/cfn-init.log]",
+                      "file = /var/log/cfn-init.log",
+                      "log_group_name = /mockedup/integration/application/ec2base",
+                      "log_stream_name = {instance_id}/var/log/cfn-init.log",
+                      "datetime_format = %b %d %H:%M:%S",
+                      "",
+                      "[/var/log/cfn-init-cmd.log]",
+                      "file = /var/log/cfn-init-cmd.log",
+                      "log_group_name = /mockedup/integration/application/ec2base",
+                      "log_stream_name = {instance_id}/var/log/cfn-init-cmd.log",
+                      "datetime_format = %b %d %H:%M:%S",
+                      "",
+                      "[/var/log/cloud-init.log]",
+                      "file = /var/log/cloud-init.log",
+                      "log_group_name = /mockedup/integration/application/ec2base",
+                      "log_stream_name = {instance_id}/var/log/cloud-init.log",
+                      "datetime_format = %b %d %H:%M:%S",
+                      "",
+                      "[/var/log/cloud-init-output.log]",
+                      "file = /var/log/cloud-init-output.log",
+                      "log_group_name = /mockedup/integration/application/ec2base",
+                      "log_stream_name = {instance_id}/var/log/cloud-init-output.log",
+                      "datetime_format = %b %d %H:%M:%S",
+                      "",
+                      "[/var/log/amazon/ssm/amazon-ssm-agent.log]",
+                      "file = /var/log/amazon/ssm/amazon-ssm-agent.log",
+                      "log_group_name = /mockedup/integration/application/ec2base",
+                      "log_stream_name = {instance_id}/var/log/amazon/ssm/amazon-ssm-agent.log",
+                      "awslogs-multiline-pattern = ^INFO",
+                      "",
+                      "[/var/log/secure]",
+                      "file = /var/log/secure",
+                      "log_group_name = /mockedup/integration/application/ec2base",
+                      "log_stream_name = {instance_id}/var/log/secure",
+                      "datetime_format = %b %d %H:%M:%S",
+                      "",
+                      "[/var/log/audit/audit.log]",
+                      "file = /var/log/audit/audit.log",
+                      "log_group_name = /mockedup/integration/application/ec2base",
+                      "log_stream_name = {instance_id}/var/log/audit/audit.log",
+                      "awslogs-multiline-pattern = ^type",
+                      "",
+                      "[/var/log/aide/aide.log]",
+                      "file = /var/log/aide/aide.log",
+                      "log_group_name = /mockedup/integration/application/ec2base",
+                      "log_stream_name = {instance_id}/var/log/aide/aide.log",
+                      "datetime_format = %b %d %H:%M:%S",
+                      "",
+                      "[/var/log/docker]",
+                      "file = /var/log/docker",
+                      "log_group_name = /mockedup/integration/application/ec2base",
+                      "log_stream_name = {instance_id}/var/log/docker",
+                      "datetime_format = %b %d %H:%M:%S",
+                      ""
+                    ]
+                  ]
+                }
+              },
+              "/opt/hamlet_cfninit/awslogs.sh": {
+                "mode": "000755",
+                "content": {
+                  "Fn::Join": [
+                    "\n",
+                    [
+                      "#!/bin/bash",
+                      "# Metadata log details",
+                      "ecs_cluster=$(curl -s http://localhost:51678/v1/metadata | jq -r '. | .Cluster')",
+                      "ecs_container_instance_id=$(curl -s http://localhost:51678/v1/metadata | jq -r '. | .ContainerInstanceArn' | awk -F/ '{print $2}' )",
+                      "macs=$(curl http://169.254.169.254/latest/meta-data/network/interfaces/macs/ | head -1 )",
+                      "vpc_id=$(curl http://169.254.169.254/latest/meta-data/network/interfaces/macs/$macs/vpc-id )",
+                      "instance_id=$(curl http://169.254.169.254/latest/meta-data/instance-id)",
+                      "",
+                      "sed -i -e \"s/{instance_id}/$instance_id/g\" /etc/awslogs/awslogs.conf",
+                      "sed -i -e \"s/{ecs_container_instance_id}/$ecs_container_instance_id/g\" /etc/awslogs/awslogs.conf",
+                      "sed -i -e \"s/{ecs_cluster}/$ecs_cluster/g\" /etc/awslogs/awslogs.conf",
+                      "sed -i -e \"s/{vpc_id}/$vpc_id/g\" /etc/awslogs/awslogs.conf"
+                    ]
+                  ]
+                }
+              }
+            },
+            "services": {
+              "sysvinit": {
+                "awslogs": {
+                  "files": [
+                    "/etc/awslogs/awslogs.conf",
+                    "/etc/awslogs/awscli.conf"
+                  ],
+                  "ensureRunning": true,
+                  "packages": [
+                    "awslogs"
+                  ],
+                  "enabled": true,
+                  "commands": [
+                    "ConfigureLogsAgent"
+                  ]
+                }
+              }
+            },
+            "packages": {
+              "yum": {
+                "jq": [],
+                "awslogs": []
+              }
+            },
+            "commands": {
+              "ConfigureLogsAgent": {
+                "ignoreErrors": false,
+                "command": "/opt/hamlet_cfninit/awslogs.sh"
+              }
+            }
+          },
+          "configSets": {
+            "ec2InstanceXappXec2baseXa": [
+              "1_AWSClI",
+              "1_OSPatching",
+              "1_SystemVolumeMount",
+              "2_CloudWatchLogs",
+              "2_HamletEnv"
+            ],
+            "ec2InstanceXappXec2baseXa-wait": []
+          },
+          "2_HamletEnv": {
+            "files": {
+              "/opt/hamlet_cfninit/set_bash_env.sh": {
+                "mode": "000755",
+                "content": {
+                  "Fn::Join": [
+                    "\n",
+                    [
+                      "if [[ $(grep -L \"/opt/hamlet_cfninit/set_env.sh\" /etc/bashrc) ]]; then",
+                      "    echo \"source /opt/hamlet_cfninit/set_env.sh\" >> /etc/bashrc",
+                      "fi"
+                    ]
+                  ]
+                }
+              },
+              "/opt/hamlet_cfninit/set_env.sh": {
+                "mode": "000755",
+                "content": {
+                  "Fn::Join": [
+                    "\n",
+                    [
+                      "# hamlet provided env",
+                      "export TEMPLATE_TIMESTAMP='2021-06-30T03:06:47Z'",
+                      "export PRODUCT='mockedup'",
+                      "export ENVIRONMENT='integration'",
+                      "export SEGMENT='default'",
+                      "export TIER='application'",
+                      "export COMPONENT='ec2base'",
+                      "export COMPONENT_INSTANCE=''",
+                      "export COMPONENT_VERSION=''",
+                      "export REQUEST_REFERENCE='SRVREQ01'",
+                      "export CONFIGURATION_REFERENCE='configRef_v123'",
+                      "export APPDATA_PREFIX='appdata/mockedup/integration/application/ec2base'",
+                      "export APPSETTINGS_PREFIX='settings/mockedup/integration/application/ec2base'",
+                      "export CREDENTIALS_PREFIX='settings/mockedup/integration/application/ec2base'",
+                      "export SETTINGS_PREFIX='settings/mockedup/integration/application/ec2base'",
+                      "export OPSDATA_BUCKET='##MockOutputXs3XsegmentXoperationsX##'",
+                      "export OPSDATA_NAME='##MockOutputXs3XsegmentXoperationsX##'",
+                      "export OPSDATA_ARN='arn:aws:iam::123456789012:mock/s3XsegmentXoperationsXarn'",
+                      "export OPSDATA_REGION='ap-mock-1'",
+                      "export OPSDATA_FQDN='##MockOutputXs3XsegmentXoperationsXdnsX##'",
+                      "export APPDATA_BUCKET='##MockOutputXs3XsegmentXapplicationX##'",
+                      "export APPDATA_NAME='##MockOutputXs3XsegmentXapplicationX##'",
+                      "export APPDATA_ARN='arn:aws:iam::123456789012:mock/s3XsegmentXapplicationXarn'",
+                      "export APPDATA_REGION='ap-mock-1'",
+                      "export APPDATA_FQDN='##MockOutputXs3XsegmentXapplicationXdnsX##'",
+                      "export ENCRYPTION_ID='##MockOutputXcmkXsegmentXcmkX##'",
+                      "export ENCRYPTION_ARN='arn:aws:iam::123456789012:mock/cmkXsegmentXcmkXarn'",
+                      "export BUILD_UNIT='aws-ec2-base'",
+                      "export RUN_ID='runId098'",
+                      "export hamlet_request='SRVREQ01'",
+                      "export hamlet_configuration='configRef_v123'",
+                      "export hamlet_accountRegion='ap-southeast-2'",
+                      "export hamlet_tenant='mockten'",
+                      "export hamlet_account='mockacct'",
+                      "export hamlet_product='mockedup'",
+                      "export hamlet_region='ap-southeast-2'",
+                      "export hamlet_segment='default'",
+                      "export hamlet_environment='int'",
+                      "export hamlet_tier='app'",
+                      "export hamlet_component='ec2base'",
+                      "export hamlet_credentials='##MockOutputXs3XaccountXcredentialsX##'",
+                      "export hamlet_code='##MockOutputXs3XaccountXcodeX##'",
+                      "export hamlet_logs='##MockOutputXs3XsegmentXoperationsX##'",
+                      "export hamlet_backups='##MockOutputXs3XsegmentXapplicationX##'",
+                      ""
+                    ]
+                  ]
+                }
+              }
+            },
+            "commands": {
+              "01Directories": {
+                "ignoreErrors": false,
+                "command": "mkdir --parents --mode=0755 /var/log/codeontap"
+              },
+              "02SetBashEnv": {
+                "ignoreErrors": false,
+                "command": "/opt/hamlet_cfninit/set_bash_env.sh"
+              }
+            }
+          },
+          "1_SystemVolumeMount": {
+            "files": {
+              "/opt/hamlet_cfninit/data_volume_mount_devsdp.sh": {
+                "mode": "000755",
+                "content": {
+                  "Fn::Join": [
+                    "\n",
+                    [
+                      "#!/bin/bash",
+                      "set -euo pipefail",
+                      "exec > >(tee /var/log/hamlet_cfninit/data_volume_mount_devsdp.log | logger -t data_volume_mount_devsdp -s 2>/dev/console) 2>&1",
+                      "device_id=\"/dev/sdp\"",
+                      "os_mount=\"/codeontap\"",
+                      "# Ensure device exists",
+                      "if [[ ! -b \"${device_id}\" ]]; then",
+                      "  sleep 30s",
+                      "fi",
+                      "if [[ ! -b \"${device_id}\" ]]; then",
+                      "  echo \"${device_id} not available\"",
+                      "  exit 1",
+                      "fi",
+                      "# Create filesystem if required",
+                      "if [[ -z \"$(file  -sL $device_id | grep \"ext\" || test $? =1 )\" ]]; then",
+                      "  mkfs -t ext4 \"${device_id}\"",
+                      "else",
+                      "  echo \"Using existing filesystem on ${device_id}\"",
+                      "fi",
+                      "# Mount device to mount point",
+                      "for local_mount_point in $(findmnt -frnuo TARGET --source \"${device_id}\" || test $? = 1 ); do",
+                      "  if [[ \"${local_mount_point}\" == \"${os_mount}\" ]]; then",
+                      "      echo \"${device_id} already mounted to ${os_mount}\"",
+                      "      exit 0",
+                      "  else",
+                      "      echo \"${device_id} is not mounted to ${os_mount}\"",
+                      "  fi",
+                      "done",
+                      "mkdir -p \"${os_mount}\"",
+                      "mount \"${device_id}\" \"${os_mount}\"",
+                      "# Permanent mount",
+                      "if [[ -z \"$( grep \"${device_id}\" /etc/fstab || test $? = 1 )\" ]]; then",
+                      "  if [[ -n \"$( findmnt -frnuo SOURCE --source \"${device_id}\" || test $? = 1 )\" ]]; then",
+                      "      echo -e \"${device_id} ${os_mount} ext4 defaults 0 0\" >> /etc/fstab",
+                      "    else",
+                      "        echo \"device ${device_id} is not mounted\"",
+                      "        exit 1",
+                      "    fi",
+                      "else",
+                      "  echo \"permanent mount setup ${device_id} to ${os_mount}\"",
+                      "fi"
+                    ]
+                  ]
+                }
+              }
+            },
+            "commands": {
+              "data_volume_mount_devsdp": {
+                "ignoreErrors": false,
+                "command": "/opt/hamlet_cfninit/data_volume_mount_devsdp.sh"
+              }
+            }
+          }
+        }
+      },
+      "Properties": {
+        "DisableApiTermination": false,
+        "KeyName": "##MockOutputXkeypairXsegmentXnameX##",
+        "UserData": {
+          "Fn::Base64": {
+            "Fn::Join": [
+              "\n",
+              [
+                "#!/bin/bash",
+                "set -uo pipefail",
+                "exec > >(tee /var/log/user-data.log | logger -t user-data -s 2>/dev/console) 2>&1",
+                "# Update cfn bootstrap commands",
+                "yum install -y aws-cfn-bootstrap",
+                "# Create staging dirs for cfninit scripts",
+                "mkdir -p /var/log/hamlet_cfninit/",
+                "mkdir -p /opt/hamlet_cfninit/",
+                "# Remainder of configuration via metadata",
+                {
+                  "Fn::Sub": [
+                    "/opt/aws/bin/cfn-init -v --stack ${StackName} --resource ${Resource} --region ${Region} --configset ${ConfigSet}",
+                    {
+                      "Resource": "ec2InstanceXappXec2baseXa",
+                      "Region": {
+                        "Ref": "AWS::Region"
+                      },
+                      "StackName": {
+                        "Ref": "AWS::StackName"
+                      },
+                      "ConfigSet": "ec2InstanceXappXec2baseXa"
+                    }
+                  ]
+                },
+                "# Signal the status from cfn-init",
+                {
+                  "Fn::Sub": [
+                    "/opt/aws/bin/cfn-signal -e $? --stack ${StackName} --resource ${Resource} --region ${Region}",
+                    {
+                      "Resource": "ec2InstanceXappXec2baseXa",
+                      "Region": {
+                        "Ref": "AWS::Region"
+                      },
+                      "StackName": {
+                        "Ref": "AWS::StackName"
+                      }
+                    }
+                  ]
+                },
+                "# Run post create step configuration as part of wait handling",
+                {
+                  "Fn::Sub": [
+                    "/opt/aws/bin/cfn-init -v --stack ${StackName} --resource ${Resource} --region ${Region} --configset ${WaitConfigSet}",
+                    {
+                      "WaitConfigSet": "ec2InstanceXappXec2baseXa-wait",
+                      "Resource": "ec2InstanceXappXec2baseXa",
+                      "Region": {
+                        "Ref": "AWS::Region"
+                      },
+                      "StackName": {
+                        "Ref": "AWS::StackName"
+                      }
+                    }
+                  ]
+                },
+                "# Send Signal to wait handler to let it know we have finished",
+                {
+                  "Fn::Sub": [
+                    "/opt/aws/bin/cfn-signal -e $? '${WaitHandleUrl}'",
+                    {
+                      "WaitHandleUrl": "##MockOutputXcfnwaithandleXappXec2baseXaX##"
+                    }
+                  ]
+                }
+              ]
+            ]
+          }
+        },
+        "InstanceInitiatedShutdownBehavior": "stop",
+        "NetworkInterfaces": [
+          {
+            "DeviceIndex": "0",
+            "NetworkInterfaceId": "##MockOutputXeniXappXec2baseXaXeth0X##"
+          }
+        ],
+        "BlockDeviceMappings": [
+          {
+            "Ebs": {
+              "VolumeType": "gp2",
+              "Encrypted": false,
+              "VolumeSize": 30,
+              "DeleteOnTermination": true
+            },
+            "DeviceName": "/dev/sdp"
+          },
+          {
+            "VirtualName": "ephemeral0",
+            "DeviceName": "/dev/sdc"
+          },
+          {
+            "VirtualName": "ephemeral1",
+            "DeviceName": "/dev/sdt"
+          }
+        ],
+        "ImageId": "ami-0423c992cc7b1e818",
+        "IamInstanceProfile": {
+          "Ref": "instanceProfileXappXec2base"
+        },
+        "InstanceType": "t2.micro",
+        "Monitoring": false,
+        "Tags": [
+          {
+            "Value": "SRVREQ01",
+            "Key": "cot:request"
+          },
+          {
+            "Value": "configRef_v123",
+            "Key": "cot:configuration"
+          },
+          {
+            "Value": "mockten",
+            "Key": "cot:tenant"
+          },
+          {
+            "Value": "mockacct",
+            "Key": "cot:account"
+          },
+          {
+            "Value": "mockedup",
+            "Key": "cot:product"
+          },
+          {
+            "Value": "integration",
+            "Key": "cot:environment"
+          },
+          {
+            "Value": "test",
+            "Key": "cot:category"
+          },
+          {
+            "Value": "default",
+            "Key": "cot:segment"
+          },
+          {
+            "Value": "application",
+            "Key": "cot:tier"
+          },
+          {
+            "Value": "ec2base",
+            "Key": "cot:component"
+          },
+          {
+            "Value": "a",
+            "Key": "cot:zone"
+          },
+          {
+            "Value": "mockedup-integration-application-ec2base-a",
+            "Key": "Name"
+          }
+        ],
+        "EbsOptimized": false
+      },
+      "CreationPolicy": {
+        "ResourceSignal": {
+          "Timeout": "PT300S",
+          "Count": 1
+        }
+      }
+    }
+  }
+}

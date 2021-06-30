@@ -1,0 +1,15 @@
+{
+  "solution_az_lb_base_elb_lb_lb_baselbtemplate": {
+    "cfn_nag": false,
+    "filename": "soln-solution-az-lb-base-westus-template.json",
+    "cfn_lint": false,
+    "json_structure": {
+      "match": [
+        {
+          "path": "outputs.appGatewayXmockedupXintegrationXelbXlb.value",
+          "value": "/subscriptions/0123456789/resourceGroups/mockRG/providers/Microsoft.Mock/mockResourceType/mockName"
+        }
+      ]
+    }
+  }
+}

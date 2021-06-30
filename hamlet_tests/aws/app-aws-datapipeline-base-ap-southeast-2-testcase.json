@@ -1,0 +1,58 @@
+{
+  "aws_datapipeline_base_app_datapipelinebase_datapipeline_datapipelinebasetemplate": {
+    "cfn_nag": false,
+    "filename": "app-aws-datapipeline-base-ap-southeast-2-template.json",
+    "cfn_lint": false,
+    "cfn_structure": {
+      "output": [
+        {
+          "id": "securityGroupXappXdatapipelinebase"
+        }
+      ],
+      "resource": [
+        {
+          "id": "instanceProfileXappXdatapipelinebase",
+          "type": "AWS::IAM::InstanceProfile"
+        },
+        {
+          "id": "securityGroupXappXdatapipelinebase",
+          "type": "AWS::EC2::SecurityGroup"
+        }
+      ]
+    }
+  },
+  "aws_datapipeline_base_app_datapipelinebase_datapipeline_datapipelinebaseconfig": {
+    "cfn_nag": false,
+    "filename": "app-aws-datapipeline-base-ap-southeast-2-config.json",
+    "cfn_lint": false,
+    "json_structure": {
+      "match": [
+        {
+          "path": "values.my_VPC_ID",
+          "value": "##MockOutputXvpcXsegmentXvpcX##"
+        },
+        {
+          "path": "values.my_ROLE_PIPELINE_NAME",
+          "value": "mockedup-integration-application-datapipelinebase-pipeline"
+        }
+      ]
+    }
+  },
+  "aws_datapipeline_base_app_datapipelinebase_datapipeline_datapipelinebasecli": {
+    "cfn_nag": false,
+    "filename": "app-aws-datapipeline-base-ap-southeast-2-cli.json",
+    "cfn_lint": false,
+    "json_structure": {
+      "match": [
+        {
+          "path": "datapipelineXappXdatapipelinebase.createPipeline.name",
+          "value": "mockedup-integration-application-datapipelinebase"
+        },
+        {
+          "path": "datapipelineXappXdatapipelinebase.createPipeline.uniqueId",
+          "value": "datapipelineXappXdatapipelinebase"
+        }
+      ]
+    }
+  }
+}

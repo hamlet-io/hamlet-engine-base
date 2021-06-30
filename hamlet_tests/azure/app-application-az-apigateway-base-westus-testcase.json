@@ -1,0 +1,15 @@
+{
+  "application_az_apigateway_base_api_apigateway_apigateway_baseapigatewaytemplate": {
+    "cfn_nag": false,
+    "filename": "app-application-az-apigateway-base-westus-template.json",
+    "cfn_lint": false,
+    "json_structure": {
+      "match": [
+        {
+          "path": "outputs.serviceXmockedupXintegrationXapiXapigateway.value",
+          "value": "/subscriptions/0123456789/resourceGroups/mockRG/providers/Microsoft.Mock/mockResourceType/mockName"
+        }
+      ]
+    }
+  }
+}

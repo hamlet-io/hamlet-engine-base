@@ -1,0 +1,379 @@
+{
+  "AWSTemplateFormatVersion": "2010-09-09",
+  "Metadata": {
+    "ConfigurationReference": "configRef_v123",
+    "RequestReference": "SRVREQ01",
+    "Prepared": "2021-06-30T03:09:10Z",
+    "RunId": "runId098"
+  },
+  "Outputs": {
+    "securityGroupXdbXpostgresdbbase": {
+      "Value": {
+        "Ref": "securityGroupXdbXpostgresdbbase"
+      }
+    },
+    "rdsXdbXpostgresdbbase": {
+      "Value": {
+        "Ref": "rdsXdbXpostgresdbbase"
+      }
+    },
+    "Account": {
+      "Value": {
+        "Ref": "AWS::AccountId"
+      }
+    },
+    "rdsXdbXpostgresdbbaseXdatabasename": {
+      "Value": "mockedup"
+    },
+    "rdsXdbXpostgresdbbaseXregion": {
+      "Value": {
+        "Ref": "AWS::Region"
+      }
+    },
+    "rdsXdbXpostgresdbbaseXport": {
+      "Value": {
+        "Fn::GetAtt": [
+          "rdsXdbXpostgresdbbase",
+          "Endpoint.Port"
+        ]
+      }
+    },
+    "rdsXdbXpostgresdbbaseXlastrestore": {
+      "Value": "##MockOutputXmanualsnapshotXrdsXdbXpostgresdbbaseXnameX##"
+    },
+    "Region": {
+      "Value": {
+        "Ref": "AWS::Region"
+      }
+    },
+    "DeploymentMode": {
+      "Value": "update"
+    },
+    "rdsXdbXpostgresdbbaseXdns": {
+      "Value": {
+        "Fn::GetAtt": [
+          "rdsXdbXpostgresdbbase",
+          "Endpoint.Address"
+        ]
+      }
+    },
+    "DeploymentUnit": {
+      "Value": "aws-db-postgres-base"
+    }
+  },
+  "Resources": {
+    "securityGroupXdbXpostgresdbbase": {
+      "Type": "AWS::EC2::SecurityGroup",
+      "Properties": {
+        "GroupDescription": "mockedup-integration-database-postgresdbbase",
+        "VpcId": "##MockOutputXvpcXsegmentXvpcX##",
+        "Tags": [
+          {
+            "Value": "SRVREQ01",
+            "Key": "cot:request"
+          },
+          {
+            "Value": "configRef_v123",
+            "Key": "cot:configuration"
+          },
+          {
+            "Value": "mockten",
+            "Key": "cot:tenant"
+          },
+          {
+            "Value": "mockacct",
+            "Key": "cot:account"
+          },
+          {
+            "Value": "mockedup",
+            "Key": "cot:product"
+          },
+          {
+            "Value": "integration",
+            "Key": "cot:environment"
+          },
+          {
+            "Value": "test",
+            "Key": "cot:category"
+          },
+          {
+            "Value": "default",
+            "Key": "cot:segment"
+          },
+          {
+            "Value": "database",
+            "Key": "cot:tier"
+          },
+          {
+            "Value": "postgresdbbase",
+            "Key": "cot:component"
+          },
+          {
+            "Value": "mockedup-integration-database-postgresdbbase",
+            "Key": "Name"
+          }
+        ]
+      }
+    },
+    "rdsXdbXpostgresdbbase": {
+      "Type": "AWS::RDS::DBInstance",
+      "DeletionPolicy": "Snapshot",
+      "UpdateReplacePolicy": "Snapshot",
+      "Properties": {
+        "StorageType": "gp2",
+        "EngineVersion": "11",
+        "DBInstanceClass": "db.t2.small",
+        "DeleteAutomatedBackups": true,
+        "Port": "5432",
+        "OptionGroupName": "##MockOutputXrdsOptionGroupXdbXpostgresdbbaseXpostgres11X##",
+        "AvailabilityZone": "ap-southeast-2a",
+        "AutoMinorVersionUpgrade": true,
+        "DBSubnetGroupName": "##MockOutputXrdsSubnetGroupXdbXpostgresdbbaseX##",
+        "DBInstanceIdentifier": "mockedup-integration-database-postgresdbbase",
+        "AllocatedStorage": "20",
+        "CACertificateIdentifier": "rds-ca-2019",
+        "DBParameterGroupName": "##MockOutputXrdsParameterGroupXdbXpostgresdbbaseXpostgres11X##",
+        "VPCSecurityGroups": [
+          "##MockOutputXsecurityGroupXdbXpostgresdbbaseX##"
+        ],
+        "AllowMajorVersionUpgrade": true,
+        "BackupRetentionPeriod": 35,
+        "Engine": "postgres",
+        "DBSnapshotIdentifier": "##MockOutputXmanualsnapshotXrdsXdbXpostgresdbbaseXnameX##",
+        "Tags": [
+          {
+            "Value": "SRVREQ01",
+            "Key": "cot:request"
+          },
+          {
+            "Value": "configRef_v123",
+            "Key": "cot:configuration"
+          },
+          {
+            "Value": "mockten",
+            "Key": "cot:tenant"
+          },
+          {
+            "Value": "mockacct",
+            "Key": "cot:account"
+          },
+          {
+            "Value": "mockedup",
+            "Key": "cot:product"
+          },
+          {
+            "Value": "integration",
+            "Key": "cot:environment"
+          },
+          {
+            "Value": "test",
+            "Key": "cot:category"
+          },
+          {
+            "Value": "default",
+            "Key": "cot:segment"
+          },
+          {
+            "Value": "database",
+            "Key": "cot:tier"
+          },
+          {
+            "Value": "postgresdbbase",
+            "Key": "cot:component"
+          },
+          {
+            "Value": "mockedup-integration-database-postgresdbbase",
+            "Key": "Name"
+          }
+        ]
+      }
+    },
+    "rdsParameterGroupXdbXpostgresdbbaseXpostgres11": {
+      "Type": "AWS::RDS::DBParameterGroup",
+      "Properties": {
+        "Description": "mockedup-integration-database-postgresdbbase",
+        "Parameters": {},
+        "Family": "postgres11",
+        "Tags": [
+          {
+            "Value": "SRVREQ01",
+            "Key": "cot:request"
+          },
+          {
+            "Value": "configRef_v123",
+            "Key": "cot:configuration"
+          },
+          {
+            "Value": "mockten",
+            "Key": "cot:tenant"
+          },
+          {
+            "Value": "mockacct",
+            "Key": "cot:account"
+          },
+          {
+            "Value": "mockedup",
+            "Key": "cot:product"
+          },
+          {
+            "Value": "integration",
+            "Key": "cot:environment"
+          },
+          {
+            "Value": "test",
+            "Key": "cot:category"
+          },
+          {
+            "Value": "default",
+            "Key": "cot:segment"
+          },
+          {
+            "Value": "database",
+            "Key": "cot:tier"
+          },
+          {
+            "Value": "postgresdbbase",
+            "Key": "cot:component"
+          },
+          {
+            "Value": "mockedup-integration-database-postgresdbbase",
+            "Key": "Name"
+          }
+        ]
+      }
+    },
+    "ingressXsecurityGroupXdbXpostgresdbbaseXpostgresqlXsecurityGroupXmgmtXssh": {
+      "Type": "AWS::EC2::SecurityGroupIngress",
+      "Properties": {
+        "FromPort": 5432,
+        "Description": "mockedup-integration-management-ssh",
+        "ToPort": 5432,
+        "IpProtocol": "tcp",
+        "SourceSecurityGroupId": "##MockOutputXsecurityGroupXmgmtXsshX##",
+        "GroupId": "##MockOutputXsecurityGroupXdbXpostgresdbbaseX##"
+      }
+    },
+    "ingressXsecurityGroupXdbXpostgresdbbaseXpostgresqlX1000016": {
+      "Type": "AWS::EC2::SecurityGroupIngress",
+      "Properties": {
+        "CidrIp": "10.0.0.0/16",
+        "FromPort": 5432,
+        "ToPort": 5432,
+        "IpProtocol": "tcp",
+        "GroupId": "##MockOutputXsecurityGroupXdbXpostgresdbbaseX##"
+      }
+    },
+    "rdsOptionGroupXdbXpostgresdbbaseXpostgres11": {
+      "Type": "AWS::RDS::OptionGroup",
+      "DeletionPolicy": "Retain",
+      "Properties": {
+        "OptionGroupDescription": "mockedup-integration-database-postgresdbbase",
+        "OptionConfigurations": [],
+        "MajorEngineVersion": "11",
+        "EngineName": "postgres",
+        "Tags": [
+          {
+            "Value": "SRVREQ01",
+            "Key": "cot:request"
+          },
+          {
+            "Value": "configRef_v123",
+            "Key": "cot:configuration"
+          },
+          {
+            "Value": "mockten",
+            "Key": "cot:tenant"
+          },
+          {
+            "Value": "mockacct",
+            "Key": "cot:account"
+          },
+          {
+            "Value": "mockedup",
+            "Key": "cot:product"
+          },
+          {
+            "Value": "integration",
+            "Key": "cot:environment"
+          },
+          {
+            "Value": "test",
+            "Key": "cot:category"
+          },
+          {
+            "Value": "default",
+            "Key": "cot:segment"
+          },
+          {
+            "Value": "database",
+            "Key": "cot:tier"
+          },
+          {
+            "Value": "postgresdbbase",
+            "Key": "cot:component"
+          },
+          {
+            "Value": "mockedup-integration-database-postgresdbbase",
+            "Key": "Name"
+          }
+        ]
+      }
+    },
+    "rdsSubnetGroupXdbXpostgresdbbase": {
+      "Type": "AWS::RDS::DBSubnetGroup",
+      "Properties": {
+        "DBSubnetGroupDescription": "mockedup-integration-database-postgresdbbase",
+        "SubnetIds": [
+          "##MockOutputXsubnetXdbXaX##",
+          "##MockOutputXsubnetXdbXbX##"
+        ],
+        "Tags": [
+          {
+            "Value": "SRVREQ01",
+            "Key": "cot:request"
+          },
+          {
+            "Value": "configRef_v123",
+            "Key": "cot:configuration"
+          },
+          {
+            "Value": "mockten",
+            "Key": "cot:tenant"
+          },
+          {
+            "Value": "mockacct",
+            "Key": "cot:account"
+          },
+          {
+            "Value": "mockedup",
+            "Key": "cot:product"
+          },
+          {
+            "Value": "integration",
+            "Key": "cot:environment"
+          },
+          {
+            "Value": "test",
+            "Key": "cot:category"
+          },
+          {
+            "Value": "default",
+            "Key": "cot:segment"
+          },
+          {
+            "Value": "database",
+            "Key": "cot:tier"
+          },
+          {
+            "Value": "postgresdbbase",
+            "Key": "cot:component"
+          },
+          {
+            "Value": "mockedup-integration-database-postgresdbbase",
+            "Key": "Name"
+          }
+        ]
+      }
+    }
+  }
+}

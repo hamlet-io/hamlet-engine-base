@@ -1,0 +1,14 @@
+{
+  "application_az_spa_base_app_spa_spa_basespatemplate": {
+    "cfn_nag": false,
+    "filename": "app-application-az-spa-base-westus-config.json",
+    "cfn_lint": false,
+    "json_structure": {
+      "exists": [
+        {
+          "path": "RUN_ID"
+        }
+      ]
+    }
+  }
+}

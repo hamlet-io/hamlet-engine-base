@@ -1,0 +1,50 @@
+{
+  "datapipelineXappXdatapipelinebase": {
+    "createPipeline": {
+      "name": "mockedup-integration-application-datapipelinebase",
+      "uniqueId": "datapipelineXappXdatapipelinebase",
+      "tags": [
+        {
+          "value": "SRVREQ01",
+          "key": "cot:request"
+        },
+        {
+          "value": "configRef_v123",
+          "key": "cot:configuration"
+        },
+        {
+          "value": "mockten",
+          "key": "cot:tenant"
+        },
+        {
+          "value": "mockacct",
+          "key": "cot:account"
+        },
+        {
+          "value": "mockedup",
+          "key": "cot:product"
+        },
+        {
+          "value": "integration",
+          "key": "cot:environment"
+        },
+        {
+          "value": "test",
+          "key": "cot:category"
+        },
+        {
+          "value": "default",
+          "key": "cot:segment"
+        },
+        {
+          "value": "application",
+          "key": "cot:tier"
+        },
+        {
+          "value": "datapipelinebase",
+          "key": "cot:component"
+        }
+      ]
+    }
+  }
+}

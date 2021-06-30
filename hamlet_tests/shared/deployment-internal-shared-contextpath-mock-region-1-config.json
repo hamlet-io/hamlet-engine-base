@@ -1,0 +1,254 @@
+{
+  "Occurrence": {
+    "Configuration": {
+      "SettingNamespaces": [
+        {
+          "Key": "application-contextpath",
+          "Match": "partial"
+        },
+        {
+          "Key": "application-contextpath-internaltest",
+          "Match": "partial"
+        },
+        {
+          "Key": "app-contextpath",
+          "Match": "partial"
+        },
+        {
+          "Key": "app-contextpath-internaltest",
+          "Match": "partial"
+        },
+        {
+          "Key": "shared-contextpath",
+          "Match": "exact"
+        }
+      ],
+      "Environment": {
+        "Build": {
+          "BUILD_UNIT": "shared-contextpath"
+        },
+        "General": {
+          "CREDENTIALS_PREFIX": "settings/mockedup/integration/application/contextpath",
+          "SEGMENT": "default",
+          "TIER": "application",
+          "COMPONENT_INSTANCE": "",
+          "APPDATA_PREFIX": "appdata/mockedup/integration/application/contextpath",
+          "ENVIRONMENT": "integration",
+          "COMPONENT_VERSION": "",
+          "REQUEST_REFERENCE": "SRVREQ01",
+          "SETTINGS_PREFIX": "settings/mockedup/integration/application/contextpath",
+          "TEMPLATE_TIMESTAMP": "2021-06-30T03:03:28Z",
+          "PRODUCT": "mockedup",
+          "CONFIGURATION_REFERENCE": "configRef_v123",
+          "COMPONENT": "contextpath",
+          "APPSETTINGS_PREFIX": "settings/mockedup/integration/application/contextpath"
+        },
+        "Sensitive": {}
+      },
+      "Solution": {
+        "Instances": {
+          "default": {
+            "DeploymentUnits": [
+              "shared-contextpath"
+            ],
+            "Versions": {},
+            "Enabled": true,
+            "Id": "default",
+            "Name": "default"
+          }
+        },
+        "SettingNamespaces": {},
+        "DeploymentUnits": [
+          "shared-contextpath"
+        ],
+        "deployment:Group": "internal",
+        "deployment:Unit": "shared-contextpath",
+        "Profiles": {
+          "Policy": [],
+          "Placement": "internal",
+          "Enabled": true,
+          "Deployment": [],
+          "Baseline": "default",
+          "Configured": true,
+          "Testing": [
+            "contextpath"
+          ]
+        },
+        "deployment:Priority": 100,
+        "Enabled": true,
+        "Links": {},
+        "Export": [],
+        "Extensions": [
+          "_contextpath_content"
+        ]
+      },
+      "Settings": {
+        "Account": {},
+        "Build": {
+          "BUILD_UNIT": {
+            "Value": "shared-contextpath"
+          }
+        },
+        "Product": {},
+        "Core": {
+          "CREDENTIALS_PREFIX": {
+            "Value": "settings/mockedup/integration/application/contextpath"
+          },
+          "SEGMENT": {
+            "Value": "default"
+          },
+          "TIER": {
+            "Value": "application"
+          },
+          "COMPONENT_INSTANCE": {
+            "Value": ""
+          },
+          "APPDATA_PREFIX": {
+            "Value": "appdata/mockedup/integration/application/contextpath"
+          },
+          "ENVIRONMENT": {
+            "Value": "integration"
+          },
+          "COMPONENT_VERSION": {
+            "Value": ""
+          },
+          "REQUEST_REFERENCE": {
+            "Value": "SRVREQ01"
+          },
+          "SETTINGS_PREFIX": {
+            "Value": "settings/mockedup/integration/application/contextpath"
+          },
+          "TEMPLATE_TIMESTAMP": {
+            "Value": "2021-06-30T03:03:28Z"
+          },
+          "PRODUCT": {
+            "Value": "mockedup"
+          },
+          "CONFIGURATION_REFERENCE": {
+            "Value": "configRef_v123"
+          },
+          "COMPONENT": {
+            "Value": "contextpath"
+          },
+          "APPSETTINGS_PREFIX": {
+            "Value": "settings/mockedup/integration/application/contextpath"
+          }
+        }
+      }
+    },
+    "State": {
+      "Attributes": {
+        "DEFAULT_CONTEXTPATH_OUTPUT": "mockedup-default",
+        "ALLINCLUDES_CONTEXTPATH_OUTPUT": "mockacct-0123456789-mockedup-mockapp-integration-default-application-contextpath-allincludes"
+      },
+      "Roles": {
+        "Outbound": {},
+        "Inbound": {}
+      },
+      "ResourceGroups": {
+        "default": {
+          "Placement": {
+            "DeploymentFramework": "default",
+            "Region": "internal",
+            "Provider": "sharedtest"
+          },
+          "Attributes": {
+            "DEFAULT_CONTEXTPATH_OUTPUT": "mockedup-default",
+            "ALLINCLUDES_CONTEXTPATH_OUTPUT": "mockacct-0123456789-mockedup-mockapp-integration-default-application-contextpath-allincludes"
+          },
+          "Roles": {
+            "Outbound": {},
+            "Inbound": {}
+          },
+          "Resources": {
+            "external": {
+              "Type": "internaltest",
+              "Id": "internaltestXappXcontextpath",
+              "Deployed": true
+            }
+          }
+        }
+      },
+      "Resources": {
+        "external": {
+          "Type": "internaltest",
+          "Id": "internaltestXappXcontextpath",
+          "Deployed": true
+        }
+      }
+    },
+    "Core": {
+      "TypedFullName": "mockedup-integration-application-contextpath-internaltest",
+      "ShortFullName": "mockedup-int-app-contextpath",
+      "ShortRawFullName": "mockedup-int-app-contextpath",
+      "Instance": {
+        "RawId": "default",
+        "RawName": "default",
+        "Id": "",
+        "Name": ""
+      },
+      "RawName": "application-contextpath",
+      "ShortRawName": "application-contextpath",
+      "Internal": {
+        "NameExtensions": [],
+        "RawIdExtensions": [],
+        "IdExtensions": [],
+        "RawNameExtensions": []
+      },
+      "ShortName": "app-contextpath",
+      "AbsoluteRawPath": "/application/contextpath",
+      "Extensions": {
+        "RawId": [
+          "app",
+          "contextpath"
+        ],
+        "RawName": [
+          "application",
+          "contextpath"
+        ],
+        "Id": [
+          "app",
+          "contextpath"
+        ],
+        "Name": [
+          "application",
+          "contextpath"
+        ]
+      },
+      "Name": "application-contextpath",
+      "FullAbsoluteRawPath": "/mockedup/integration/application/contextpath",
+      "Version": {
+        "RawId": "default",
+        "RawName": "default",
+        "Id": "",
+        "Name": ""
+      },
+      "ReltiveRawPath": "application/contextpath",
+      "TypedId": "appXcontextpathXinternaltest",
+      "Component": {
+        "RawId": "contextpath",
+        "Type": "internaltest",
+        "RawName": "contextpath",
+        "Id": "contextpath",
+        "Name": "contextpath"
+      },
+      "ShortTypedFullName": "mockedup-int-app-contextpath-internaltest",
+      "FullRealitveRawPath": "mockedup/integration/application/contextpath",
+      "RelativePath": "application/contextpath",
+      "Tier": {
+        "Id": "app",
+        "Name": "application"
+      },
+      "TypedName": "application-contextpath-internaltest",
+      "AbsolutePath": "/application/contextpath",
+      "RawFullName": "mockedup-integration-application-contextpath",
+      "Type": "internaltest",
+      "RawId": "appXcontextpath",
+      "FullRelativePath": "mockedup/integration/application/contextpath",
+      "FullName": "mockedup-integration-application-contextpath",
+      "FullAbsolutePath": "/mockedup/integration/application/contextpath",
+      "Id": "appXcontextpath",
+      "ShortTypedName": "app-contextpath-internaltest"
+    }
+  }
+}

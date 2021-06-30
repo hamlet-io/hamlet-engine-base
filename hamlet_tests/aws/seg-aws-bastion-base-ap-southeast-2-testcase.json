@@ -1,0 +1,58 @@
+{
+  "aws_bastion_base_mgmt_bastionbase_bastion_bastionbase": {
+    "cfn_nag": false,
+    "filename": "seg-aws-bastion-base-ap-southeast-2-template.json",
+    "cfn_lint": true,
+    "json_structure": {
+      "match": [
+        {
+          "path": "Resources.asgXmgmtXbastionbase.UpdatePolicy.AutoScalingRollingUpdate.WaitOnResourceSignals",
+          "value": true
+        },
+        {
+          "path": "Resources.asgXmgmtXbastionbase.Properties.DesiredCapacity",
+          "value": "0"
+        },
+        {
+          "path": "Resources.securityGroupXmgmtXbastionbase.Properties.VpcId",
+          "value": "##MockOutputXvpcXsegmentXvpcX##"
+        }
+      ],
+      "not_empty": [
+        {
+          "path": "Resources.launchConfigXmgmtXbastionbase.Properties.ImageId"
+        },
+        {
+          "path": "Resources.launchConfigXmgmtXbastionbase.Properties.InstanceType"
+        },
+        {
+          "path": "Resources.asgXmgmtXbastionbase.Metadata"
+        }
+      ]
+    },
+    "cfn_structure": {
+      "output": [
+        {
+          "id": "securityGroupXmgmtXbastionbase"
+        },
+        {
+          "id": "asgXmgmtXbastionbase"
+        }
+      ],
+      "resource": [
+        {
+          "id": "launchConfigXmgmtXbastionbase",
+          "type": "AWS::AutoScaling::LaunchConfiguration"
+        },
+        {
+          "id": "securityGroupXmgmtXbastionbase",
+          "type": "AWS::EC2::SecurityGroup"
+        },
+        {
+          "id": "asgXmgmtXbastionbase",
+          "type": "AWS::AutoScaling::AutoScalingGroup"
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,103 @@
+{
+  "AWSTemplateFormatVersion": "2010-09-09",
+  "Metadata": {
+    "ConfigurationReference": "configRef_v123",
+    "RequestReference": "SRVREQ01",
+    "Prepared": "2021-06-30T03:05:04Z",
+    "RunId": "runId098"
+  },
+  "Outputs": {
+    "Account": {
+      "Value": {
+        "Ref": "AWS::AccountId"
+      }
+    },
+    "Region": {
+      "Value": {
+        "Ref": "AWS::Region"
+      }
+    },
+    "DeploymentMode": {
+      "Value": "update"
+    },
+    "natGatewayXmgmtXa": {
+      "Value": {
+        "Ref": "natGatewayXmgmtXa"
+      }
+    },
+    "DeploymentUnit": {
+      "Value": "nat"
+    }
+  },
+  "Resources": {
+    "routeXrouteTableXmgmtXvpcXinternalXaXmgmtXnatXdefaultX0": {
+      "Type": "AWS::EC2::Route",
+      "Properties": {
+        "RouteTableId": "##MockOutputXrouteTableXmgmtXvpcXinternalXaX##",
+        "DestinationCidrBlock": "0.0.0.0/0",
+        "NatGatewayId": "##MockOutputXnatGatewayXmgmtXaX##"
+      }
+    },
+    "routeXrouteTableXmgmtXvpcXinternalXbXmgmtXnatXdefaultX0": {
+      "Type": "AWS::EC2::Route",
+      "Properties": {
+        "RouteTableId": "##MockOutputXrouteTableXmgmtXvpcXinternalXbX##",
+        "DestinationCidrBlock": "0.0.0.0/0",
+        "NatGatewayId": "##MockOutputXnatGatewayXmgmtXaX##"
+      }
+    },
+    "natGatewayXmgmtXa": {
+      "Type": "AWS::EC2::NatGateway",
+      "Properties": {
+        "AllocationId": "##MockOutputXeipXmgmtXnatXaXidX##",
+        "SubnetId": "##MockOutputXsubnetXmgmtXaX##",
+        "Tags": [
+          {
+            "Value": "SRVREQ01",
+            "Key": "cot:request"
+          },
+          {
+            "Value": "configRef_v123",
+            "Key": "cot:configuration"
+          },
+          {
+            "Value": "mockten",
+            "Key": "cot:tenant"
+          },
+          {
+            "Value": "mockacct",
+            "Key": "cot:account"
+          },
+          {
+            "Value": "mockedup",
+            "Key": "cot:product"
+          },
+          {
+            "Value": "integration",
+            "Key": "cot:environment"
+          },
+          {
+            "Value": "test",
+            "Key": "cot:category"
+          },
+          {
+            "Value": "default",
+            "Key": "cot:segment"
+          },
+          {
+            "Value": "management",
+            "Key": "cot:tier"
+          },
+          {
+            "Value": "nat",
+            "Key": "cot:component"
+          },
+          {
+            "Value": "mockedup-integration-management-nat-a",
+            "Key": "Name"
+          }
+        ]
+      }
+    }
+  }
+}

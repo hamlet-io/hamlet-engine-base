@@ -1,0 +1,127 @@
+{
+  "AWSTemplateFormatVersion": "2010-09-09",
+  "Metadata": {
+    "ConfigurationReference": "configRef_v123",
+    "RequestReference": "SRVREQ01",
+    "Prepared": "2021-06-30T03:08:35Z",
+    "RunId": "runId098"
+  },
+  "Outputs": {
+    "s3XappXs3replicasextrcXdns": {
+      "Value": {
+        "Fn::GetAtt": [
+          "s3XappXs3replicasextrc",
+          "DomainName"
+        ]
+      }
+    },
+    "Account": {
+      "Value": {
+        "Ref": "AWS::AccountId"
+      }
+    },
+    "s3XappXs3replicasextrcXname": {
+      "Value": {
+        "Ref": "s3XappXs3replicasextrc"
+      }
+    },
+    "s3XappXs3replicasextrcXarn": {
+      "Value": {
+        "Fn::GetAtt": [
+          "s3XappXs3replicasextrc",
+          "Arn"
+        ]
+      }
+    },
+    "s3XappXs3replicasextrcXurl": {
+      "Value": {
+        "Fn::GetAtt": [
+          "s3XappXs3replicasextrc",
+          "WebsiteURL"
+        ]
+      }
+    },
+    "s3XappXs3replicasextrcXregion": {
+      "Value": {
+        "Ref": "AWS::Region"
+      }
+    },
+    "Region": {
+      "Value": {
+        "Ref": "AWS::Region"
+      }
+    },
+    "DeploymentMode": {
+      "Value": "update"
+    },
+    "s3XappXs3replicasextrc": {
+      "Value": {
+        "Ref": "s3XappXs3replicasextrc"
+      }
+    },
+    "DeploymentUnit": {
+      "Value": "aws-s3-replication-external"
+    }
+  },
+  "Resources": {
+    "s3XappXs3replicasextrc": {
+      "Type": "AWS::S3::Bucket",
+      "Properties": {
+        "BucketName": "##MockOutputXs3XappXs3replicasextrcXnameX##",
+        "LoggingConfiguration": {
+          "LogFilePrefix": "s3/##MockOutputXs3XappXs3replicasextrcXnameX##/",
+          "DestinationBucketName": "##MockOutputXs3XaccountXauditX##"
+        },
+        "VersioningConfiguration": {
+          "Status": "Enabled"
+        },
+        "ReplicationConfiguration": {
+          "Role": "arn:aws:iam::123456789012:mock/roleXappXs3replicasextrcXarn",
+          "Rules": [
+            {
+              "Status": "Enabled",
+              "Destination": {
+                "AccessControlTranslation": {
+                  "Owner": "Destination"
+                },
+                "Account": "0987654321",
+                "Bucket": "arn:aws:s3:::external-replication-destination"
+              },
+              "Prefix": ""
+            }
+          ]
+        },
+        "Tags": [
+          {
+            "Value": "SRVREQ01",
+            "Key": "cot:request"
+          },
+          {
+            "Value": "configRef_v123",
+            "Key": "cot:configuration"
+          },
+          {
+            "Value": "mockten",
+            "Key": "cot:tenant"
+          },
+          {
+            "Value": "mockacct",
+            "Key": "cot:account"
+          },
+          {
+            "Value": "mockedup",
+            "Key": "cot:product"
+          },
+          {
+            "Value": "integration",
+            "Key": "cot:environment"
+          },
+          {
+            "Value": "test",
+            "Key": "cot:category"
+          }
+        ]
+      }
+    }
+  }
+}

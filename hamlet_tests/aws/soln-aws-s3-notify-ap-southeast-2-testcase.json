@@ -1,0 +1,45 @@
+{
+  "aws_s3_notify_app_s3notify_s3_s3notify": {
+    "cfn_nag": false,
+    "filename": "soln-aws-s3-notify-ap-southeast-2-template.json",
+    "cfn_lint": false,
+    "json_structure": {
+      "match": [
+        {
+          "path": "Resources.s3XappXs3notify.Properties.NotificationConfiguration.QueueConfigurations[0].Queue",
+          "value": "arn:aws:iam::123456789012:mock/sqsXappXs3notifyqueueXarn"
+        }
+      ]
+    },
+    "cfn_structure": {
+      "output": [
+        {
+          "id": "s3XappXs3notify"
+        },
+        {
+          "id": "s3XappXs3notifyXname"
+        },
+        {
+          "id": "s3XappXs3notifyXarn"
+        },
+        {
+          "id": "s3XappXs3notifyXregion"
+        }
+      ],
+      "resource": [
+        {
+          "id": "s3XappXs3notify",
+          "type": "AWS::S3::Bucket"
+        },
+        {
+          "id": "sqsXappXs3notifyqueue",
+          "type": "AWS::SQS::Queue"
+        },
+        {
+          "id": "sqsPolicyXappXs3notifyqueue",
+          "type": "AWS::SQS::QueuePolicy"
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,36 @@
+{
+  "aws_healthcheck_complex_base_app_healthcheckcomplexbase_healthcheck_healthcheckcomplexbase": {
+    "cfn_nag": false,
+    "filename": "app-aws-healthcheck-complex-base-ap-southeast-2-template.json",
+    "cfn_lint": true,
+    "json_structure": {
+      "match": [
+        {
+          "path": "Resources.canaryXappXhealthcheckcomplexbase.Properties.Name",
+          "value": "healthcheckcomplexbas"
+        },
+        {
+          "path": "Resources.canaryXappXhealthcheckcomplexbase.Properties.ArtifactS3Location",
+          "value": "s3://##MockOutputXs3XsegmentXapplicationX##/appdata/mockedup/integration/application/healthcheckcomplexbase"
+        },
+        {
+          "path": "Resources.canaryXappXhealthcheckcomplexbase.Properties.RunConfig.EnvironmentVariables.LB_FQDN",
+          "value": "healthchecklb-integration.mock.local"
+        }
+      ]
+    },
+    "cfn_structure": {
+      "output": [
+        {
+          "id": "canaryXappXhealthcheckcomplexbase"
+        }
+      ],
+      "resource": [
+        {
+          "id": "canaryXappXhealthcheckcomplexbase",
+          "type": "AWS::Synthetics::Canary"
+        }
+      ]
+    }
+  }
+}

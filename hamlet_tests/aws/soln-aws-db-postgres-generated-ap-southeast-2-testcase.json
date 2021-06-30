@@ -1,0 +1,23 @@
+{
+  "aws_db_postgres_generated_db_postgresdbgenerated_db_postgresdbgenerated": {
+    "cfn_nag": false,
+    "filename": "soln-aws-db-postgres-generated-ap-southeast-2-template.json",
+    "cfn_lint": false,
+    "cfn_structure": {
+      "output": [
+        {
+          "id": "rdsXdbXpostgresdbgeneratedXdns"
+        },
+        {
+          "id": "rdsXdbXpostgresdbgeneratedXport"
+        }
+      ],
+      "resource": [
+        {
+          "id": "rdsXdbXpostgresdbgenerated",
+          "type": "AWS::RDS::DBInstance"
+        }
+      ]
+    }
+  }
+}

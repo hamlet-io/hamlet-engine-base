@@ -1,0 +1,379 @@
+{
+  "AWSTemplateFormatVersion": "2010-09-09",
+  "Metadata": {
+    "ConfigurationReference": "configRef_v123",
+    "RequestReference": "SRVREQ01",
+    "Prepared": "2021-06-30T03:09:29Z",
+    "RunId": "runId098"
+  },
+  "Outputs": {
+    "securityGroupXdbXpostgresdbgenerated": {
+      "Value": {
+        "Ref": "securityGroupXdbXpostgresdbgenerated"
+      }
+    },
+    "rdsXdbXpostgresdbgeneratedXport": {
+      "Value": {
+        "Fn::GetAtt": [
+          "rdsXdbXpostgresdbgenerated",
+          "Endpoint.Port"
+        ]
+      }
+    },
+    "Account": {
+      "Value": {
+        "Ref": "AWS::AccountId"
+      }
+    },
+    "rdsXdbXpostgresdbgeneratedXregion": {
+      "Value": {
+        "Ref": "AWS::Region"
+      }
+    },
+    "rdsXdbXpostgresdbgenerated": {
+      "Value": {
+        "Ref": "rdsXdbXpostgresdbgenerated"
+      }
+    },
+    "rdsXdbXpostgresdbgeneratedXdatabasename": {
+      "Value": "mockedup"
+    },
+    "rdsXdbXpostgresdbgeneratedXlastrestore": {
+      "Value": "##MockOutputXmanualsnapshotXrdsXdbXpostgresdbgeneratedXnameX##"
+    },
+    "Region": {
+      "Value": {
+        "Ref": "AWS::Region"
+      }
+    },
+    "DeploymentMode": {
+      "Value": "update"
+    },
+    "rdsXdbXpostgresdbgeneratedXdns": {
+      "Value": {
+        "Fn::GetAtt": [
+          "rdsXdbXpostgresdbgenerated",
+          "Endpoint.Address"
+        ]
+      }
+    },
+    "DeploymentUnit": {
+      "Value": "aws-db-postgres-generated"
+    }
+  },
+  "Resources": {
+    "securityGroupXdbXpostgresdbgenerated": {
+      "Type": "AWS::EC2::SecurityGroup",
+      "Properties": {
+        "GroupDescription": "mockedup-integration-database-postgresdbgenerated",
+        "VpcId": "##MockOutputXvpcXsegmentXvpcX##",
+        "Tags": [
+          {
+            "Value": "SRVREQ01",
+            "Key": "cot:request"
+          },
+          {
+            "Value": "configRef_v123",
+            "Key": "cot:configuration"
+          },
+          {
+            "Value": "mockten",
+            "Key": "cot:tenant"
+          },
+          {
+            "Value": "mockacct",
+            "Key": "cot:account"
+          },
+          {
+            "Value": "mockedup",
+            "Key": "cot:product"
+          },
+          {
+            "Value": "integration",
+            "Key": "cot:environment"
+          },
+          {
+            "Value": "test",
+            "Key": "cot:category"
+          },
+          {
+            "Value": "default",
+            "Key": "cot:segment"
+          },
+          {
+            "Value": "database",
+            "Key": "cot:tier"
+          },
+          {
+            "Value": "postgresdbgenerated",
+            "Key": "cot:component"
+          },
+          {
+            "Value": "mockedup-integration-database-postgresdbgenerated",
+            "Key": "Name"
+          }
+        ]
+      }
+    },
+    "ingressXsecurityGroupXdbXpostgresdbgeneratedXpostgresqlXsecurityGroupXmgmtXssh": {
+      "Type": "AWS::EC2::SecurityGroupIngress",
+      "Properties": {
+        "FromPort": 5432,
+        "Description": "mockedup-integration-management-ssh",
+        "ToPort": 5432,
+        "IpProtocol": "tcp",
+        "SourceSecurityGroupId": "##MockOutputXsecurityGroupXmgmtXsshX##",
+        "GroupId": "##MockOutputXsecurityGroupXdbXpostgresdbgeneratedX##"
+      }
+    },
+    "ingressXsecurityGroupXdbXpostgresdbgeneratedXpostgresqlX1000016": {
+      "Type": "AWS::EC2::SecurityGroupIngress",
+      "Properties": {
+        "CidrIp": "10.0.0.0/16",
+        "FromPort": 5432,
+        "ToPort": 5432,
+        "IpProtocol": "tcp",
+        "GroupId": "##MockOutputXsecurityGroupXdbXpostgresdbgeneratedX##"
+      }
+    },
+    "rdsSubnetGroupXdbXpostgresdbgenerated": {
+      "Type": "AWS::RDS::DBSubnetGroup",
+      "Properties": {
+        "DBSubnetGroupDescription": "mockedup-integration-database-postgresdbgenerated",
+        "SubnetIds": [
+          "##MockOutputXsubnetXdbXaX##",
+          "##MockOutputXsubnetXdbXbX##"
+        ],
+        "Tags": [
+          {
+            "Value": "SRVREQ01",
+            "Key": "cot:request"
+          },
+          {
+            "Value": "configRef_v123",
+            "Key": "cot:configuration"
+          },
+          {
+            "Value": "mockten",
+            "Key": "cot:tenant"
+          },
+          {
+            "Value": "mockacct",
+            "Key": "cot:account"
+          },
+          {
+            "Value": "mockedup",
+            "Key": "cot:product"
+          },
+          {
+            "Value": "integration",
+            "Key": "cot:environment"
+          },
+          {
+            "Value": "test",
+            "Key": "cot:category"
+          },
+          {
+            "Value": "default",
+            "Key": "cot:segment"
+          },
+          {
+            "Value": "database",
+            "Key": "cot:tier"
+          },
+          {
+            "Value": "postgresdbgenerated",
+            "Key": "cot:component"
+          },
+          {
+            "Value": "mockedup-integration-database-postgresdbgenerated",
+            "Key": "Name"
+          }
+        ]
+      }
+    },
+    "rdsXdbXpostgresdbgenerated": {
+      "Type": "AWS::RDS::DBInstance",
+      "DeletionPolicy": "Delete",
+      "UpdateReplacePolicy": "Delete",
+      "Properties": {
+        "StorageType": "gp2",
+        "EngineVersion": "11",
+        "DBInstanceClass": "db.t2.small",
+        "DeleteAutomatedBackups": true,
+        "Port": "5432",
+        "OptionGroupName": "##MockOutputXrdsOptionGroupXdbXpostgresdbgeneratedXpostgres11X##",
+        "AvailabilityZone": "ap-southeast-2a",
+        "AutoMinorVersionUpgrade": true,
+        "DBSubnetGroupName": "##MockOutputXrdsSubnetGroupXdbXpostgresdbgeneratedX##",
+        "DBInstanceIdentifier": "mockedup-integration-database-postgresdbgenerated-backup",
+        "AllocatedStorage": "20",
+        "CACertificateIdentifier": "rds-ca-2019",
+        "DBParameterGroupName": "##MockOutputXrdsParameterGroupXdbXpostgresdbgeneratedXpostgres11X##",
+        "VPCSecurityGroups": [
+          "##MockOutputXsecurityGroupXdbXpostgresdbgeneratedX##"
+        ],
+        "AllowMajorVersionUpgrade": true,
+        "BackupRetentionPeriod": 35,
+        "Engine": "postgres",
+        "DBSnapshotIdentifier": "##MockOutputXmanualsnapshotXrdsXdbXpostgresdbgeneratedXnameX##",
+        "Tags": [
+          {
+            "Value": "SRVREQ01",
+            "Key": "cot:request"
+          },
+          {
+            "Value": "configRef_v123",
+            "Key": "cot:configuration"
+          },
+          {
+            "Value": "mockten",
+            "Key": "cot:tenant"
+          },
+          {
+            "Value": "mockacct",
+            "Key": "cot:account"
+          },
+          {
+            "Value": "mockedup",
+            "Key": "cot:product"
+          },
+          {
+            "Value": "integration",
+            "Key": "cot:environment"
+          },
+          {
+            "Value": "test",
+            "Key": "cot:category"
+          },
+          {
+            "Value": "default",
+            "Key": "cot:segment"
+          },
+          {
+            "Value": "database",
+            "Key": "cot:tier"
+          },
+          {
+            "Value": "postgresdbgenerated",
+            "Key": "cot:component"
+          },
+          {
+            "Value": "mockedup-integration-database-postgresdbgenerated",
+            "Key": "Name"
+          }
+        ]
+      }
+    },
+    "rdsOptionGroupXdbXpostgresdbgeneratedXpostgres11": {
+      "Type": "AWS::RDS::OptionGroup",
+      "DeletionPolicy": "Retain",
+      "Properties": {
+        "OptionGroupDescription": "mockedup-integration-database-postgresdbgenerated",
+        "OptionConfigurations": [],
+        "MajorEngineVersion": "11",
+        "EngineName": "postgres",
+        "Tags": [
+          {
+            "Value": "SRVREQ01",
+            "Key": "cot:request"
+          },
+          {
+            "Value": "configRef_v123",
+            "Key": "cot:configuration"
+          },
+          {
+            "Value": "mockten",
+            "Key": "cot:tenant"
+          },
+          {
+            "Value": "mockacct",
+            "Key": "cot:account"
+          },
+          {
+            "Value": "mockedup",
+            "Key": "cot:product"
+          },
+          {
+            "Value": "integration",
+            "Key": "cot:environment"
+          },
+          {
+            "Value": "test",
+            "Key": "cot:category"
+          },
+          {
+            "Value": "default",
+            "Key": "cot:segment"
+          },
+          {
+            "Value": "database",
+            "Key": "cot:tier"
+          },
+          {
+            "Value": "postgresdbgenerated",
+            "Key": "cot:component"
+          },
+          {
+            "Value": "mockedup-integration-database-postgresdbgenerated",
+            "Key": "Name"
+          }
+        ]
+      }
+    },
+    "rdsParameterGroupXdbXpostgresdbgeneratedXpostgres11": {
+      "Type": "AWS::RDS::DBParameterGroup",
+      "Properties": {
+        "Description": "mockedup-integration-database-postgresdbgenerated",
+        "Parameters": {},
+        "Family": "postgres11",
+        "Tags": [
+          {
+            "Value": "SRVREQ01",
+            "Key": "cot:request"
+          },
+          {
+            "Value": "configRef_v123",
+            "Key": "cot:configuration"
+          },
+          {
+            "Value": "mockten",
+            "Key": "cot:tenant"
+          },
+          {
+            "Value": "mockacct",
+            "Key": "cot:account"
+          },
+          {
+            "Value": "mockedup",
+            "Key": "cot:product"
+          },
+          {
+            "Value": "integration",
+            "Key": "cot:environment"
+          },
+          {
+            "Value": "test",
+            "Key": "cot:category"
+          },
+          {
+            "Value": "default",
+            "Key": "cot:segment"
+          },
+          {
+            "Value": "database",
+            "Key": "cot:tier"
+          },
+          {
+            "Value": "postgresdbgenerated",
+            "Key": "cot:component"
+          },
+          {
+            "Value": "mockedup-integration-database-postgresdbgenerated",
+            "Key": "Name"
+          }
+        ]
+      }
+    }
+  }
+}

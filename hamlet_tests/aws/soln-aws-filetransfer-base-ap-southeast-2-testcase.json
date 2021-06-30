@@ -1,0 +1,30 @@
+{
+  "aws_filetransfer_base_app_filetransferbase_filetransfer_filetransferbase": {
+    "cfn_nag": false,
+    "filename": "soln-aws-filetransfer-base-ap-southeast-2-template.json",
+    "cfn_lint": false,
+    "cfn_structure": {
+      "output": [
+        {
+          "id": "transferServerXappXfiletransferbase"
+        },
+        {
+          "id": "transferServerXappXfiletransferbaseXarn"
+        },
+        {
+          "id": "transferServerXappXfiletransferbaseXname"
+        }
+      ],
+      "resource": [
+        {
+          "id": "transferServerXappXfiletransferbase",
+          "type": "AWS::Transfer::Server"
+        },
+        {
+          "id": "securityGroupXtransferServerXappXfiletransferbase",
+          "type": "AWS::EC2::SecurityGroup"
+        }
+      ]
+    }
+  }
+}

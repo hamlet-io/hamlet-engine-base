@@ -1,0 +1,15 @@
+{
+  "application_az_lambda_base_app_lambda_lambda_baselambdatemplate": {
+    "cfn_nag": false,
+    "filename": "app-application-az-lambda-base-westus-template.json",
+    "cfn_lint": false,
+    "json_structure": {
+      "match": [
+        {
+          "path": "outputs.sitesXappXlambdaXapi.value",
+          "value": "/subscriptions/0123456789/resourceGroups/mockRG/providers/Microsoft.Mock/mockResourceType/mockName"
+        }
+      ]
+    }
+  }
+}

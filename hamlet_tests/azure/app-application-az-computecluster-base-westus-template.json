@@ -1,0 +1,321 @@
+{
+  "outputs": {
+    "roleXStorageBlobDataReader": {
+      "type": "string",
+      "value": "/subscriptions/0123456789/resourceGroups/mockRG/providers/Microsoft.Mock/mockResourceType/mockName"
+    },
+    "vmssXappXcomputecluster": {
+      "type": "string",
+      "value": "/subscriptions/0123456789/resourceGroups/mockRG/providers/Microsoft.Mock/mockResourceType/mockName"
+    },
+    "vmssXsettingsXappXcomputecluster": {
+      "type": "string",
+      "value": "/subscriptions/0123456789/resourceGroups/mockRG/providers/Microsoft.Mock/mockResourceType/mockName"
+    },
+    "Region": {
+      "type": "string",
+      "value": "[resourceGroup().location]"
+    },
+    "DeploymentMode": {
+      "type": "string",
+      "value": "update"
+    },
+    "publicIPXappXcomputeclusterXip": {
+      "type": "string",
+      "value": "123.123.123.123"
+    },
+    "vmssXappXcomputeclusterXname": {
+      "type": "string",
+      "value": "app-computecluster"
+    },
+    "Subscription": {
+      "type": "string",
+      "value": "[subscription().id]"
+    },
+    "vmssXappXcomputeclusterXid": {
+      "type": "string",
+      "value": "/subscriptions/0123456789/resourceGroups/mockRG/providers/Microsoft.Mock/mockResourceType/mockName"
+    },
+    "DeploymentUnit": {
+      "type": "string",
+      "value": "application-az-computecluster-base"
+    },
+    "ResourceGroup": {
+      "type": "string",
+      "value": "mockedup-integration-default-app-application-az-computecluster-base"
+    }
+  },
+  "variables": {},
+  "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
+  "resources": [
+    {
+      "apiVersion": "2019-09-01",
+      "name": "app-computecluster",
+      "location": "westus",
+      "type": "Microsoft.Network/publicIPAddresses",
+      "sku": {
+        "name": "Standard"
+      },
+      "properties": {
+        "publicIPAddressVersion": "IPv4",
+        "publicIPAllocationMethod": "Static"
+      }
+    },
+    {
+      "apiVersion": "2015-04-01",
+      "dependsOn": [
+        "/subscriptions/0123456789/resourceGroups/mockRG/providers/Microsoft.Mock/mockResourceType/mockName"
+      ],
+      "name": "app-computecluster",
+      "location": "westus",
+      "type": "Microsoft.Insights/autoscaleSettings",
+      "properties": {
+        "targetResourceUri": "/subscriptions/0123456789/resourceGroups/mockRG/providers/Microsoft.Mock/mockResourceType/mockName",
+        "name": "app-computecluster",
+        "profiles": [
+          {
+            "name": "default",
+            "rules": [
+              {
+                "scaleAction": {
+                  "cooldown": "PT5M",
+                  "type": "ChangeCount",
+                  "value": 1,
+                  "direction": "Increase"
+                },
+                "metricTrigger": {
+                  "metricResourceUri": "/subscriptions/0123456789/resourceGroups/mockRG/providers/Microsoft.Mock/mockResourceType/mockName",
+                  "timeGrain": "PT1M",
+                  "statistic": "Average",
+                  "timeWindow": "PT5M",
+                  "metricName": "CpuPercentage",
+                  "timeAggregation": "Average",
+                  "threshold": 50,
+                  "operator": "GreaterThan"
+                }
+              },
+              {
+                "scaleAction": {
+                  "cooldown": "PT5M",
+                  "type": "ChangeCount",
+                  "value": 1,
+                  "direction": "Decrease"
+                },
+                "metricTrigger": {
+                  "metricResourceUri": "/subscriptions/0123456789/resourceGroups/mockRG/providers/Microsoft.Mock/mockResourceType/mockName",
+                  "timeGrain": "PT1M",
+                  "statistic": "Average",
+                  "timeWindow": "PT5M",
+                  "metricName": "CpuPercentage",
+                  "timeAggregation": "Average",
+                  "threshold": 30,
+                  "operator": "LessThan"
+                }
+              }
+            ],
+            "capacity": {
+              "default": 1,
+              "maximum": 2,
+              "minimum": 1
+            }
+          }
+        ],
+        "enabled": true
+      }
+    },
+    {
+      "apiVersion": "2019-04-01",
+      "name": "mockedup-int-mgmt-vpc-network-nsg/http",
+      "type": "Microsoft.Network/networkSecurityGroups/securityRules",
+      "properties": {
+        "destinationAddressPrefix": "123.123.123.123",
+        "protocol": "tcp",
+        "access": "allow",
+        "sourcePortRange": "*",
+        "sourceAddressPrefix": "Internet",
+        "destinationPortRange": "80",
+        "priority": 200,
+        "direction": "Inbound"
+      }
+    },
+    {
+      "apiVersion": "2019-04-01",
+      "name": "mockedup-int-mgmt-vpc-network-nsg/https",
+      "type": "Microsoft.Network/networkSecurityGroups/securityRules",
+      "properties": {
+        "destinationAddressPrefix": "123.123.123.123",
+        "protocol": "tcp",
+        "access": "allow",
+        "sourcePortRange": "*",
+        "sourceAddressPrefix": "Internet",
+        "destinationPortRange": "443",
+        "priority": 201,
+        "direction": "Inbound"
+      }
+    },
+    {
+      "apiVersion": "2019-09-01",
+      "dependsOn": [
+        "/subscriptions/0123456789/resourceGroups/mockRG/providers/Microsoft.Mock/mockResourceType/mockName"
+      ],
+      "name": "app-computecluster",
+      "location": "westus",
+      "type": "Microsoft.Network/networkInterfaces",
+      "properties": {
+        "ipConfigurations": [
+          {
+            "name": "app-computeclusteripConfig",
+            "properties": {
+              "subnet": {
+                "privateIPAllocationMethod": "Dynamic",
+                "privateIPAddressVersion": "IPv4",
+                "id": "/subscriptions/0123456789/resourceGroups/mockRG/providers/Microsoft.Mock/mockResourceType/mockName"
+              },
+              "primary": true,
+              "publicIPAddress": {
+                "id": "/subscriptions/0123456789/resourceGroups/mockRG/providers/Microsoft.Mock/mockResourceType/mockName"
+              }
+            }
+          }
+        ],
+        "networkSecurityGroup": {
+          "id": "/subscriptions/0123456789/resourceGroups/mockRG/providers/Microsoft.Mock/mockResourceType/mockName"
+        }
+      }
+    },
+    {
+      "apiVersion": "2019-03-01",
+      "dependsOn": [
+        "/subscriptions/0123456789/resourceGroups/mockRG/providers/Microsoft.Mock/mockResourceType/mockName"
+      ],
+      "identity": {
+        "type": "SystemAssigned"
+      },
+      "name": "app-computecluster",
+      "location": "westus",
+      "type": "Microsoft.Compute/virtualMachineScaleSets",
+      "sku": {
+        "tier": "Standard",
+        "name": "Standard_B1ms",
+        "capacity": 1
+      },
+      "properties": {
+        "upgradePolicy": {
+          "mode": "Manual"
+        },
+        "virtualMachineProfile": {
+          "storageProfile": {
+            "imageReference": {
+              "offer": "UbuntuServer",
+              "publisher": "Canonical",
+              "sku": "18.04-LTS",
+              "version": "latest"
+            },
+            "osDisk": {
+              "managedDisk": {
+                "storageAccountType": "Standard_LRS"
+              },
+              "createOption": "FromImage"
+            }
+          },
+          "networkProfile": {
+            "networkInterfaceConfigurations": [
+              {
+                "name": "app-computecluster",
+                "id": "/subscriptions/0123456789/resourceGroups/mockRG/providers/Microsoft.Mock/mockResourceType/mockName",
+                "properties": {
+                  "ipConfigurations": [
+                    {
+                      "name": "app-computeclusteripConfig",
+                      "id": "[concat(reference('app-computecluster', 'Full').id, '/ipConfigurations/app-computeclusteripConfig')]",
+                      "properties": {
+                        "subnet": {
+                          "privateIPAllocationMethod": "Dynamic",
+                          "privateIPAddressVersion": "IPv4",
+                          "id": "/subscriptions/0123456789/resourceGroups/mockRG/providers/Microsoft.Mock/mockResourceType/mockName"
+                        }
+                      }
+                    }
+                  ],
+                  "primary": true
+                }
+              }
+            ]
+          },
+          "priority": "Regular",
+          "osProfile": {
+            "adminUsername": "bojangles",
+            "linuxConfiguration": {
+              "disablePasswordAuthentication": true,
+              "ssh": {
+                "publicKeys": [
+                  {
+                    "path": "/home/bojangles/.ssh/authorized_keys",
+                    "keyData": "[parameters('secret-mgmt-baseline-sshPublicKey')]"
+                  }
+                ]
+              }
+            },
+            "computerNamePrefix": "mockedup"
+          }
+        }
+      }
+    },
+    {
+      "apiVersion": "2018-09-01-preview",
+      "dependsOn": [
+        "/subscriptions/0123456789/resourceGroups/mockRG/providers/Microsoft.Mock/mockResourceType/mockName"
+      ],
+      "name": "2a2b9908-6ea1-4ae2-8e65-a410df84e7d1",
+      "type": "Microsoft.Authorization/roleAssignments",
+      "properties": {
+        "roleDefinitionId": "/subscriptions/0123456789/resourceGroups/mockRG/providers/Microsoft.Mock/mockResourceType/mockName",
+        "principalId": "/subscriptions/0123456789/resourceGroups/mockRG/providers/Microsoft.Mock/mockResourceType/mockName"
+      }
+    },
+    {
+      "apiVersion": "2019-12-01",
+      "dependsOn": [
+        "/subscriptions/0123456789/resourceGroups/mockRG/providers/Microsoft.Mock/mockResourceType/mockName"
+      ],
+      "name": "app-computecluster/app-computecluster",
+      "type": "Microsoft.Compute/virtualMachineScaleSets/extensions",
+      "properties": {
+        "settings": {
+          "timestamp": 20210630031659596
+        },
+        "publisher": "Microsoft.Azure.Extensions",
+        "type": "CustomScript",
+        "typeHandlerVersion": "2.1",
+        "protectedSettings": {
+          "managedIdentity": {},
+          "commandToExecute": "[concat('sudo apt update', ' && curl -sL https://aka.ms/InstallAzureCLIDeb | sudo bash', ' && sudo apt install docker.io -y', ' && az storage blob download --connection-string ', parameters('storage'), ' -c ', parameters('container'), ' -n ', parameters('blob'), ' -f ', parameters('file'), ' && sudo apt install unzip && unzip -DD ', parameters('file'), ' -d .', ' && chmod 755 ./init.sh && ./init.sh')]"
+        }
+      }
+    }
+  ],
+  "contentVersion": "1.0.0.0",
+  "parameters": {
+    "container": {
+      "type": "securestring"
+    },
+    "blob": {
+      "defaultValue": "mockedup/application-az-computecluster-base/123456789#MockCommit#/app-computecluster.zip",
+      "type": "securestring"
+    },
+    "file": {
+      "defaultValue": "app-computecluster.zip",
+      "type": "securestring"
+    },
+    "mgmt-baseline-secret-ConnectionKey": {
+      "type": "securestring"
+    },
+    "storage": {
+      "defaultValue": "[concat('''DefaultEndpointsProtocol=https;AccountName=', 'mgmtbaselinesubscription', ';AccountKey=', parameters('mgmt-baseline-secret-ConnectionKey'), '''')]",
+      "type": "securestring"
+    },
+    "secret-mgmt-baseline-sshPublicKey": {
+      "type": "securestring"
+    }
+  }
+}

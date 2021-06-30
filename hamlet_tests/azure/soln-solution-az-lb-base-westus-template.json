@@ -1,0 +1,93 @@
+{
+  "outputs": {
+    "Region": {
+      "type": "string",
+      "value": "[resourceGroup().location]"
+    },
+    "DeploymentMode": {
+      "type": "string",
+      "value": "update"
+    },
+    "publicIPXmockedupXintegrationXelbXlbXip": {
+      "type": "string",
+      "value": "123.123.123.123"
+    },
+    "Subscription": {
+      "type": "string",
+      "value": "[subscription().id]"
+    },
+    "vaultAccessPolicyXaccessKeyVaultCert": {
+      "type": "string",
+      "value": "/subscriptions/0123456789/resourceGroups/mockRG/providers/Microsoft.Mock/mockResourceType/mockName"
+    },
+    "DeploymentUnit": {
+      "type": "string",
+      "value": "solution-az-lb-base"
+    },
+    "ResourceGroup": {
+      "type": "string",
+      "value": "mockedup-integration-default-soln-solution-az-lb-base"
+    },
+    "appGatewayXmockedupXintegrationXelbXlb": {
+      "type": "string",
+      "value": "/subscriptions/0123456789/resourceGroups/mockRG/providers/Microsoft.Mock/mockResourceType/mockName"
+    }
+  },
+  "variables": {},
+  "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
+  "resources": [
+    {
+      "apiVersion": "2018-02-14",
+      "dependsOn": [
+        "/subscriptions/0123456789/resourceGroups/mockRG/providers/Microsoft.Mock/mockResourceType/mockName"
+      ],
+      "name": "mockName/add",
+      "type": "Microsoft.KeyVault/vaults/accessPolicies",
+      "properties": {
+        "accessPolicies": [
+          {
+            "permissions": {
+              "secrets": [
+                "get",
+                "list"
+              ]
+            },
+            "tenantId": "[subscription().tenantId]",
+            "objectId": "/subscriptions/0123456789/resourceGroups/mockRG/providers/Microsoft.Mock/mockResourceType/mockName"
+          }
+        ]
+      }
+    },
+    {
+      "apiVersion": "2019-09-01",
+      "name": "publicIP-mockedup-integration-elb-lb",
+      "location": "westus",
+      "type": "Microsoft.Network/publicIPAddresses",
+      "sku": {
+        "name": "Standard"
+      },
+      "properties": {
+        "publicIPAddressVersion": "IPv4",
+        "publicIPAllocationMethod": "Static"
+      }
+    },
+    {
+      "apiVersion": "2019-09-01",
+      "dependsOn": [
+        "/subscriptions/0123456789/resourceGroups/mockRG/providers/Microsoft.Mock/mockResourceType/mockName"
+      ],
+      "name": "appGateway-mockedup-integration-elb-lb",
+      "location": "westus",
+      "type": "Microsoft.Network/applicationGateways",
+      "properties": {
+        "sku": {
+          "tier": "Standard_v2",
+          "name": "Standard_v2",
+          "capacity": 1
+        }
+      }
+    }
+  ],
+  "contentVersion": "1.0.0.0",
+  "parameters": {}
+}

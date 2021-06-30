@@ -1,0 +1,50 @@
+{
+  "AWSTemplateFormatVersion": "2010-09-09",
+  "Metadata": {
+    "ConfigurationReference": "configRef_v123",
+    "RequestReference": "SRVREQ01",
+    "Prepared": "2021-06-30T03:03:52Z",
+    "RunId": "runId098"
+  },
+  "Outputs": {
+    "Account": {
+      "Value": {
+        "Ref": "AWS::AccountId"
+      }
+    },
+    "cfaccessXmgmtXbaselineXoaiXcanonicalid": {
+      "Value": {
+        "Fn::GetAtt": [
+          "cfaccessXmgmtXbaselineXoai",
+          "S3CanonicalUserId"
+        ]
+      }
+    },
+    "cfaccessXmgmtXbaselineXoai": {
+      "Value": {
+        "Ref": "cfaccessXmgmtXbaselineXoai"
+      }
+    },
+    "Region": {
+      "Value": {
+        "Ref": "AWS::Region"
+      }
+    },
+    "DeploymentMode": {
+      "Value": "update"
+    },
+    "DeploymentUnit": {
+      "Value": "baseline"
+    }
+  },
+  "Resources": {
+    "cfaccessXmgmtXbaselineXoai": {
+      "Type": "AWS::CloudFront::CloudFrontOriginAccessIdentity",
+      "Properties": {
+        "CloudFrontOriginAccessIdentityConfig": {
+          "Comment": "mockedup-integration-management-baseline-oai"
+        }
+      }
+    }
+  }
+}

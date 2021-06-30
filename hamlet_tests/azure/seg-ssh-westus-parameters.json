@@ -1,0 +1,14 @@
+{
+  "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentParameters.json#",
+  "contentVersion": "1.0.0.0",
+  "parameters": {
+    "secret-mgmt-baseline-sshPublicKey": {
+      "reference": {
+        "secretName": "secret-mgmt-baseline-sshPublicKey",
+        "keyVault": {
+          "id": "/subscriptions/0123456789/resourceGroups/mockRG/providers/Microsoft.Mock/mockResourceType/mockName"
+        }
+      }
+    }
+  }
+}

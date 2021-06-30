@@ -1,0 +1,53 @@
+{
+  "aws_s3_replication_app_s3replicasrc_s3_s3replica": {
+    "cfn_nag": false,
+    "filename": "soln-aws-s3-replication-ap-southeast-2-template.json",
+    "cfn_lint": false,
+    "json_structure": {
+      "match": [
+        {
+          "path": "Resources.s3XappXs3replicasrc.Properties.ReplicationConfiguration.Rules[0].Destination.Bucket",
+          "value": "arn:aws:iam::123456789012:mock/s3XappXs3replicadstXarn"
+        }
+      ]
+    },
+    "cfn_structure": {
+      "output": [
+        {
+          "id": "s3XappXs3replicasrc"
+        },
+        {
+          "id": "s3XappXs3replicasrcXname"
+        },
+        {
+          "id": "s3XappXs3replicasrcXarn"
+        },
+        {
+          "id": "s3XappXs3replicasrcXregion"
+        },
+        {
+          "id": "s3XappXs3replicadst"
+        },
+        {
+          "id": "s3XappXs3replicadstXname"
+        },
+        {
+          "id": "s3XappXs3replicadstXarn"
+        },
+        {
+          "id": "s3XappXs3replicadstXregion"
+        }
+      ],
+      "resource": [
+        {
+          "id": "s3XappXs3replicasrc",
+          "type": "AWS::S3::Bucket"
+        },
+        {
+          "id": "s3XappXs3replicadst",
+          "type": "AWS::S3::Bucket"
+        }
+      ]
+    }
+  }
+}

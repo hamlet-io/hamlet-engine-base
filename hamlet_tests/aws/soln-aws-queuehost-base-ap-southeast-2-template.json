@@ -1,0 +1,329 @@
+{
+  "AWSTemplateFormatVersion": "2010-09-09",
+  "Metadata": {
+    "ConfigurationReference": "configRef_v123",
+    "RequestReference": "SRVREQ01",
+    "Prepared": "2021-06-30T03:08:52Z",
+    "RunId": "runId098"
+  },
+  "Outputs": {
+    "mqBrokerXappXqueuehostbase": {
+      "Value": {
+        "Ref": "mqBrokerXappXqueuehostbase"
+      }
+    },
+    "Account": {
+      "Value": {
+        "Ref": "AWS::AccountId"
+      }
+    },
+    "secretXappXqueuehostbaseXroot": {
+      "Value": {
+        "Ref": "secretXappXqueuehostbaseXroot"
+      }
+    },
+    "mqBrokerXappXqueuehostbaseXdns": {
+      "Value": {
+        "Fn::Join": [
+          ";",
+          {
+            "Fn::GetAtt": [
+              "mqBrokerXappXqueuehostbase",
+              "AmqpEndpoints"
+            ]
+          }
+        ]
+      }
+    },
+    "Region": {
+      "Value": {
+        "Ref": "AWS::Region"
+      }
+    },
+    "DeploymentMode": {
+      "Value": "update"
+    },
+    "securityGroupXmqBrokerXappXqueuehostbase": {
+      "Value": {
+        "Ref": "securityGroupXmqBrokerXappXqueuehostbase"
+      }
+    },
+    "mqBrokerXappXqueuehostbaseXarn": {
+      "Value": {
+        "Fn::GetAtt": [
+          "mqBrokerXappXqueuehostbase",
+          "Arn"
+        ]
+      }
+    },
+    "DeploymentUnit": {
+      "Value": "aws-queuehost-base"
+    }
+  },
+  "Resources": {
+    "ingressXsecurityGroupXmqBrokerXappXqueuehostbaseXrabbitmqXuiXsecurityGroupXmgmtXssh": {
+      "Type": "AWS::EC2::SecurityGroupIngress",
+      "Properties": {
+        "FromPort": 15671,
+        "Description": "mockedup-integration-management-ssh",
+        "ToPort": 15671,
+        "IpProtocol": "tcp",
+        "SourceSecurityGroupId": "##MockOutputXsecurityGroupXmgmtXsshX##",
+        "GroupId": "##MockOutputXsecurityGroupXmqBrokerXappXqueuehostbaseX##"
+      }
+    },
+    "mqBrokerXappXqueuehostbase": {
+      "Type": "AWS::AmazonMQ::Broker",
+      "Properties": {
+        "SecurityGroups": [
+          "##MockOutputXsecurityGroupXmqBrokerXappXqueuehostbaseX##"
+        ],
+        "EngineVersion": "1.0.0",
+        "MaintenanceWindowStartTime": {
+          "DayOfWeek": "Sunday",
+          "TimeOfDay": "00:00",
+          "TimeZone": "UTC"
+        },
+        "HostInstanceType": "queue.m3.micro",
+        "Users": [
+          {
+            "Username": {
+              "Fn::Sub": [
+                "{{resolve:secretsmanager:${secretId}:SecretString:${secretKey}}}",
+                {
+                  "secretKey": "username",
+                  "secretId": "##MockOutputXsecretXappXqueuehostbaseXrootX##"
+                }
+              ]
+            },
+            "Password": {
+              "Fn::Sub": [
+                "{{resolve:secretsmanager:${secretId}:SecretString:${secretKey}}}",
+                {
+                  "secretKey": "password",
+                  "secretId": "##MockOutputXsecretXappXqueuehostbaseXrootX##"
+                }
+              ]
+            }
+          }
+        ],
+        "Logs": {
+          "General": true
+        },
+        "AutoMinorVersionUpgrade": true,
+        "SubnetIds": [
+          "##MockOutputXsubnetXappXaX##"
+        ],
+        "BrokerName": "mockedup-int-app-queuehostbase-##MockOutputXseedXs",
+        "DeploymentMode": "SINGLE_INSTANCE",
+        "EngineType": "RABBITMQ",
+        "PubliclyAccessible": false,
+        "Tags": [
+          {
+            "Value": "SRVREQ01",
+            "Key": "cot:request"
+          },
+          {
+            "Value": "configRef_v123",
+            "Key": "cot:configuration"
+          },
+          {
+            "Value": "mockten",
+            "Key": "cot:tenant"
+          },
+          {
+            "Value": "mockacct",
+            "Key": "cot:account"
+          },
+          {
+            "Value": "mockedup",
+            "Key": "cot:product"
+          },
+          {
+            "Value": "integration",
+            "Key": "cot:environment"
+          },
+          {
+            "Value": "test",
+            "Key": "cot:category"
+          },
+          {
+            "Value": "default",
+            "Key": "cot:segment"
+          },
+          {
+            "Value": "application",
+            "Key": "cot:tier"
+          },
+          {
+            "Value": "queuehostbase",
+            "Key": "cot:component"
+          },
+          {
+            "Value": "mockedup-integration-application-queuehostbase",
+            "Key": "Name"
+          }
+        ]
+      }
+    },
+    "ingressXsecurityGroupXmqBrokerXappXqueuehostbaseXrabbitmqXsecurityGroupXmgmtXssh": {
+      "Type": "AWS::EC2::SecurityGroupIngress",
+      "Properties": {
+        "FromPort": 5671,
+        "Description": "mockedup-integration-management-ssh",
+        "ToPort": 5671,
+        "IpProtocol": "tcp",
+        "SourceSecurityGroupId": "##MockOutputXsecurityGroupXmgmtXsshX##",
+        "GroupId": "##MockOutputXsecurityGroupXmqBrokerXappXqueuehostbaseX##"
+      }
+    },
+    "ingressXsecurityGroupXmqBrokerXappXqueuehostbaseXrabbitmqXuiX1000016": {
+      "Type": "AWS::EC2::SecurityGroupIngress",
+      "Properties": {
+        "CidrIp": "10.0.0.0/16",
+        "FromPort": 15671,
+        "ToPort": 15671,
+        "IpProtocol": "tcp",
+        "GroupId": "##MockOutputXsecurityGroupXmqBrokerXappXqueuehostbaseX##"
+      }
+    },
+    "secretXappXqueuehostbaseXroot": {
+      "Type": "AWS::SecretsManager::Secret",
+      "Properties": {
+        "Description": "Root credentials for broker",
+        "KmsKeyId": "arn:aws:iam::123456789012:mock/cmkXsegmentXcmkXarn",
+        "Tags": [
+          {
+            "Value": "SRVREQ01",
+            "Key": "cot:request"
+          },
+          {
+            "Value": "configRef_v123",
+            "Key": "cot:configuration"
+          },
+          {
+            "Value": "mockten",
+            "Key": "cot:tenant"
+          },
+          {
+            "Value": "mockacct",
+            "Key": "cot:account"
+          },
+          {
+            "Value": "mockedup",
+            "Key": "cot:product"
+          },
+          {
+            "Value": "integration",
+            "Key": "cot:environment"
+          },
+          {
+            "Value": "test",
+            "Key": "cot:category"
+          },
+          {
+            "Value": "default",
+            "Key": "cot:segment"
+          },
+          {
+            "Value": "application",
+            "Key": "cot:tier"
+          },
+          {
+            "Value": "queuehostbase",
+            "Key": "cot:component"
+          },
+          {
+            "Value": "mockedup-integration-application-queuehostbase-root",
+            "Key": "Name"
+          }
+        ],
+        "Name": "mockedup-integration-application-queuehostbase-root"
+      }
+    },
+    "securityGroupXmqBrokerXappXqueuehostbase": {
+      "Type": "AWS::EC2::SecurityGroup",
+      "Properties": {
+        "GroupDescription": "mockedup-integration-application-queuehostbase",
+        "VpcId": "##MockOutputXvpcXsegmentXvpcX##",
+        "Tags": [
+          {
+            "Value": "SRVREQ01",
+            "Key": "cot:request"
+          },
+          {
+            "Value": "configRef_v123",
+            "Key": "cot:configuration"
+          },
+          {
+            "Value": "mockten",
+            "Key": "cot:tenant"
+          },
+          {
+            "Value": "mockacct",
+            "Key": "cot:account"
+          },
+          {
+            "Value": "mockedup",
+            "Key": "cot:product"
+          },
+          {
+            "Value": "integration",
+            "Key": "cot:environment"
+          },
+          {
+            "Value": "test",
+            "Key": "cot:category"
+          },
+          {
+            "Value": "default",
+            "Key": "cot:segment"
+          },
+          {
+            "Value": "application",
+            "Key": "cot:tier"
+          },
+          {
+            "Value": "queuehostbase",
+            "Key": "cot:component"
+          },
+          {
+            "Value": "mockedup-integration-application-queuehostbase",
+            "Key": "Name"
+          }
+        ]
+      }
+    },
+    "ingressXsecurityGroupXmqBrokerXappXqueuehostbaseXhttpsXsecurityGroupXmgmtXssh": {
+      "Type": "AWS::EC2::SecurityGroupIngress",
+      "Properties": {
+        "FromPort": 443,
+        "Description": "mockedup-integration-management-ssh",
+        "ToPort": 443,
+        "IpProtocol": "tcp",
+        "SourceSecurityGroupId": "##MockOutputXsecurityGroupXmgmtXsshX##",
+        "GroupId": "##MockOutputXsecurityGroupXmqBrokerXappXqueuehostbaseX##"
+      }
+    },
+    "ingressXsecurityGroupXmqBrokerXappXqueuehostbaseXhttpsX1000016": {
+      "Type": "AWS::EC2::SecurityGroupIngress",
+      "Properties": {
+        "CidrIp": "10.0.0.0/16",
+        "FromPort": 443,
+        "ToPort": 443,
+        "IpProtocol": "tcp",
+        "GroupId": "##MockOutputXsecurityGroupXmqBrokerXappXqueuehostbaseX##"
+      }
+    },
+    "ingressXsecurityGroupXmqBrokerXappXqueuehostbaseXrabbitmqX1000016": {
+      "Type": "AWS::EC2::SecurityGroupIngress",
+      "Properties": {
+        "CidrIp": "10.0.0.0/16",
+        "FromPort": 5671,
+        "ToPort": 5671,
+        "IpProtocol": "tcp",
+        "GroupId": "##MockOutputXsecurityGroupXmqBrokerXappXqueuehostbaseX##"
+      }
+    }
+  }
+}

@@ -1,0 +1,59 @@
+{
+  "aws_db_postgres_base_db_postgresdbbase_db_postgresdbbase": {
+    "cfn_nag": false,
+    "filename": "soln-aws-db-postgres-base-ap-southeast-2-template.json",
+    "cfn_lint": false,
+    "json_structure": {
+      "match": [
+        {
+          "path": "Resources.rdsXdbXpostgresdbbase.Properties.Engine",
+          "value": "postgres"
+        },
+        {
+          "path": "Resources.rdsXdbXpostgresdbbase.Properties.EngineVersion",
+          "value": "11"
+        },
+        {
+          "path": "Resources.rdsOptionGroupXdbXpostgresdbbaseXpostgres11.Properties.MajorEngineVersion",
+          "value": "11"
+        },
+        {
+          "path": "Resources.rdsParameterGroupXdbXpostgresdbbaseXpostgres11.Properties.Family",
+          "value": "postgres11"
+        }
+      ],
+      "not_empty": [
+        {
+          "path": "Resources.rdsXdbXpostgresdbbase.Properties.DBInstanceClass"
+        }
+      ]
+    },
+    "cfn_structure": {
+      "output": [
+        {
+          "id": "rdsXdbXpostgresdbbaseXdns"
+        },
+        {
+          "id": "rdsXdbXpostgresdbbaseXport"
+        },
+        {
+          "id": "securityGroupXdbXpostgresdbbase"
+        }
+      ],
+      "resource": [
+        {
+          "id": "rdsXdbXpostgresdbbase",
+          "type": "AWS::RDS::DBInstance"
+        },
+        {
+          "id": "rdsOptionGroupXdbXpostgresdbbaseXpostgres11",
+          "type": "AWS::RDS::OptionGroup"
+        },
+        {
+          "id": "rdsParameterGroupXdbXpostgresdbbaseXpostgres11",
+          "type": "AWS::RDS::DBParameterGroup"
+        }
+      ]
+    }
+  }
+}

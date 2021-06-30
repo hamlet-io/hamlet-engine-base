@@ -1,0 +1,29 @@
+{
+  "aws_s3_base_app_s3base_s3_s3base": {
+    "cfn_nag": false,
+    "filename": "soln-aws-s3-base-ap-southeast-2-template.json",
+    "cfn_lint": false,
+    "cfn_structure": {
+      "output": [
+        {
+          "id": "s3XappXs3base"
+        },
+        {
+          "id": "s3XappXs3baseXname"
+        },
+        {
+          "id": "s3XappXs3baseXarn"
+        },
+        {
+          "id": "s3XappXs3baseXregion"
+        }
+      ],
+      "resource": [
+        {
+          "id": "s3XappXs3base",
+          "type": "AWS::S3::Bucket"
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,172 @@
+{
+  "AWSTemplateFormatVersion": "2010-09-09",
+  "Metadata": {
+    "ConfigurationReference": "configRef_v123",
+    "RequestReference": "SRVREQ01",
+    "Prepared": "2021-06-30T03:04:46Z",
+    "RunId": "runId098"
+  },
+  "Outputs": {
+    "Account": {
+      "Value": {
+        "Ref": "AWS::AccountId"
+      }
+    },
+    "securityGroupXmgmtXvpcendpoint": {
+      "Value": {
+        "Ref": "securityGroupXmgmtXvpcendpoint"
+      }
+    },
+    "Region": {
+      "Value": {
+        "Ref": "AWS::Region"
+      }
+    },
+    "DeploymentMode": {
+      "Value": "update"
+    },
+    "DeploymentUnit": {
+      "Value": "vpcendpoint"
+    }
+  },
+  "Resources": {
+    "securityGroupXmgmtXvpcendpoint": {
+      "Type": "AWS::EC2::SecurityGroup",
+      "Properties": {
+        "GroupDescription": "mockedup-integration-management-vpcendpoint",
+        "VpcId": "##MockOutputXvpcXsegmentXvpcX##",
+        "Tags": [
+          {
+            "Value": "SRVREQ01",
+            "Key": "cot:request"
+          },
+          {
+            "Value": "configRef_v123",
+            "Key": "cot:configuration"
+          },
+          {
+            "Value": "mockten",
+            "Key": "cot:tenant"
+          },
+          {
+            "Value": "mockacct",
+            "Key": "cot:account"
+          },
+          {
+            "Value": "mockedup",
+            "Key": "cot:product"
+          },
+          {
+            "Value": "integration",
+            "Key": "cot:environment"
+          },
+          {
+            "Value": "test",
+            "Key": "cot:category"
+          },
+          {
+            "Value": "default",
+            "Key": "cot:segment"
+          },
+          {
+            "Value": "management",
+            "Key": "cot:tier"
+          },
+          {
+            "Value": "vpcendpoint",
+            "Key": "cot:component"
+          },
+          {
+            "Value": "mockedup-integration-management-vpcendpoint",
+            "Key": "Name"
+          }
+        ]
+      }
+    },
+    "vpcEndPointXmgmtXvpcendpointXdefaultXs3": {
+      "Type": "AWS::EC2::VPCEndpoint",
+      "Properties": {
+        "VpcId": "##MockOutputXvpcXsegmentXvpcX##",
+        "ServiceName": "com.amazonaws.ap-southeast-2.s3",
+        "RouteTableIds": [
+          "##MockOutputXrouteTableXmgmtXvpcXinternalXaX##",
+          "##MockOutputXrouteTableXmgmtXvpcXinternalXbX##",
+          "##MockOutputXrouteTableXmgmtXvpcXexternalXaX##",
+          "##MockOutputXrouteTableXmgmtXvpcXexternalXbX##"
+        ],
+        "VpcEndpointType": "Gateway"
+      }
+    },
+    "ingressXsecurityGroupXmgmtXvpcendpointXhttpXsecurityGroupXmgmtXssh": {
+      "Type": "AWS::EC2::SecurityGroupIngress",
+      "Properties": {
+        "FromPort": 80,
+        "Description": "mockedup-integration-management-ssh",
+        "ToPort": 80,
+        "IpProtocol": "tcp",
+        "SourceSecurityGroupId": "##MockOutputXsecurityGroupXmgmtXsshX##",
+        "GroupId": "##MockOutputXsecurityGroupXmgmtXvpcendpointX##"
+      }
+    },
+    "ingressXsecurityGroupXmgmtXvpcendpointXhttpsX1000016": {
+      "Type": "AWS::EC2::SecurityGroupIngress",
+      "Properties": {
+        "CidrIp": "10.0.0.0/16",
+        "FromPort": 443,
+        "ToPort": 443,
+        "IpProtocol": "tcp",
+        "GroupId": "##MockOutputXsecurityGroupXmgmtXvpcendpointX##"
+      }
+    },
+    "vpcEndPointXmgmtXvpcendpointXdefaultXlogs": {
+      "Type": "AWS::EC2::VPCEndpoint",
+      "Properties": {
+        "PrivateDnsEnabled": true,
+        "VpcId": "##MockOutputXvpcXsegmentXvpcX##",
+        "ServiceName": "com.amazonaws.ap-southeast-2.logs",
+        "VpcEndpointType": "Interface",
+        "SubnetIds": [
+          "##MockOutputXsubnetXmgmtXaX##"
+        ],
+        "SecurityGroupIds": [
+          "##MockOutputXsecurityGroupXmgmtXvpcendpointX##"
+        ]
+      }
+    },
+    "ingressXsecurityGroupXmgmtXvpcendpointXhttpsXsecurityGroupXmgmtXssh": {
+      "Type": "AWS::EC2::SecurityGroupIngress",
+      "Properties": {
+        "FromPort": 443,
+        "Description": "mockedup-integration-management-ssh",
+        "ToPort": 443,
+        "IpProtocol": "tcp",
+        "SourceSecurityGroupId": "##MockOutputXsecurityGroupXmgmtXsshX##",
+        "GroupId": "##MockOutputXsecurityGroupXmgmtXvpcendpointX##"
+      }
+    },
+    "ingressXsecurityGroupXmgmtXvpcendpointXhttpX1000016": {
+      "Type": "AWS::EC2::SecurityGroupIngress",
+      "Properties": {
+        "CidrIp": "10.0.0.0/16",
+        "FromPort": 80,
+        "ToPort": 80,
+        "IpProtocol": "tcp",
+        "GroupId": "##MockOutputXsecurityGroupXmgmtXvpcendpointX##"
+      }
+    },
+    "vpcEndPointXmgmtXvpcendpointXdefaultXdynamodb": {
+      "Type": "AWS::EC2::VPCEndpoint",
+      "Properties": {
+        "VpcId": "##MockOutputXvpcXsegmentXvpcX##",
+        "ServiceName": "com.amazonaws.ap-southeast-2.dynamodb",
+        "RouteTableIds": [
+          "##MockOutputXrouteTableXmgmtXvpcXinternalXaX##",
+          "##MockOutputXrouteTableXmgmtXvpcXinternalXbX##",
+          "##MockOutputXrouteTableXmgmtXvpcXexternalXaX##",
+          "##MockOutputXrouteTableXmgmtXvpcXexternalXbX##"
+        ],
+        "VpcEndpointType": "Gateway"
+      }
+    }
+  }
+}

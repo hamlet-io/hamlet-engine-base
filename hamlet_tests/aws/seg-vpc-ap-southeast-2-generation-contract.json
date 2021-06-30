@@ -1,0 +1,67 @@
+{
+  "Stages": [
+    {
+      "Steps": [
+        {
+          "Status": "completed",
+          "Type": "process_template_pass",
+          "Parameters": {
+            "outputConversion": "",
+            "passAlternative": "",
+            "outputFileName": "seg-vpc-ap-southeast-2-template.json",
+            "pass": "template",
+            "outputType": "resource",
+            "deploymentUnitSubset": "",
+            "outputFormat": ""
+          },
+          "Priority": 100,
+          "Id": "generationXsubsetsXprimaryXtemplate",
+          "Mandatory": true
+        }
+      ],
+      "ExecutionMode": "parallel",
+      "Id": "generationXsubsets",
+      "Mandatory": true
+    },
+    {
+      "Steps": [
+        {
+          "Status": "available",
+          "Type": "rename_file",
+          "Parameters": {
+            "currentFileName": "deployment-generation-contract.json",
+            "newFileName": "seg-vpc-ap-southeast-2-generation-contract.json"
+          },
+          "Priority": 100,
+          "Id": "cleanupXgenerationcontract",
+          "Mandatory": true
+        }
+      ],
+      "ExecutionMode": "serial",
+      "Id": "cleanup",
+      "Mandatory": true
+    }
+  ],
+  "Metadata": {
+    "ConfigurationReference": "configRef_v123",
+    "RequestReference": "SRVREQ01",
+    "Prepared": "2021-06-30T03:04:10Z",
+    "Id": {},
+    "RunId": "runId098",
+    "Providers": {}
+  },
+  "Properties": {
+    "deploymentMode": "update",
+    "deploymentFramework": "cf",
+    "flows": "components",
+    "deploymentUnit": "vpc",
+    "deploymentGroup": "segment",
+    "accountRegion": "ap-southeast-2",
+    "requestReference": "SRVREQ01",
+    "configurationReference": "configRef_v123",
+    "entrance": "deployment",
+    "region": "ap-southeast-2",
+    "providers": "aws,awstest",
+    "account": ""
+  }
+}

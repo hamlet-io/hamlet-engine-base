@@ -1,0 +1,179 @@
+{
+  "AWSTemplateFormatVersion": "2010-09-09",
+  "Metadata": {
+    "ConfigurationReference": "configRef_v123",
+    "RequestReference": "SRVREQ01",
+    "Prepared": "2021-06-30T03:08:01Z",
+    "RunId": "runId098"
+  },
+  "Outputs": {
+    "Account": {
+      "Value": {
+        "Ref": "AWS::AccountId"
+      }
+    },
+    "s3XappXs3notifyXregion": {
+      "Value": {
+        "Ref": "AWS::Region"
+      }
+    },
+    "s3XappXs3notify": {
+      "Value": {
+        "Ref": "s3XappXs3notify"
+      }
+    },
+    "s3XappXs3notifyXdns": {
+      "Value": {
+        "Fn::GetAtt": [
+          "s3XappXs3notify",
+          "DomainName"
+        ]
+      }
+    },
+    "s3XappXs3notifyXurl": {
+      "Value": {
+        "Fn::GetAtt": [
+          "s3XappXs3notify",
+          "WebsiteURL"
+        ]
+      }
+    },
+    "sqsXappXs3notifyqueueXreplaceXregion": {
+      "Value": {
+        "Ref": "AWS::Region"
+      }
+    },
+    "sqsXappXs3notifyqueueXreplace": {
+      "Value": {
+        "Ref": "sqsXappXs3notifyqueueXreplace"
+      }
+    },
+    "sqsXappXs3notifyqueueXreplaceXarn": {
+      "Value": {
+        "Fn::GetAtt": [
+          "sqsXappXs3notifyqueueXreplace",
+          "Arn"
+        ]
+      }
+    },
+    "sqsXappXs3notifyqueueXreplaceXurl": {
+      "Value": {
+        "Ref": "sqsXappXs3notifyqueueXreplace"
+      }
+    },
+    "Region": {
+      "Value": {
+        "Ref": "AWS::Region"
+      }
+    },
+    "DeploymentMode": {
+      "Value": "update"
+    },
+    "s3XappXs3notifyXname": {
+      "Value": {
+        "Ref": "s3XappXs3notify"
+      }
+    },
+    "sqsXappXs3notifyqueueXreplaceXname": {
+      "Value": {
+        "Fn::GetAtt": [
+          "sqsXappXs3notifyqueueXreplace",
+          "QueueName"
+        ]
+      }
+    },
+    "DeploymentUnit": {
+      "Value": "aws-s3-notify"
+    },
+    "s3XappXs3notifyXarn": {
+      "Value": {
+        "Fn::GetAtt": [
+          "s3XappXs3notify",
+          "Arn"
+        ]
+      }
+    }
+  },
+  "Resources": {
+    "sqsXappXs3notifyqueueXreplace": {
+      "Type": "AWS::SQS::Queue",
+      "Properties": {
+        "QueueName": "mockedup-integration-application-s3notifyqueue-replace"
+      }
+    },
+    "s3XappXs3notify": {
+      "Type": "AWS::S3::Bucket",
+      "Properties": {
+        "BucketName": "##MockOutputXs3XappXs3notifyXnameX##",
+        "LoggingConfiguration": {
+          "LogFilePrefix": "s3/##MockOutputXs3XappXs3notifyXnameX##/",
+          "DestinationBucketName": "##MockOutputXs3XaccountXauditX##"
+        },
+        "NotificationConfiguration": {
+          "QueueConfigurations": [
+            {
+              "Event": "s3:ObjectCreated:*",
+              "Queue": "arn:aws:iam::123456789012:mock/sqsXappXs3notifyqueueXarn"
+            }
+          ]
+        },
+        "Tags": [
+          {
+            "Value": "SRVREQ01",
+            "Key": "cot:request"
+          },
+          {
+            "Value": "configRef_v123",
+            "Key": "cot:configuration"
+          },
+          {
+            "Value": "mockten",
+            "Key": "cot:tenant"
+          },
+          {
+            "Value": "mockacct",
+            "Key": "cot:account"
+          },
+          {
+            "Value": "mockedup",
+            "Key": "cot:product"
+          },
+          {
+            "Value": "integration",
+            "Key": "cot:environment"
+          },
+          {
+            "Value": "test",
+            "Key": "cot:category"
+          }
+        ]
+      }
+    },
+    "sqsPolicyXappXs3notifyqueue": {
+      "Type": "AWS::SQS::QueuePolicy",
+      "Properties": {
+        "PolicyDocument": {
+          "Version": "2012-10-17",
+          "Statement": [
+            {
+              "Condition": {
+                "ArnEquals": {
+                  "aws:sourceArn": "arn:aws:iam::123456789012:mock/s3XappXs3notifyXarn"
+                }
+              },
+              "Action": "sqs:SendMessage",
+              "Resource": "arn:aws:iam::123456789012:mock/sqsXappXs3notifyqueueXreplaceXarn",
+              "Effect": "Allow",
+              "Principal": {
+                "Service": "s3.amazonaws.com"
+              }
+            }
+          ]
+        },
+        "Queues": [
+          "https://mock.local/sqsXappXs3notifyqueueXreplaceXurl"
+        ]
+      }
+    }
+  }
+}

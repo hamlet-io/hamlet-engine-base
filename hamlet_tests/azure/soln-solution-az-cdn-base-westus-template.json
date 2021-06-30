@@ -1,0 +1,94 @@
+{
+  "outputs": {
+    "Region": {
+      "type": "string",
+      "value": "[resourceGroup().location]"
+    },
+    "DeploymentMode": {
+      "type": "string",
+      "value": "update"
+    },
+    "Subscription": {
+      "type": "string",
+      "value": "[subscription().id]"
+    },
+    "DeploymentUnit": {
+      "type": "string",
+      "value": "solution-az-cdn-base"
+    },
+    "frontdoorXwebXcdn": {
+      "type": "string",
+      "value": "/subscriptions/0123456789/resourceGroups/mockRG/providers/Microsoft.Mock/mockResourceType/mockName"
+    },
+    "frontdoorWAFPolicyXwebXcdn": {
+      "type": "string",
+      "value": "/subscriptions/0123456789/resourceGroups/mockRG/providers/Microsoft.Mock/mockResourceType/mockName"
+    },
+    "ResourceGroup": {
+      "type": "string",
+      "value": "mockedup-integration-default-soln-solution-az-cdn-base"
+    }
+  },
+  "variables": {},
+  "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
+  "resources": [
+    {
+      "apiVersion": "2019-05-01",
+      "name": "mockedup-integration-web-cdn-subscriptions0123456789resourceGrou",
+      "location": "global",
+      "type": "Microsoft.Network/frontDoors",
+      "properties": {
+        "healthProbeSettings": [
+          {
+            "name": "default",
+            "properties": {
+              "path": "/",
+              "protocol": "Https",
+              "enabledState": "Disabled",
+              "intervalInSeconds": 30
+            }
+          }
+        ],
+        "backendPools": [
+          {
+            "name": "default",
+            "properties": {
+              "loadBalancingSettings": {},
+              "backends": [
+                {
+                  "address": "/subscriptions/0123456789/resourceGroups/mockRG/providers/Microsoft.Mock/mockResourceType/mockName.blob.core.windows.net",
+                  "backendHostHeader": "/subscriptions/0123456789/resourceGroups/mockRG/providers/Microsoft.Mock/mockResourceType/mockName.blob.core.windows.net",
+                  "httpPort": 80,
+                  "weight": 50,
+                  "priority": 1,
+                  "httpsPort": 443
+                }
+              ]
+            }
+          }
+        ]
+      }
+    },
+    {
+      "apiVersion": "2019-03-01",
+      "name": "frontdoorWAFPolicywebcdn",
+      "location": "westus",
+      "type": "Microsoft.Network/FrontDoorWebApplicationFirewallPolicies",
+      "properties": {
+        "policySettings": {
+          "mode": "Prevention"
+        },
+        "managedRules": {
+          "managedRuleSets": [
+            {
+              "ruleSetVersion": "1.0",
+              "ruleSetType": "DefaultRuleSet"
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "contentVersion": "1.0.0.0",
+  "parameters": {}
+}

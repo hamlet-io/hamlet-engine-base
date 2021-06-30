@@ -1,0 +1,23 @@
+{
+  "aws_mobileapp_base_app_mobileappbase_mobileapp_mobileappbase": {
+    "cfn_nag": false,
+    "filename": "app-aws-mobileapp-base-ap-southeast-2-config.json",
+    "cfn_lint": false,
+    "json_structure": {
+      "match": [
+        {
+          "path": "BuildConfig.APP_BUILD_FORMATS",
+          "value": "ios,android"
+        },
+        {
+          "path": "BuildConfig.BUILD_REFERENCE]",
+          "value": "123456789#MockCommit#"
+        },
+        {
+          "path": "BuildConfig.RELEASE_CHANNEL",
+          "value": "integration"
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,117 @@
+{
+  "outputs": {
+    "containerXappXstage": {
+      "type": "string",
+      "value": "/subscriptions/0123456789/resourceGroups/mockRG/providers/Microsoft.Mock/mockResourceType/mockName"
+    },
+    "containerXappXstageXname": {
+      "type": "string",
+      "value": "appstagesubscriptions012/default/container-app-stage"
+    },
+    "storageXappXstageXdictionary": {
+      "type": "object",
+      "value": "/subscriptions/0123456789/resourceGroups/mockRG/providers/Microsoft.Mock/mockResourceType/mockName"
+    },
+    "storageXappXstageXname": {
+      "type": "string",
+      "value": "appstagesubscriptions012"
+    },
+    "blobXappXstage": {
+      "type": "string",
+      "value": "/subscriptions/0123456789/resourceGroups/mockRG/providers/Microsoft.Mock/mockResourceType/mockName"
+    },
+    "storageXappXstage": {
+      "type": "string",
+      "value": "/subscriptions/0123456789/resourceGroups/mockRG/providers/Microsoft.Mock/mockResourceType/mockName"
+    },
+    "secretXappXstage": {
+      "type": "string",
+      "value": "/subscriptions/0123456789/resourceGroups/mockRG/providers/Microsoft.Mock/mockResourceType/mockName"
+    },
+    "storageXappXstageXregion": {
+      "type": "string",
+      "value": "westus"
+    },
+    "Region": {
+      "type": "string",
+      "value": "[resourceGroup().location]"
+    },
+    "DeploymentMode": {
+      "type": "string",
+      "value": "update"
+    },
+    "secretXappXstageXname": {
+      "type": "string",
+      "value": "mockName/app-stage-secret-ConnectionKey"
+    },
+    "Subscription": {
+      "type": "string",
+      "value": "[subscription().id]"
+    },
+    "DeploymentUnit": {
+      "type": "string",
+      "value": "solution-az-s3-base"
+    },
+    "ResourceGroup": {
+      "type": "string",
+      "value": "mockedup-integration-default-soln-solution-az-s3-base"
+    }
+  },
+  "variables": {},
+  "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
+  "resources": [
+    {
+      "apiVersion": "2019-04-01",
+      "identity": {
+        "type": "SystemAssigned"
+      },
+      "kind": "StorageV2",
+      "name": "appstagesubscriptions012",
+      "location": "westus",
+      "type": "Microsoft.Storage/storageAccounts",
+      "sku": {
+        "name": "Standard_LRS"
+      },
+      "properties": {
+        "accessTier": "Cool",
+        "supportsHttpsTrafficOnly": true,
+        "networkAcls": {
+          "bypass": "AzureServices",
+          "defaultAction": "Deny"
+        }
+      }
+    },
+    {
+      "apiVersion": "2019-04-01",
+      "dependsOn": [
+        "/subscriptions/0123456789/resourceGroups/mockRG/providers/Microsoft.Mock/mockResourceType/mockName"
+      ],
+      "name": "appstagesubscriptions012/default",
+      "type": "Microsoft.Storage/storageAccounts/blobServices",
+      "properties": {}
+    },
+    {
+      "apiVersion": "2019-04-01",
+      "dependsOn": [
+        "/subscriptions/0123456789/resourceGroups/mockRG/providers/Microsoft.Mock/mockResourceType/mockName",
+        "/subscriptions/0123456789/resourceGroups/mockRG/providers/Microsoft.Mock/mockResourceType/mockName"
+      ],
+      "name": "appstagesubscriptions012/default/container-app-stage",
+      "type": "Microsoft.Storage/storageAccounts/blobServices/containers",
+      "properties": {}
+    },
+    {
+      "apiVersion": "2018-02-14",
+      "dependsOn": [
+        "/subscriptions/0123456789/resourceGroups/mockRG/providers/Microsoft.Mock/mockResourceType/mockName"
+      ],
+      "name": "mockName/app-stage-secret-ConnectionKey",
+      "type": "Microsoft.KeyVault/vaults/secrets",
+      "properties": {
+        "value": "[listKeys(resourceId('Microsoft.Storage/storageAccounts', 'appstagesubscriptions012'), '2019-04-01').keys[0].value]"
+      }
+    }
+  ],
+  "contentVersion": "1.0.0.0",
+  "parameters": {}
+}

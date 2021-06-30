@@ -1,0 +1,181 @@
+{
+  "x-amazon-apigateway-request-validator": "all",
+  "x-amazon-apigateway-request-validators": {
+    "all": {
+      "validateRequestBody": true,
+      "validateRequestParameters": true
+    },
+    "none": {
+      "validateRequestBody": false,
+      "validateRequestParameters": false
+    },
+    "params": {
+      "validateRequestBody": false,
+      "validateRequestParameters": true
+    },
+    "body": {
+      "validateRequestBody": true,
+      "validateRequestParameters": false
+    }
+  },
+  "schemes": [
+    "https"
+  ],
+  "swagger": "2.0",
+  "x-amazon-apigateway-binary-media-types": [
+    "*/*"
+  ],
+  "security": [],
+  "basePath": "/application-apigatewaybase",
+  "x-amazon-apigateway-gateway-responses": {
+    "INTEGRATION_FAILURE": {
+      "responseTemplates": {
+        "application/json": "[{\"Code\": \"gen08\",\"Title\": \"Internal API failure\",\"Detail\": \"Action: Please contact the API provider, Diagnostics: $context.error.message\"}\n]"
+      },
+      "statusCode": 500
+    },
+    "RESOURCE_NOT_FOUND": {
+      "responseTemplates": {
+        "application/json": "[{\"Code\": \"gen15\",\"Title\": \"Resource not found\",\"Detail\": \"Action: Please check the API documentation, Diagnostics: $context.error.message\"}\n]"
+      },
+      "statusCode": 404
+    },
+    "REQUEST_TOO_LARGE": {
+      "responseTemplates": {
+        "application/json": "[{\"Code\": \"gen14\",\"Title\": \"Request too large\",\"Detail\": \"Action: Please check the API documentation, Diagnostics: $context.error.message\"}\n]"
+      },
+      "statusCode": 413
+    },
+    "THROTTLED": {
+      "responseTemplates": {
+        "application/json": "[{\"Code\": \"gen16\",\"Title\": \"Throttling employed\",\"Detail\": \"Action: Please contact the API provider, Diagnostics: $context.error.message\"}\n]"
+      },
+      "statusCode": 429
+    },
+    "UNSUPPORTED_MEDIA_TYPE": {
+      "responseTemplates": {
+        "application/json": "[{\"Code\": \"gen18\",\"Title\": \"Unsupported media type\",\"Detail\": \"Action: Please check the API documentation, Diagnostics: $context.error.message\"}\n]"
+      },
+      "statusCode": 415
+    },
+    "AUTHORIZER_CONFIGURATION_ERROR": {
+      "responseTemplates": {
+        "application/json": "[{\"Code\": \"gen03\",\"Title\": \"Internal API failure\",\"Detail\": \"Action: Please contact the API provider, Diagnostics: $context.error.message\"}\n]"
+      },
+      "statusCode": 500
+    },
+    "BAD_REQUEST_PARAMETERS": {
+      "responseTemplates": {
+        "application/json": "[{\"Code\": \"gen05\",\"Title\": \"Parameters not valid\",\"Detail\": \"Action: Please check the API documentation, Diagnostics: $context.error.message\"}\n]"
+      },
+      "statusCode": 400
+    },
+    "BAD_REQUEST_BODY": {
+      "responseTemplates": {
+        "application/json": "[{\"Code\": \"gen06\",\"Title\": \"Request body not valid\",\"Detail\": \"Action: Please check the API documentation, Diagnostics: $context.error.message\"}\n]"
+      },
+      "statusCode": 400
+    },
+    "EXPIRED_TOKEN": {
+      "responseTemplates": {
+        "application/json": "[{\"Code\": \"gen07\",\"Title\": \"Expired Token\",\"Detail\": \"Action: Please re-authenticate, Diagnostics: $context.error.message\"}\n]"
+      },
+      "statusCode": 401
+    },
+    "ACCESS_DENIED": {
+      "responseTemplates": {
+        "application/json": "[{\"Code\": \"gen01\",\"Title\": \"Authorisation Failure\",\"Detail\": \"Action: Please contact the API provider, Diagnostics: $context.error.message\"}\n]"
+      },
+      "statusCode": 403
+    },
+    "INVALID_API_KEY": {
+      "responseTemplates": {
+        "application/json": "[{\"Code\": \"gen10\",\"Title\": \"Invalid API Key\",\"Detail\": \"Action: Please contact the API provider, Diagnostics: $context.error.message\"}\n]"
+      },
+      "statusCode": 401
+    },
+    "UNAUTHORIZED": {
+      "responseTemplates": {
+        "application/json": "[{\"Code\": \"gen17\",\"Title\": \"Authorisation Failure\",\"Detail\": \"Action: Please contact the API provider, Diagnostics: $context.error.message\"}\n]"
+      },
+      "statusCode": 403
+    },
+    "API_CONFIGURATION_ERROR": {
+      "responseTemplates": {
+        "application/json": "[{\"Code\": \"gen02\",\"Title\": \"Internal API failure\",\"Detail\": \"Action: Please contact the API provider, Diagnostics: $context.error.message\"}\n]"
+      },
+      "statusCode": 500
+    },
+    "QUOTA_EXCEEDED": {
+      "responseTemplates": {
+        "application/json": "[{\"Code\": \"gen13\",\"Title\": \"Quota exceeded\",\"Detail\": \"Action: Please contact the API provider, Diagnostics: $context.error.message\"}\n]"
+      },
+      "statusCode": 429
+    },
+    "INTEGRATION_TIMEOUT": {
+      "responseTemplates": {
+        "application/json": "[{\"Code\": \"gen09\",\"Title\": \"Internal API failure\",\"Detail\": \"Action: Please contact the API provider, Diagnostics: $context.error.message\"}\n]"
+      },
+      "statusCode": 500
+    },
+    "MISSING_AUTHENTICATION_TOKEN": {
+      "responseTemplates": {
+        "application/json": "[{\"Code\": \"gen12\",\"Title\": \"Authentication Failure\",\"Detail\": \"Action: Please check the API specification to ensure verb/path are valid, Diagnostics: $context.error.message\"}\n]"
+      },
+      "statusCode": 401
+    },
+    "INVALID_SIGNATURE": {
+      "responseTemplates": {
+        "application/json": "[{\"Code\": \"gen11\",\"Title\": \"Invalid signature\",\"Detail\": \"Action: Please check signature implementation, Diagnostics: $context.error.message\"}\n]"
+      },
+      "statusCode": 401
+    },
+    "AUTHORIZER_FAILURE": {
+      "responseTemplates": {
+        "application/json": "[{\"Code\": \"gen04\",\"Title\": \"Authorisation Failure\",\"Detail\": \"Action: Please contact the API provider, Diagnostics: $context.error.message\"}\n]"
+      },
+      "statusCode": 403
+    }
+  },
+  "paths": {
+    "/{proxy+}": {
+      "x-amazon-apigateway-any-method": {
+        "security": [],
+        "x-amazon-apigateway-request-validator": "all",
+        "responses": {},
+        "x-amazon-apigateway-integration": {
+          "passthroughBehavior": "never",
+          "contentHandling": "CONVERT_TO_TEXT",
+          "type": "aws_proxy",
+          "httpMethod": "POST",
+          "uri": "arn:aws:apigateway:ap-southeast-2:lambda:path/2015-03-31/functions/arn:aws:lambda:ap-southeast-2:0123456789:function:${stageVariables.LAMBDA_API_LAMBDA}/invocations"
+        }
+      }
+    }
+  },
+  "host": "##MockOutputXapiXappXapigatewaybaseX##.execute-api.ap-mock-1.amazonaws.com",
+  "definitions": {
+    "Empty": {
+      "type": "object",
+      "title": "Empty Schema"
+    }
+  },
+  "securityDefinitions": {
+    "api_key": {
+      "in": "header",
+      "name": "x-api-key",
+      "type": "apiKey"
+    },
+    "sigv4": {
+      "x-amazon-apigateway-authtype": "awsSigv4",
+      "in": "header",
+      "name": "Authorization",
+      "type": "apiKey"
+    }
+  },
+  "info": {
+    "description": "**Hamlet Deployment** mockedup-integration-application-apigatewaybase/nPass all requests through to the implementation.",
+    "title": "Proxy",
+    "version": "v1.0.0-123456789#MockCommit#"
+  }
+}

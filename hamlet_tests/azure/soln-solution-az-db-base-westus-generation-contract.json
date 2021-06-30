@@ -1,0 +1,67 @@
+{
+  "Stages": [
+    {
+      "Steps": [
+        {
+          "Status": "completed",
+          "Type": "process_template_pass",
+          "Parameters": {
+            "outputConversion": "",
+            "passAlternative": "",
+            "outputFileName": "soln-solution-az-db-base-westus-testcase.json",
+            "pass": "testcase",
+            "outputType": "json",
+            "deploymentUnitSubset": "testcase",
+            "outputFormat": ""
+          },
+          "Priority": 100,
+          "Id": "generationXsubsetsXprimaryXtestcase",
+          "Mandatory": true
+        }
+      ],
+      "ExecutionMode": "parallel",
+      "Id": "generationXsubsets",
+      "Mandatory": true
+    },
+    {
+      "Steps": [
+        {
+          "Status": "available",
+          "Type": "rename_file",
+          "Parameters": {
+            "currentFileName": "deploymenttest-generation-contract.json",
+            "newFileName": "soln-solution-az-db-base-westus-generation-contract.json"
+          },
+          "Priority": 100,
+          "Id": "cleanupXgenerationcontract",
+          "Mandatory": true
+        }
+      ],
+      "ExecutionMode": "serial",
+      "Id": "cleanup",
+      "Mandatory": true
+    }
+  ],
+  "Metadata": {
+    "ConfigurationReference": "configRef_v123",
+    "RequestReference": "SRVREQ01",
+    "Prepared": "2021-06-30T03:16:14Z",
+    "Id": {},
+    "RunId": "runId098",
+    "Providers": {}
+  },
+  "Properties": {
+    "deploymentMode": "update",
+    "deploymentFramework": "arm",
+    "flows": "components",
+    "deploymentUnit": "solution-az-db-base",
+    "deploymentGroup": "solution",
+    "accountRegion": "westus",
+    "requestReference": "SRVREQ01",
+    "configurationReference": "configRef_v123",
+    "entrance": "deploymenttest",
+    "region": "westus",
+    "providers": "azure,azuretest",
+    "account": ""
+  }
+}

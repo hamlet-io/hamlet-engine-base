@@ -1,0 +1,95 @@
+{
+  "outputs": {
+    "Region": {
+      "type": "string",
+      "value": "[resourceGroup().location]"
+    },
+    "DeploymentMode": {
+      "type": "string",
+      "value": "update"
+    },
+    "Subscription": {
+      "type": "string",
+      "value": "[subscription().id]"
+    },
+    "DeploymentUnit": {
+      "type": "string",
+      "value": "segment-az-network-base"
+    },
+    "ResourceGroup": {
+      "type": "string",
+      "value": "mockedup-integration-default-seg-segment-az-network-base"
+    },
+    "vnetXmgmtXvnet": {
+      "type": "string",
+      "value": "/subscriptions/0123456789/resourceGroups/mockRG/providers/Microsoft.Mock/mockResourceType/mockName"
+    }
+  },
+  "variables": {},
+  "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
+  "resources": [
+    {
+      "apiVersion": "2019-02-01",
+      "name": "mockedup-int-mgmt-vnet-network",
+      "location": "westus",
+      "type": "Microsoft.Network/virtualNetworks",
+      "properties": {
+        "addressSpace": {
+          "addressPrefixes": [
+            "10.0.0.0/16"
+          ]
+        }
+      }
+    },
+    {
+      "apiVersion": "2019-02-01",
+      "name": "mockedup-int-mgmt-vnet-network-nsg",
+      "location": "westus",
+      "type": "Microsoft.Network/networkSecurityGroups",
+      "properties": {}
+    },
+    {
+      "apiVersion": "2019-02-01",
+      "name": "routeTable-mgmt-vnet-internal",
+      "location": "westus",
+      "type": "Microsoft.Network/routeTables",
+      "properties": {}
+    },
+    {
+      "apiVersion": "2019-02-01",
+      "name": "routeTable-mgmt-vnet-external",
+      "location": "westus",
+      "type": "Microsoft.Network/routeTables",
+      "properties": {}
+    },
+    {
+      "apiVersion": "2019-11-01",
+      "dependsOn": [
+        "/subscriptions/0123456789/resourceGroups/mockRG/providers/Microsoft.Mock/mockResourceType/mockName"
+      ],
+      "name": "mockedup-int-mgmt-vnet-network-flowlog",
+      "type": "Microsoft.Network/networkWatchers/flowLogs",
+      "properties": {
+        "targetResourceId": "/subscriptions/0123456789/resourceGroups/mockRG/providers/Microsoft.Mock/mockResourceType/mockName",
+        "format": {
+          "type": "JSON",
+          "version": 0
+        },
+        "retentionPolicy": {
+          "days": 7,
+          "enabled": true
+        },
+        "flowAnalyticsConfiguration": {
+          "networkWatcherFlowAnalyticsConfiguration": {
+            "trafficAnalyticsInterval": 0,
+            "enabled": true
+          }
+        },
+        "enabled": true,
+        "storageId": "/subscriptions/0123456789/resourceGroups/mockRG/providers/Microsoft.Mock/mockResourceType/mockName"
+      }
+    }
+  ],
+  "contentVersion": "1.0.0.0",
+  "parameters": {}
+}

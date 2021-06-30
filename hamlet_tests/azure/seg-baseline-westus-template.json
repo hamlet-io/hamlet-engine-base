@@ -1,0 +1,276 @@
+{
+  "outputs": {
+    "storageXmgmtXbaseline": {
+      "type": "string",
+      "value": "/subscriptions/0123456789/resourceGroups/mockRG/providers/Microsoft.Mock/mockResourceType/mockName"
+    },
+    "storageXmgmtXbaselineXdictionary": {
+      "type": "object",
+      "value": "/subscriptions/0123456789/resourceGroups/mockRG/providers/Microsoft.Mock/mockResourceType/mockName"
+    },
+    "containerXmgmtXbaselineXweb": {
+      "type": "string",
+      "value": "/subscriptions/0123456789/resourceGroups/mockRG/providers/Microsoft.Mock/mockResourceType/mockName"
+    },
+    "secretXmgmtXbaseline": {
+      "type": "string",
+      "value": "/subscriptions/0123456789/resourceGroups/mockRG/providers/Microsoft.Mock/mockResourceType/mockName"
+    },
+    "containerXmgmtXbaselineXappdataXname": {
+      "type": "string",
+      "value": "mgmtbaselinesubscription/default/appdata"
+    },
+    "containerXmgmtXbaselineXname": {
+      "type": "string",
+      "value": "mgmtbaselinesubscription/default/$web"
+    },
+    "vaultXmgmtXbaselineXname": {
+      "type": "string",
+      "value": "vault-/subscriptions/0123456789/resourceGroups/mockRG/providers/Microsoft.Mock/mockResourceType/mockName"
+    },
+    "containerXmgmtXbaselineXwebXname": {
+      "type": "string",
+      "value": "mgmtbaselinesubscription/default/$web"
+    },
+    "containerXmgmtXbaselineXappdata": {
+      "type": "string",
+      "value": "/subscriptions/0123456789/resourceGroups/mockRG/providers/Microsoft.Mock/mockResourceType/mockName"
+    },
+    "keyXcmk": {
+      "type": "string",
+      "value": "/subscriptions/0123456789/resourceGroups/mockRG/providers/Microsoft.Mock/mockResourceType/mockName"
+    },
+    "secretXmgmtXbaselineXname": {
+      "type": "string",
+      "value": "vault-/subscriptions/0123456789/resourceGroups/mockRG/providers/Microsoft.Mock/mockResourceType/mockName/mgmt-baseline-secret-ConnectionKey"
+    },
+    "vaultXmgmtXbaseline": {
+      "type": "string",
+      "value": "/subscriptions/0123456789/resourceGroups/mockRG/providers/Microsoft.Mock/mockResourceType/mockName"
+    },
+    "storageXmgmtXbaselineXname": {
+      "type": "string",
+      "value": "mgmtbaselinesubscription"
+    },
+    "Region": {
+      "type": "string",
+      "value": "[resourceGroup().location]"
+    },
+    "DeploymentMode": {
+      "type": "string",
+      "value": "update"
+    },
+    "containerXmgmtXbaselineXopsdataXname": {
+      "type": "string",
+      "value": "mgmtbaselinesubscription/default/opsdata"
+    },
+    "storageXmgmtXbaselineXregion": {
+      "type": "string",
+      "value": "westus"
+    },
+    "blobXmgmtXbaseline": {
+      "type": "string",
+      "value": "/subscriptions/0123456789/resourceGroups/mockRG/providers/Microsoft.Mock/mockResourceType/mockName"
+    },
+    "containerXmgmtXbaseline": {
+      "type": "string",
+      "value": "/subscriptions/0123456789/resourceGroups/mockRG/providers/Microsoft.Mock/mockResourceType/mockName"
+    },
+    "Subscription": {
+      "type": "string",
+      "value": "[subscription().id]"
+    },
+    "DeploymentUnit": {
+      "type": "string",
+      "value": "baseline"
+    },
+    "containerXmgmtXbaselineXopsdata": {
+      "type": "string",
+      "value": "/subscriptions/0123456789/resourceGroups/mockRG/providers/Microsoft.Mock/mockResourceType/mockName"
+    },
+    "ResourceGroup": {
+      "type": "string",
+      "value": "mockedup-integration-default-seg-baseline"
+    }
+  },
+  "variables": {},
+  "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
+  "resources": [
+    {
+      "apiVersion": "2019-04-01",
+      "identity": {
+        "type": "SystemAssigned"
+      },
+      "kind": "StorageV2",
+      "name": "mgmtbaselinesubscription",
+      "location": "westus",
+      "type": "Microsoft.Storage/storageAccounts",
+      "sku": {
+        "name": "Standard_LRS"
+      },
+      "properties": {
+        "accessTier": "Cool",
+        "supportsHttpsTrafficOnly": true,
+        "networkAcls": {
+          "bypass": "AzureServices",
+          "defaultAction": "Allow"
+        }
+      }
+    },
+    {
+      "apiVersion": "2018-02-14",
+      "dependsOn": [
+        "/subscriptions/0123456789/resourceGroups/mockRG/providers/Microsoft.Mock/mockResourceType/mockName",
+        "/subscriptions/0123456789/resourceGroups/mockRG/providers/Microsoft.Mock/mockResourceType/mockName"
+      ],
+      "name": "vault-/subscriptions/0123456789/resourceGroups/mockRG/providers/Microsoft.Mock/mockResourceType/mockName/mgmt-baseline-secret-ConnectionKey",
+      "type": "Microsoft.KeyVault/vaults/secrets",
+      "properties": {
+        "value": "[listKeys(resourceId('Microsoft.Storage/storageAccounts', 'mgmtbaselinesubscription'), '2019-04-01').keys[0].value]"
+      }
+    },
+    {
+      "apiVersion": "2019-04-01",
+      "dependsOn": [
+        "/subscriptions/0123456789/resourceGroups/mockRG/providers/Microsoft.Mock/mockResourceType/mockName"
+      ],
+      "name": "mgmtbaselinesubscription/default",
+      "type": "Microsoft.Storage/storageAccounts/blobServices",
+      "properties": {}
+    },
+    {
+      "apiVersion": "2019-04-01",
+      "dependsOn": [
+        "/subscriptions/0123456789/resourceGroups/mockRG/providers/Microsoft.Mock/mockResourceType/mockName",
+        "/subscriptions/0123456789/resourceGroups/mockRG/providers/Microsoft.Mock/mockResourceType/mockName"
+      ],
+      "name": "mgmtbaselinesubscription/default/$web",
+      "type": "Microsoft.Storage/storageAccounts/blobServices/containers",
+      "properties": {
+        "publicAccess": "None"
+      }
+    },
+    {
+      "apiVersion": "2019-04-01",
+      "dependsOn": [
+        "/subscriptions/0123456789/resourceGroups/mockRG/providers/Microsoft.Mock/mockResourceType/mockName",
+        "/subscriptions/0123456789/resourceGroups/mockRG/providers/Microsoft.Mock/mockResourceType/mockName"
+      ],
+      "name": "mgmtbaselinesubscription/default/opsdata",
+      "type": "Microsoft.Storage/storageAccounts/blobServices/containers",
+      "properties": {
+        "publicAccess": "Blob"
+      }
+    },
+    {
+      "apiVersion": "2019-04-01",
+      "dependsOn": [
+        "/subscriptions/0123456789/resourceGroups/mockRG/providers/Microsoft.Mock/mockResourceType/mockName",
+        "/subscriptions/0123456789/resourceGroups/mockRG/providers/Microsoft.Mock/mockResourceType/mockName"
+      ],
+      "name": "mgmtbaselinesubscription/default/appdata",
+      "type": "Microsoft.Storage/storageAccounts/blobServices/containers",
+      "properties": {
+        "publicAccess": "Container"
+      }
+    },
+    {
+      "apiVersion": "2019-04-01",
+      "dependsOn": [
+        "/subscriptions/0123456789/resourceGroups/mockRG/providers/Microsoft.Mock/mockResourceType/mockName",
+        "/subscriptions/0123456789/resourceGroups/mockRG/providers/Microsoft.Mock/mockResourceType/mockName"
+      ],
+      "name": "mgmtbaselinesubscription/default/$web",
+      "type": "Microsoft.Storage/storageAccounts/blobServices/containers",
+      "properties": {
+        "publicAccess": "None"
+      }
+    },
+    {
+      "apiVersion": "2019-09-01",
+      "dependsOn": [
+        "/subscriptions/0123456789/resourceGroups/mockRG/providers/Microsoft.Mock/mockResourceType/mockName"
+      ],
+      "name": "vault-/subscriptions/0123456789/resourceGroups/mockRG/providers/Microsoft.Mock/mockResourceType/mockName/key-mgmt-baseline-cmk-cmk",
+      "type": "Microsoft.KeyVault/vaults/keys",
+      "properties": {
+        "kty": "RSA",
+        "keySize": 2048
+      }
+    },
+    {
+      "apiVersion": "2018-02-14",
+      "name": "vault-/subscriptions/0123456789/resourceGroups/mockRG/providers/Microsoft.Mock/mockResourceType/mockName",
+      "location": "westus",
+      "type": "Microsoft.KeyVault/vaults",
+      "properties": {
+        "enabledForDeployment": true,
+        "accessPolicies": [
+          {
+            "permissions": {
+              "certificates": [
+                "Get",
+                "List",
+                "Update",
+                "Create",
+                "Import",
+                "Delete",
+                "Recover",
+                "Backup",
+                "Restore",
+                "ManageContacts",
+                "ManageIssuers",
+                "GetIssuers",
+                "ListIssuers",
+                "SetIssuers",
+                "DeleteIssuers"
+              ],
+              "keys": [
+                "Get",
+                "List",
+                "Update",
+                "Create",
+                "Import",
+                "Delete",
+                "Recover",
+                "Backup",
+                "Restore"
+              ],
+              "secrets": [
+                "Get",
+                "List",
+                "Set",
+                "Delete",
+                "Recover",
+                "Backup",
+                "Restore"
+              ]
+            },
+            "tenantId": "[subscription().tenantId]",
+            "objectId": "1234567890-1234567890-1234567890-1234567890"
+          }
+        ],
+        "enabledForDiskEncryption": true,
+        "enabledForTemplateDeployment": true,
+        "createMode": "default",
+        "tenantId": "[subscription().tenantId]",
+        "sku": {
+          "name": "standard",
+          "family": "A"
+        },
+        "enableSoftDelete": true,
+        "networkAcls": {
+          "bypass": "AzureServices",
+          "defaultAction": "Deny",
+          "ipRules": [
+            {
+              "value": "0.0.0.0/0"
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "contentVersion": "1.0.0.0",
+  "parameters": {}
+}

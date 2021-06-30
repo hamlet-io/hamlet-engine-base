@@ -1,0 +1,15 @@
+{
+  "application_az_computecluster_base_app_computecluster_computecluster_basecomputeclustertemplate": {
+    "cfn_nag": false,
+    "filename": "app-application-az-computecluster-base-westus-template.json",
+    "cfn_lint": false,
+    "json_structure": {
+      "match": [
+        {
+          "path": "outputs.vmssXsettingsXappXcomputecluster.value",
+          "value": "/subscriptions/0123456789/resourceGroups/mockRG/providers/Microsoft.Mock/mockResourceType/mockName"
+        }
+      ]
+    }
+  }
+}

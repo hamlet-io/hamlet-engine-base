@@ -1,0 +1,1130 @@
+{
+  "AWSTemplateFormatVersion": "2010-09-09",
+  "Metadata": {
+    "ConfigurationReference": "configRef_v123",
+    "RequestReference": "SRVREQ01",
+    "Prepared": "2021-06-30T03:04:11Z",
+    "RunId": "runId098"
+  },
+  "Outputs": {
+    "routeTableXmgmtXvpcXinternalXb": {
+      "Value": {
+        "Ref": "routeTableXmgmtXvpcXinternalXb"
+      }
+    },
+    "Account": {
+      "Value": {
+        "Ref": "AWS::AccountId"
+      }
+    },
+    "routeTableXmgmtXvpcXinternalXa": {
+      "Value": {
+        "Ref": "routeTableXmgmtXvpcXinternalXa"
+      }
+    },
+    "subnetXelbXa": {
+      "Value": {
+        "Ref": "subnetXelbXa"
+      }
+    },
+    "subnetListXmgmtXvpcXapp": {
+      "Value": {
+        "Fn::Join": [
+          ",",
+          [
+            "##MockOutputXsubnetXappXaX##",
+            "##MockOutputXsubnetXappXbX##"
+          ]
+        ]
+      },
+      "Export": {
+        "Name": {
+          "Fn::Join": [
+            ":",
+            [
+              {
+                "Ref": "AWS::StackName"
+              },
+              "subnetListXmgmtXvpcXapp"
+            ]
+          ]
+        }
+      }
+    },
+    "subnetXappXb": {
+      "Value": {
+        "Ref": "subnetXappXb"
+      }
+    },
+    "subnetXelbXb": {
+      "Value": {
+        "Ref": "subnetXelbXb"
+      }
+    },
+    "routeTableXmgmtXvpcXexternalXa": {
+      "Value": {
+        "Ref": "routeTableXmgmtXvpcXexternalXa"
+      }
+    },
+    "vpcXsegmentXvpc": {
+      "Value": {
+        "Ref": "vpc"
+      },
+      "Export": {
+        "Name": {
+          "Fn::Join": [
+            ":",
+            [
+              {
+                "Ref": "AWS::StackName"
+              },
+              "vpcXsegmentXvpc"
+            ]
+          ]
+        }
+      }
+    },
+    "routeTableXmgmtXvpcXexternalXb": {
+      "Value": {
+        "Ref": "routeTableXmgmtXvpcXexternalXb"
+      }
+    },
+    "subnetXdbXb": {
+      "Value": {
+        "Ref": "subnetXdbXb"
+      }
+    },
+    "subnetListXmgmtXvpcXelb": {
+      "Value": {
+        "Fn::Join": [
+          ",",
+          [
+            "##MockOutputXsubnetXelbXaX##",
+            "##MockOutputXsubnetXelbXbX##"
+          ]
+        ]
+      },
+      "Export": {
+        "Name": {
+          "Fn::Join": [
+            ":",
+            [
+              {
+                "Ref": "AWS::StackName"
+              },
+              "subnetListXmgmtXvpcXelb"
+            ]
+          ]
+        }
+      }
+    },
+    "subnetXdbXa": {
+      "Value": {
+        "Ref": "subnetXdbXa"
+      }
+    },
+    "subnetXmgmtXb": {
+      "Value": {
+        "Ref": "subnetXmgmtXb"
+      }
+    },
+    "subnetXmgmtXa": {
+      "Value": {
+        "Ref": "subnetXmgmtXa"
+      }
+    },
+    "subnetXappXa": {
+      "Value": {
+        "Ref": "subnetXappXa"
+      }
+    },
+    "subnetListXmgmtXvpcXmgmt": {
+      "Value": {
+        "Fn::Join": [
+          ",",
+          [
+            "##MockOutputXsubnetXmgmtXaX##",
+            "##MockOutputXsubnetXmgmtXbX##"
+          ]
+        ]
+      },
+      "Export": {
+        "Name": {
+          "Fn::Join": [
+            ":",
+            [
+              {
+                "Ref": "AWS::StackName"
+              },
+              "subnetListXmgmtXvpcXmgmt"
+            ]
+          ]
+        }
+      }
+    },
+    "Region": {
+      "Value": {
+        "Ref": "AWS::Region"
+      }
+    },
+    "DeploymentMode": {
+      "Value": "update"
+    },
+    "igwXsegmentXigw": {
+      "Value": {
+        "Ref": "igw"
+      }
+    },
+    "subnetListXmgmtXvpcXdb": {
+      "Value": {
+        "Fn::Join": [
+          ",",
+          [
+            "##MockOutputXsubnetXdbXaX##",
+            "##MockOutputXsubnetXdbXbX##"
+          ]
+        ]
+      },
+      "Export": {
+        "Name": {
+          "Fn::Join": [
+            ":",
+            [
+              {
+                "Ref": "AWS::StackName"
+              },
+              "subnetListXmgmtXvpcXdb"
+            ]
+          ]
+        }
+      }
+    },
+    "DeploymentUnit": {
+      "Value": "vpc"
+    }
+  },
+  "Resources": {
+    "routeTableXmgmtXvpcXinternalXb": {
+      "Type": "AWS::EC2::RouteTable",
+      "Properties": {
+        "VpcId": "##MockOutputXvpcX##",
+        "Tags": [
+          {
+            "Value": "SRVREQ01",
+            "Key": "cot:request"
+          },
+          {
+            "Value": "configRef_v123",
+            "Key": "cot:configuration"
+          },
+          {
+            "Value": "mockten",
+            "Key": "cot:tenant"
+          },
+          {
+            "Value": "mockacct",
+            "Key": "cot:account"
+          },
+          {
+            "Value": "mockedup",
+            "Key": "cot:product"
+          },
+          {
+            "Value": "integration",
+            "Key": "cot:environment"
+          },
+          {
+            "Value": "test",
+            "Key": "cot:category"
+          },
+          {
+            "Value": "default",
+            "Key": "cot:segment"
+          },
+          {
+            "Value": "b",
+            "Key": "cot:zone"
+          },
+          {
+            "Value": "mockedup-integration-management-vpc-internal-b",
+            "Key": "Name"
+          }
+        ]
+      }
+    },
+    "ruleXnetworkACLXopenXinXinboundX200": {
+      "Type": "AWS::EC2::NetworkAclEntry",
+      "Properties": {
+        "PortRange": {
+          "From": 0,
+          "To": 65535
+        },
+        "NetworkAclId": "##MockOutputXnetworkACLXopenX##",
+        "RuleAction": "allow",
+        "CidrBlock": "0.0.0.0/0",
+        "Egress": false,
+        "RuleNumber": 200,
+        "Protocol": "-1"
+      }
+    },
+    "ruleXnetworkACLXopenXoutXoutboundX200": {
+      "Type": "AWS::EC2::NetworkAclEntry",
+      "Properties": {
+        "PortRange": {
+          "From": 0,
+          "To": 65535
+        },
+        "NetworkAclId": "##MockOutputXnetworkACLXopenX##",
+        "RuleAction": "allow",
+        "CidrBlock": "0.0.0.0/0",
+        "Egress": true,
+        "RuleNumber": 200,
+        "Protocol": "-1"
+      }
+    },
+    "routeTableXmgmtXvpcXinternalXa": {
+      "Type": "AWS::EC2::RouteTable",
+      "Properties": {
+        "VpcId": "##MockOutputXvpcX##",
+        "Tags": [
+          {
+            "Value": "SRVREQ01",
+            "Key": "cot:request"
+          },
+          {
+            "Value": "configRef_v123",
+            "Key": "cot:configuration"
+          },
+          {
+            "Value": "mockten",
+            "Key": "cot:tenant"
+          },
+          {
+            "Value": "mockacct",
+            "Key": "cot:account"
+          },
+          {
+            "Value": "mockedup",
+            "Key": "cot:product"
+          },
+          {
+            "Value": "integration",
+            "Key": "cot:environment"
+          },
+          {
+            "Value": "test",
+            "Key": "cot:category"
+          },
+          {
+            "Value": "default",
+            "Key": "cot:segment"
+          },
+          {
+            "Value": "a",
+            "Key": "cot:zone"
+          },
+          {
+            "Value": "mockedup-integration-management-vpc-internal-a",
+            "Key": "Name"
+          }
+        ]
+      }
+    },
+    "subnetXelbXa": {
+      "Type": "AWS::EC2::Subnet",
+      "Properties": {
+        "VpcId": "##MockOutputXvpcX##",
+        "AvailabilityZone": "ap-southeast-2a",
+        "CidrBlock": "10.0.128.0/22",
+        "Tags": [
+          {
+            "Value": "SRVREQ01",
+            "Key": "cot:request"
+          },
+          {
+            "Value": "configRef_v123",
+            "Key": "cot:configuration"
+          },
+          {
+            "Value": "mockten",
+            "Key": "cot:tenant"
+          },
+          {
+            "Value": "mockacct",
+            "Key": "cot:account"
+          },
+          {
+            "Value": "mockedup",
+            "Key": "cot:product"
+          },
+          {
+            "Value": "integration",
+            "Key": "cot:environment"
+          },
+          {
+            "Value": "test",
+            "Key": "cot:category"
+          },
+          {
+            "Value": "default",
+            "Key": "cot:segment"
+          },
+          {
+            "Value": "elb",
+            "Key": "cot:tier"
+          },
+          {
+            "Value": "a",
+            "Key": "cot:zone"
+          },
+          {
+            "Value": "mockedup-integration-elb-a",
+            "Key": "Name"
+          }
+        ]
+      }
+    },
+    "subnetXappXb": {
+      "Type": "AWS::EC2::Subnet",
+      "Properties": {
+        "VpcId": "##MockOutputXvpcX##",
+        "AvailabilityZone": "ap-southeast-2b",
+        "CidrBlock": "10.0.36.0/22",
+        "Tags": [
+          {
+            "Value": "SRVREQ01",
+            "Key": "cot:request"
+          },
+          {
+            "Value": "configRef_v123",
+            "Key": "cot:configuration"
+          },
+          {
+            "Value": "mockten",
+            "Key": "cot:tenant"
+          },
+          {
+            "Value": "mockacct",
+            "Key": "cot:account"
+          },
+          {
+            "Value": "mockedup",
+            "Key": "cot:product"
+          },
+          {
+            "Value": "integration",
+            "Key": "cot:environment"
+          },
+          {
+            "Value": "test",
+            "Key": "cot:category"
+          },
+          {
+            "Value": "default",
+            "Key": "cot:segment"
+          },
+          {
+            "Value": "application",
+            "Key": "cot:tier"
+          },
+          {
+            "Value": "b",
+            "Key": "cot:zone"
+          },
+          {
+            "Value": "mockedup-integration-application-b",
+            "Key": "Name"
+          }
+        ]
+      }
+    },
+    "subnetXelbXb": {
+      "Type": "AWS::EC2::Subnet",
+      "Properties": {
+        "VpcId": "##MockOutputXvpcX##",
+        "AvailabilityZone": "ap-southeast-2b",
+        "CidrBlock": "10.0.132.0/22",
+        "Tags": [
+          {
+            "Value": "SRVREQ01",
+            "Key": "cot:request"
+          },
+          {
+            "Value": "configRef_v123",
+            "Key": "cot:configuration"
+          },
+          {
+            "Value": "mockten",
+            "Key": "cot:tenant"
+          },
+          {
+            "Value": "mockacct",
+            "Key": "cot:account"
+          },
+          {
+            "Value": "mockedup",
+            "Key": "cot:product"
+          },
+          {
+            "Value": "integration",
+            "Key": "cot:environment"
+          },
+          {
+            "Value": "test",
+            "Key": "cot:category"
+          },
+          {
+            "Value": "default",
+            "Key": "cot:segment"
+          },
+          {
+            "Value": "elb",
+            "Key": "cot:tier"
+          },
+          {
+            "Value": "b",
+            "Key": "cot:zone"
+          },
+          {
+            "Value": "mockedup-integration-elb-b",
+            "Key": "Name"
+          }
+        ]
+      }
+    },
+    "routeTableXmgmtXvpcXexternalXa": {
+      "Type": "AWS::EC2::RouteTable",
+      "Properties": {
+        "VpcId": "##MockOutputXvpcX##",
+        "Tags": [
+          {
+            "Value": "SRVREQ01",
+            "Key": "cot:request"
+          },
+          {
+            "Value": "configRef_v123",
+            "Key": "cot:configuration"
+          },
+          {
+            "Value": "mockten",
+            "Key": "cot:tenant"
+          },
+          {
+            "Value": "mockacct",
+            "Key": "cot:account"
+          },
+          {
+            "Value": "mockedup",
+            "Key": "cot:product"
+          },
+          {
+            "Value": "integration",
+            "Key": "cot:environment"
+          },
+          {
+            "Value": "test",
+            "Key": "cot:category"
+          },
+          {
+            "Value": "default",
+            "Key": "cot:segment"
+          },
+          {
+            "Value": "a",
+            "Key": "cot:zone"
+          },
+          {
+            "Value": "mockedup-integration-management-vpc-external-a",
+            "Key": "Name"
+          }
+        ]
+      }
+    },
+    "routeXrouteTableXmgmtXvpcXexternalXgatewayXa": {
+      "Type": "AWS::EC2::Route",
+      "Properties": {
+        "RouteTableId": "##MockOutputXrouteTableXmgmtXvpcXexternalXaX##",
+        "DestinationCidrBlock": "0.0.0.0/0",
+        "GatewayId": "##MockOutputXigwX##"
+      }
+    },
+    "routeTableXmgmtXvpcXexternalXb": {
+      "Type": "AWS::EC2::RouteTable",
+      "Properties": {
+        "VpcId": "##MockOutputXvpcX##",
+        "Tags": [
+          {
+            "Value": "SRVREQ01",
+            "Key": "cot:request"
+          },
+          {
+            "Value": "configRef_v123",
+            "Key": "cot:configuration"
+          },
+          {
+            "Value": "mockten",
+            "Key": "cot:tenant"
+          },
+          {
+            "Value": "mockacct",
+            "Key": "cot:account"
+          },
+          {
+            "Value": "mockedup",
+            "Key": "cot:product"
+          },
+          {
+            "Value": "integration",
+            "Key": "cot:environment"
+          },
+          {
+            "Value": "test",
+            "Key": "cot:category"
+          },
+          {
+            "Value": "default",
+            "Key": "cot:segment"
+          },
+          {
+            "Value": "b",
+            "Key": "cot:zone"
+          },
+          {
+            "Value": "mockedup-integration-management-vpc-external-b",
+            "Key": "Name"
+          }
+        ]
+      }
+    },
+    "routeXrouteTableXmgmtXvpcXexternalXgatewayXb": {
+      "Type": "AWS::EC2::Route",
+      "Properties": {
+        "RouteTableId": "##MockOutputXrouteTableXmgmtXvpcXexternalXbX##",
+        "DestinationCidrBlock": "0.0.0.0/0",
+        "GatewayId": "##MockOutputXigwX##"
+      }
+    },
+    "associationXsubnetXdbXaXrouteTable": {
+      "Type": "AWS::EC2::SubnetRouteTableAssociation",
+      "Properties": {
+        "RouteTableId": "##MockOutputXrouteTableXmgmtXvpcXinternalXaX##",
+        "SubnetId": "##MockOutputXsubnetXdbXaX##"
+      }
+    },
+    "associationXsubnetXappXbXrouteTable": {
+      "Type": "AWS::EC2::SubnetRouteTableAssociation",
+      "Properties": {
+        "RouteTableId": "##MockOutputXrouteTableXmgmtXvpcXinternalXbX##",
+        "SubnetId": "##MockOutputXsubnetXappXbX##"
+      }
+    },
+    "igwXattachment": {
+      "Type": "AWS::EC2::VPCGatewayAttachment",
+      "Properties": {
+        "InternetGatewayId": "##MockOutputXigwX##",
+        "VpcId": "##MockOutputXvpcX##"
+      }
+    },
+    "subnetXmgmtXb": {
+      "Type": "AWS::EC2::Subnet",
+      "Properties": {
+        "VpcId": "##MockOutputXvpcX##",
+        "AvailabilityZone": "ap-southeast-2b",
+        "CidrBlock": "10.0.244.0/22",
+        "Tags": [
+          {
+            "Value": "SRVREQ01",
+            "Key": "cot:request"
+          },
+          {
+            "Value": "configRef_v123",
+            "Key": "cot:configuration"
+          },
+          {
+            "Value": "mockten",
+            "Key": "cot:tenant"
+          },
+          {
+            "Value": "mockacct",
+            "Key": "cot:account"
+          },
+          {
+            "Value": "mockedup",
+            "Key": "cot:product"
+          },
+          {
+            "Value": "integration",
+            "Key": "cot:environment"
+          },
+          {
+            "Value": "test",
+            "Key": "cot:category"
+          },
+          {
+            "Value": "default",
+            "Key": "cot:segment"
+          },
+          {
+            "Value": "management",
+            "Key": "cot:tier"
+          },
+          {
+            "Value": "b",
+            "Key": "cot:zone"
+          },
+          {
+            "Value": "mockedup-integration-management-b",
+            "Key": "Name"
+          }
+        ]
+      }
+    },
+    "subnetXmgmtXa": {
+      "Type": "AWS::EC2::Subnet",
+      "Properties": {
+        "VpcId": "##MockOutputXvpcX##",
+        "AvailabilityZone": "ap-southeast-2a",
+        "CidrBlock": "10.0.240.0/22",
+        "Tags": [
+          {
+            "Value": "SRVREQ01",
+            "Key": "cot:request"
+          },
+          {
+            "Value": "configRef_v123",
+            "Key": "cot:configuration"
+          },
+          {
+            "Value": "mockten",
+            "Key": "cot:tenant"
+          },
+          {
+            "Value": "mockacct",
+            "Key": "cot:account"
+          },
+          {
+            "Value": "mockedup",
+            "Key": "cot:product"
+          },
+          {
+            "Value": "integration",
+            "Key": "cot:environment"
+          },
+          {
+            "Value": "test",
+            "Key": "cot:category"
+          },
+          {
+            "Value": "default",
+            "Key": "cot:segment"
+          },
+          {
+            "Value": "management",
+            "Key": "cot:tier"
+          },
+          {
+            "Value": "a",
+            "Key": "cot:zone"
+          },
+          {
+            "Value": "mockedup-integration-management-a",
+            "Key": "Name"
+          }
+        ]
+      }
+    },
+    "igw": {
+      "Type": "AWS::EC2::InternetGateway",
+      "Properties": {
+        "Tags": [
+          {
+            "Value": "SRVREQ01",
+            "Key": "cot:request"
+          },
+          {
+            "Value": "configRef_v123",
+            "Key": "cot:configuration"
+          },
+          {
+            "Value": "mockten",
+            "Key": "cot:tenant"
+          },
+          {
+            "Value": "mockacct",
+            "Key": "cot:account"
+          },
+          {
+            "Value": "mockedup",
+            "Key": "cot:product"
+          },
+          {
+            "Value": "integration",
+            "Key": "cot:environment"
+          },
+          {
+            "Value": "test",
+            "Key": "cot:category"
+          },
+          {
+            "Value": "default",
+            "Key": "cot:segment"
+          },
+          {
+            "Value": "mockedup-integration",
+            "Key": "Name"
+          }
+        ]
+      }
+    },
+    "subnetXappXa": {
+      "Type": "AWS::EC2::Subnet",
+      "Properties": {
+        "VpcId": "##MockOutputXvpcX##",
+        "AvailabilityZone": "ap-southeast-2a",
+        "CidrBlock": "10.0.32.0/22",
+        "Tags": [
+          {
+            "Value": "SRVREQ01",
+            "Key": "cot:request"
+          },
+          {
+            "Value": "configRef_v123",
+            "Key": "cot:configuration"
+          },
+          {
+            "Value": "mockten",
+            "Key": "cot:tenant"
+          },
+          {
+            "Value": "mockacct",
+            "Key": "cot:account"
+          },
+          {
+            "Value": "mockedup",
+            "Key": "cot:product"
+          },
+          {
+            "Value": "integration",
+            "Key": "cot:environment"
+          },
+          {
+            "Value": "test",
+            "Key": "cot:category"
+          },
+          {
+            "Value": "default",
+            "Key": "cot:segment"
+          },
+          {
+            "Value": "application",
+            "Key": "cot:tier"
+          },
+          {
+            "Value": "a",
+            "Key": "cot:zone"
+          },
+          {
+            "Value": "mockedup-integration-application-a",
+            "Key": "Name"
+          }
+        ]
+      }
+    },
+    "associationXsubnetXdbXaXnetworkACL": {
+      "Type": "AWS::EC2::SubnetNetworkAclAssociation",
+      "Properties": {
+        "NetworkAclId": "##MockOutputXnetworkACLXopenX##",
+        "SubnetId": "##MockOutputXsubnetXdbXaX##"
+      }
+    },
+    "associationXsubnetXdbXbXnetworkACL": {
+      "Type": "AWS::EC2::SubnetNetworkAclAssociation",
+      "Properties": {
+        "NetworkAclId": "##MockOutputXnetworkACLXopenX##",
+        "SubnetId": "##MockOutputXsubnetXdbXbX##"
+      }
+    },
+    "associationXsubnetXmgmtXaXnetworkACL": {
+      "Type": "AWS::EC2::SubnetNetworkAclAssociation",
+      "Properties": {
+        "NetworkAclId": "##MockOutputXnetworkACLXopenX##",
+        "SubnetId": "##MockOutputXsubnetXmgmtXaX##"
+      }
+    },
+    "associationXsubnetXmgmtXaXrouteTable": {
+      "Type": "AWS::EC2::SubnetRouteTableAssociation",
+      "Properties": {
+        "RouteTableId": "##MockOutputXrouteTableXmgmtXvpcXexternalXaX##",
+        "SubnetId": "##MockOutputXsubnetXmgmtXaX##"
+      }
+    },
+    "associationXsubnetXappXaXnetworkACL": {
+      "Type": "AWS::EC2::SubnetNetworkAclAssociation",
+      "Properties": {
+        "NetworkAclId": "##MockOutputXnetworkACLXopenX##",
+        "SubnetId": "##MockOutputXsubnetXappXaX##"
+      }
+    },
+    "associationXsubnetXelbXbXnetworkACL": {
+      "Type": "AWS::EC2::SubnetNetworkAclAssociation",
+      "Properties": {
+        "NetworkAclId": "##MockOutputXnetworkACLXopenX##",
+        "SubnetId": "##MockOutputXsubnetXelbXbX##"
+      }
+    },
+    "associationXsubnetXappXaXrouteTable": {
+      "Type": "AWS::EC2::SubnetRouteTableAssociation",
+      "Properties": {
+        "RouteTableId": "##MockOutputXrouteTableXmgmtXvpcXinternalXaX##",
+        "SubnetId": "##MockOutputXsubnetXappXaX##"
+      }
+    },
+    "associationXsubnetXelbXbXrouteTable": {
+      "Type": "AWS::EC2::SubnetRouteTableAssociation",
+      "Properties": {
+        "RouteTableId": "##MockOutputXrouteTableXmgmtXvpcXexternalXbX##",
+        "SubnetId": "##MockOutputXsubnetXelbXbX##"
+      }
+    },
+    "vpc": {
+      "Type": "AWS::EC2::VPC",
+      "Properties": {
+        "CidrBlock": "10.0.0.0/16",
+        "EnableDnsSupport": true,
+        "EnableDnsHostnames": true,
+        "Tags": [
+          {
+            "Value": "SRVREQ01",
+            "Key": "cot:request"
+          },
+          {
+            "Value": "configRef_v123",
+            "Key": "cot:configuration"
+          },
+          {
+            "Value": "mockten",
+            "Key": "cot:tenant"
+          },
+          {
+            "Value": "mockacct",
+            "Key": "cot:account"
+          },
+          {
+            "Value": "mockedup",
+            "Key": "cot:product"
+          },
+          {
+            "Value": "integration",
+            "Key": "cot:environment"
+          },
+          {
+            "Value": "test",
+            "Key": "cot:category"
+          },
+          {
+            "Value": "default",
+            "Key": "cot:segment"
+          },
+          {
+            "Value": "mockedup-integration",
+            "Key": "Name"
+          }
+        ]
+      }
+    },
+    "subnetXdbXb": {
+      "Type": "AWS::EC2::Subnet",
+      "Properties": {
+        "VpcId": "##MockOutputXvpcX##",
+        "AvailabilityZone": "ap-southeast-2b",
+        "CidrBlock": "10.0.52.0/22",
+        "Tags": [
+          {
+            "Value": "SRVREQ01",
+            "Key": "cot:request"
+          },
+          {
+            "Value": "configRef_v123",
+            "Key": "cot:configuration"
+          },
+          {
+            "Value": "mockten",
+            "Key": "cot:tenant"
+          },
+          {
+            "Value": "mockacct",
+            "Key": "cot:account"
+          },
+          {
+            "Value": "mockedup",
+            "Key": "cot:product"
+          },
+          {
+            "Value": "integration",
+            "Key": "cot:environment"
+          },
+          {
+            "Value": "test",
+            "Key": "cot:category"
+          },
+          {
+            "Value": "default",
+            "Key": "cot:segment"
+          },
+          {
+            "Value": "database",
+            "Key": "cot:tier"
+          },
+          {
+            "Value": "b",
+            "Key": "cot:zone"
+          },
+          {
+            "Value": "mockedup-integration-database-b",
+            "Key": "Name"
+          }
+        ]
+      }
+    },
+    "subnetXdbXa": {
+      "Type": "AWS::EC2::Subnet",
+      "Properties": {
+        "VpcId": "##MockOutputXvpcX##",
+        "AvailabilityZone": "ap-southeast-2a",
+        "CidrBlock": "10.0.48.0/22",
+        "Tags": [
+          {
+            "Value": "SRVREQ01",
+            "Key": "cot:request"
+          },
+          {
+            "Value": "configRef_v123",
+            "Key": "cot:configuration"
+          },
+          {
+            "Value": "mockten",
+            "Key": "cot:tenant"
+          },
+          {
+            "Value": "mockacct",
+            "Key": "cot:account"
+          },
+          {
+            "Value": "mockedup",
+            "Key": "cot:product"
+          },
+          {
+            "Value": "integration",
+            "Key": "cot:environment"
+          },
+          {
+            "Value": "test",
+            "Key": "cot:category"
+          },
+          {
+            "Value": "default",
+            "Key": "cot:segment"
+          },
+          {
+            "Value": "database",
+            "Key": "cot:tier"
+          },
+          {
+            "Value": "a",
+            "Key": "cot:zone"
+          },
+          {
+            "Value": "mockedup-integration-database-a",
+            "Key": "Name"
+          }
+        ]
+      }
+    },
+    "associationXsubnetXappXbXnetworkACL": {
+      "Type": "AWS::EC2::SubnetNetworkAclAssociation",
+      "Properties": {
+        "NetworkAclId": "##MockOutputXnetworkACLXopenX##",
+        "SubnetId": "##MockOutputXsubnetXappXbX##"
+      }
+    },
+    "associationXsubnetXelbXaXnetworkACL": {
+      "Type": "AWS::EC2::SubnetNetworkAclAssociation",
+      "Properties": {
+        "NetworkAclId": "##MockOutputXnetworkACLXopenX##",
+        "SubnetId": "##MockOutputXsubnetXelbXaX##"
+      }
+    },
+    "associationXsubnetXmgmtXbXrouteTable": {
+      "Type": "AWS::EC2::SubnetRouteTableAssociation",
+      "Properties": {
+        "RouteTableId": "##MockOutputXrouteTableXmgmtXvpcXexternalXbX##",
+        "SubnetId": "##MockOutputXsubnetXmgmtXbX##"
+      }
+    },
+    "associationXsubnetXmgmtXbXnetworkACL": {
+      "Type": "AWS::EC2::SubnetNetworkAclAssociation",
+      "Properties": {
+        "NetworkAclId": "##MockOutputXnetworkACLXopenX##",
+        "SubnetId": "##MockOutputXsubnetXmgmtXbX##"
+      }
+    },
+    "associationXsubnetXelbXaXrouteTable": {
+      "Type": "AWS::EC2::SubnetRouteTableAssociation",
+      "Properties": {
+        "RouteTableId": "##MockOutputXrouteTableXmgmtXvpcXexternalXaX##",
+        "SubnetId": "##MockOutputXsubnetXelbXaX##"
+      }
+    },
+    "networkACLXopen": {
+      "Type": "AWS::EC2::NetworkAcl",
+      "Properties": {
+        "VpcId": "##MockOutputXvpcX##",
+        "Tags": [
+          {
+            "Value": "SRVREQ01",
+            "Key": "cot:request"
+          },
+          {
+            "Value": "configRef_v123",
+            "Key": "cot:configuration"
+          },
+          {
+            "Value": "mockten",
+            "Key": "cot:tenant"
+          },
+          {
+            "Value": "mockacct",
+            "Key": "cot:account"
+          },
+          {
+            "Value": "mockedup",
+            "Key": "cot:product"
+          },
+          {
+            "Value": "integration",
+            "Key": "cot:environment"
+          },
+          {
+            "Value": "test",
+            "Key": "cot:category"
+          },
+          {
+            "Value": "default",
+            "Key": "cot:segment"
+          },
+          {
+            "Value": "mockedup-integration-open",
+            "Key": "Name"
+          }
+        ]
+      }
+    },
+    "associationXsubnetXdbXbXrouteTable": {
+      "Type": "AWS::EC2::SubnetRouteTableAssociation",
+      "Properties": {
+        "RouteTableId": "##MockOutputXrouteTableXmgmtXvpcXinternalXbX##",
+        "SubnetId": "##MockOutputXsubnetXdbXbX##"
+      }
+    }
+  }
+}

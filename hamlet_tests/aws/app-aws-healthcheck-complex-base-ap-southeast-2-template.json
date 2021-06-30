@@ -1,0 +1,106 @@
+{
+  "AWSTemplateFormatVersion": "2010-09-09",
+  "Metadata": {
+    "ConfigurationReference": "configRef_v123",
+    "RequestReference": "SRVREQ01",
+    "Prepared": "2021-06-30T03:11:56Z",
+    "RunId": "runId098"
+  },
+  "Outputs": {
+    "Account": {
+      "Value": {
+        "Ref": "AWS::AccountId"
+      }
+    },
+    "canaryXappXhealthcheckcomplexbase": {
+      "Value": {
+        "Ref": "canaryXappXhealthcheckcomplexbase"
+      }
+    },
+    "Region": {
+      "Value": {
+        "Ref": "AWS::Region"
+      }
+    },
+    "DeploymentMode": {
+      "Value": "update"
+    },
+    "DeploymentUnit": {
+      "Value": "aws-healthcheck-complex-base"
+    }
+  },
+  "Resources": {
+    "canaryXappXhealthcheckcomplexbase": {
+      "Type": "AWS::Synthetics::Canary",
+      "Properties": {
+        "ExecutionRoleArn": "arn:aws:iam::123456789012:mock/roleXcanaryXappXhealthcheckcomplexbaseXarn",
+        "Schedule": {
+          "Expression": "rate(5 minutes)"
+        },
+        "SuccessRetentionPeriod": 30,
+        "RuntimeVersion": "syn-python-selenium-1.0",
+        "RunConfig": {
+          "EnvironmentVariables": {
+            "LB_FQDN": "healthchecklb-integration.mock.local"
+          },
+          "MemoryInMB": 1024,
+          "ActiveTracing": true
+        },
+        "FailureRetentionPeriod": 30,
+        "Code": {
+          "Script": "def basic_custom_script():\n    fail = False\n    if fail:\n        raise Exception(\"Failed basicCanary check.\")\n    return \"Successfully completed basicCanary checks.\"\ndef handler(event, context):\n    return basic_custom_script()",
+          "Handler": "handler"
+        },
+        "ArtifactS3Location": "s3://##MockOutputXs3XsegmentXapplicationX##/appdata/mockedup/integration/application/healthcheckcomplexbase",
+        "StartCanaryAfterCreation": true,
+        "Tags": [
+          {
+            "Value": "SRVREQ01",
+            "Key": "cot:request"
+          },
+          {
+            "Value": "configRef_v123",
+            "Key": "cot:configuration"
+          },
+          {
+            "Value": "mockten",
+            "Key": "cot:tenant"
+          },
+          {
+            "Value": "mockacct",
+            "Key": "cot:account"
+          },
+          {
+            "Value": "mockedup",
+            "Key": "cot:product"
+          },
+          {
+            "Value": "integration",
+            "Key": "cot:environment"
+          },
+          {
+            "Value": "test",
+            "Key": "cot:category"
+          },
+          {
+            "Value": "default",
+            "Key": "cot:segment"
+          },
+          {
+            "Value": "application",
+            "Key": "cot:tier"
+          },
+          {
+            "Value": "healthcheckcomplexbase",
+            "Key": "cot:component"
+          },
+          {
+            "Value": "mockedup-integration-application-healthcheckcomplexbase",
+            "Key": "Name"
+          }
+        ],
+        "Name": "healthcheckcomplexbas"
+      }
+    }
+  }
+}

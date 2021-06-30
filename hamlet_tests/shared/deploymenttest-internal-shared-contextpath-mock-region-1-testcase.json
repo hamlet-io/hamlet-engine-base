@@ -1,0 +1,15 @@
+{
+  "shared_contextpath_app_contextpath_internaltest_contextpath": {
+    "cfn_nag": false,
+    "filename": "deployment-internal-shared-contextpath-mock-region-1-config.json",
+    "cfn_lint": false,
+    "json_structure": {
+      "match": [
+        {
+          "path": "Occurrence.State.Attributes.ALLINCLUDES_CONTEXTPATH_OUTPUT",
+          "value": "mockacct-0123456789-mockedup-mockapp-integration-default-application-contextpath-allincludes"
+        }
+      ]
+    }
+  }
+}

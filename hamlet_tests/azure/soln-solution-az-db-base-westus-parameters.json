@@ -1,0 +1,14 @@
+{
+  "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentParameters.json#",
+  "contentVersion": "1.0.0.0",
+  "parameters": {
+    "mockedup-int-db-database-secret": {
+      "reference": {
+        "secretName": "mockedup-int-db-database-secret",
+        "keyVault": {
+          "id": "/subscriptions/0123456789/resourceGroups/mockRG/providers/Microsoft.Mock/mockResourceType/mockName"
+        }
+      }
+    }
+  }
+}

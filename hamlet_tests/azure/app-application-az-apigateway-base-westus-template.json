@@ -1,0 +1,76 @@
+{
+  "outputs": {
+    "Region": {
+      "type": "string",
+      "value": "[resourceGroup().location]"
+    },
+    "DeploymentMode": {
+      "type": "string",
+      "value": "update"
+    },
+    "serviceXmockedupXintegrationXapiXapigateway": {
+      "type": "string",
+      "value": "/subscriptions/0123456789/resourceGroups/mockRG/providers/Microsoft.Mock/mockResourceType/mockName"
+    },
+    "Subscription": {
+      "type": "string",
+      "value": "[subscription().id]"
+    },
+    "DeploymentUnit": {
+      "type": "string",
+      "value": "application-az-apigateway-base"
+    },
+    "ResourceGroup": {
+      "type": "string",
+      "value": "mockedup-integration-default-app-application-az-apigateway-base"
+    }
+  },
+  "variables": {},
+  "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
+  "resources": [
+    {
+      "apiVersion": "2019-01-01",
+      "dependsOn": [
+        "/subscriptions/0123456789/resourceGroups/mockRG/providers/Microsoft.Mock/mockResourceType/mockName"
+      ],
+      "name": "mockedup-integration-api-apigateway-subscriptions0/apis-api-apigateway",
+      "type": "Microsoft.ApiManagement/service/apis",
+      "properties": {
+        "path": "",
+        "format": "openapi",
+        "value": "[string(parameters('openapi'))]"
+      }
+    },
+    {
+      "apiVersion": "2019-01-01",
+      "dependsOn": [
+        "/subscriptions/0123456789/resourceGroups/mockRG/providers/Microsoft.Mock/mockResourceType/mockName"
+      ],
+      "name": "mockedup-integration-api-apigateway-subscriptions0/products-api-apigateway",
+      "type": "Microsoft.ApiManagement/service/products",
+      "properties": {
+        "displayName": "mockedup-integration-api-apigateway-subscriptions0/products-api-apigateway"
+      }
+    },
+    {
+      "apiVersion": "2019-01-01",
+      "name": "mockedup-integration-api-apigateway-subscriptions0",
+      "location": "westus",
+      "type": "Microsoft.ApiManagement/service",
+      "sku": {
+        "name": "Developer"
+      },
+      "properties": {
+        "virtualNetworkType": "Internal",
+        "publisherName": "Mock Ock",
+        "publisherEmail": "m.ock@example.com"
+      }
+    }
+  ],
+  "contentVersion": "1.0.0.0",
+  "parameters": {
+    "openapi": {
+      "type": "object"
+    }
+  }
+}

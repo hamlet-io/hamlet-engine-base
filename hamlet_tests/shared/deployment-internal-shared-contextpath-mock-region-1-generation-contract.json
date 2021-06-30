@@ -1,0 +1,67 @@
+{
+  "Stages": [
+    {
+      "Steps": [
+        {
+          "Status": "completed",
+          "Type": "process_template_pass",
+          "Parameters": {
+            "outputConversion": "",
+            "passAlternative": "",
+            "outputFileName": "deployment-internal-shared-contextpath-mock-region-1-config.json",
+            "pass": "config",
+            "outputType": "json",
+            "deploymentUnitSubset": "config",
+            "outputFormat": ""
+          },
+          "Priority": 100,
+          "Id": "generationXsubsetsXprimaryXconfig",
+          "Mandatory": true
+        }
+      ],
+      "ExecutionMode": "parallel",
+      "Id": "generationXsubsets",
+      "Mandatory": true
+    },
+    {
+      "Steps": [
+        {
+          "Status": "available",
+          "Type": "rename_file",
+          "Parameters": {
+            "currentFileName": "deployment-generation-contract.json",
+            "newFileName": "deployment-internal-shared-contextpath-mock-region-1-generation-contract.json"
+          },
+          "Priority": 100,
+          "Id": "cleanupXgenerationcontract",
+          "Mandatory": true
+        }
+      ],
+      "ExecutionMode": "serial",
+      "Id": "cleanup",
+      "Mandatory": true
+    }
+  ],
+  "Metadata": {
+    "ConfigurationReference": "configRef_v123",
+    "RequestReference": "SRVREQ01",
+    "Prepared": "2021-06-30T03:03:28Z",
+    "Id": {},
+    "RunId": "runId098",
+    "Providers": {}
+  },
+  "Properties": {
+    "deploymentMode": "update",
+    "deploymentFramework": "default",
+    "flows": "components",
+    "deploymentUnit": "shared-contextpath",
+    "deploymentGroup": "internal",
+    "accountRegion": "mock-region-1",
+    "requestReference": "SRVREQ01",
+    "configurationReference": "configRef_v123",
+    "entrance": "deployment",
+    "region": "mock-region-1",
+    "providers": "sharedtest,shared",
+    "account": ""
+  }
+}

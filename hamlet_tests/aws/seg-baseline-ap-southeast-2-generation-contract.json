@@ -1,0 +1,99 @@
+{
+  "Stages": [
+    {
+      "Steps": [
+        {
+          "Status": "completed",
+          "Type": "process_template_pass",
+          "Parameters": {
+            "outputConversion": "",
+            "passAlternative": "",
+            "outputFileName": "seg-baseline-ap-southeast-2-prologue.sh",
+            "pass": "prologue",
+            "outputType": "script",
+            "deploymentUnitSubset": "prologue",
+            "outputFormat": "bash"
+          },
+          "Priority": 100,
+          "Id": "generationXsubsetsXprimaryXprologue",
+          "Mandatory": true
+        },
+        {
+          "Status": "completed",
+          "Type": "process_template_pass",
+          "Parameters": {
+            "outputConversion": "",
+            "passAlternative": "",
+            "outputFileName": "seg-baseline-ap-southeast-2-template.json",
+            "pass": "template",
+            "outputType": "resource",
+            "deploymentUnitSubset": "",
+            "outputFormat": ""
+          },
+          "Priority": 100,
+          "Id": "generationXsubsetsXprimaryXtemplate",
+          "Mandatory": true
+        },
+        {
+          "Status": "completed",
+          "Type": "process_template_pass",
+          "Parameters": {
+            "outputConversion": "",
+            "passAlternative": "",
+            "outputFileName": "seg-baseline-ap-southeast-2-epilogue.sh",
+            "pass": "epilogue",
+            "outputType": "script",
+            "deploymentUnitSubset": "epilogue",
+            "outputFormat": "bash"
+          },
+          "Priority": 100,
+          "Id": "generationXsubsetsXprimaryXepilogue",
+          "Mandatory": true
+        }
+      ],
+      "ExecutionMode": "parallel",
+      "Id": "generationXsubsets",
+      "Mandatory": true
+    },
+    {
+      "Steps": [
+        {
+          "Status": "available",
+          "Type": "rename_file",
+          "Parameters": {
+            "currentFileName": "deployment-generation-contract.json",
+            "newFileName": "seg-baseline-ap-southeast-2-generation-contract.json"
+          },
+          "Priority": 100,
+          "Id": "cleanupXgenerationcontract",
+          "Mandatory": true
+        }
+      ],
+      "ExecutionMode": "serial",
+      "Id": "cleanup",
+      "Mandatory": true
+    }
+  ],
+  "Metadata": {
+    "ConfigurationReference": "configRef_v123",
+    "RequestReference": "SRVREQ01",
+    "Prepared": "2021-06-30T03:03:52Z",
+    "Id": {},
+    "RunId": "runId098",
+    "Providers": {}
+  },
+  "Properties": {
+    "deploymentMode": "update",
+    "deploymentFramework": "cf",
+    "flows": "components",
+    "deploymentUnit": "baseline",
+    "deploymentGroup": "segment",
+    "accountRegion": "ap-southeast-2",
+    "requestReference": "SRVREQ01",
+    "configurationReference": "configRef_v123",
+    "entrance": "deployment",
+    "region": "ap-southeast-2",
+    "providers": "aws,awstest",
+    "account": ""
+  }
+}

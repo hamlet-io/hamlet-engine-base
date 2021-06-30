@@ -1,0 +1,67 @@
+{
+  "Stages": [
+    {
+      "Steps": [
+        {
+          "Status": "completed",
+          "Type": "process_template_pass",
+          "Parameters": {
+            "outputConversion": "",
+            "passAlternative": "",
+            "outputFileName": "app-aws-mobileapp-base-ap-southeast-2-testcase.json",
+            "pass": "testcase",
+            "outputType": "json",
+            "deploymentUnitSubset": "testcase",
+            "outputFormat": ""
+          },
+          "Priority": 100,
+          "Id": "generationXsubsetsXprimaryXtestcase",
+          "Mandatory": true
+        }
+      ],
+      "ExecutionMode": "parallel",
+      "Id": "generationXsubsets",
+      "Mandatory": true
+    },
+    {
+      "Steps": [
+        {
+          "Status": "available",
+          "Type": "rename_file",
+          "Parameters": {
+            "currentFileName": "deploymenttest-generation-contract.json",
+            "newFileName": "app-aws-mobileapp-base-ap-southeast-2-generation-contract.json"
+          },
+          "Priority": 100,
+          "Id": "cleanupXgenerationcontract",
+          "Mandatory": true
+        }
+      ],
+      "ExecutionMode": "serial",
+      "Id": "cleanup",
+      "Mandatory": true
+    }
+  ],
+  "Metadata": {
+    "ConfigurationReference": "configRef_v123",
+    "RequestReference": "SRVREQ01",
+    "Prepared": "2021-06-30T03:12:28Z",
+    "Id": {},
+    "RunId": "runId098",
+    "Providers": {}
+  },
+  "Properties": {
+    "deploymentMode": "update",
+    "deploymentFramework": "cf",
+    "flows": "components",
+    "deploymentUnit": "aws-mobileapp-base",
+    "deploymentGroup": "application",
+    "accountRegion": "ap-southeast-2",
+    "requestReference": "SRVREQ01",
+    "configurationReference": "configRef_v123",
+    "entrance": "deploymenttest",
+    "region": "ap-southeast-2",
+    "providers": "aws,awstest",
+    "account": ""
+  }
+}

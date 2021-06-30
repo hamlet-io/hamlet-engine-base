@@ -1,0 +1,736 @@
+{
+  "AWSTemplateFormatVersion": "2010-09-09",
+  "Metadata": {
+    "ConfigurationReference": "configRef_v123",
+    "RequestReference": "SRVREQ01",
+    "Prepared": "2021-06-30T03:06:11Z",
+    "RunId": "runId098"
+  },
+  "Outputs": {
+    "listenerRuleXelbXhealthchecklbXhttpsX100": {
+      "Value": {
+        "Ref": "listenerRuleXelbXhealthchecklbXhttpsX100"
+      }
+    },
+    "tgXelbXhealthchecklbXhttpsXarn": {
+      "Value": {
+        "Ref": "tgXelbXhealthchecklbXhttps"
+      }
+    },
+    "Account": {
+      "Value": {
+        "Ref": "AWS::AccountId"
+      }
+    },
+    "tgXdefaultXelbXhealthchecklbXhttp": {
+      "Value": {
+        "Ref": "tgXdefaultXelbXhealthchecklbXhttp"
+      }
+    },
+    "tgXdefaultXelbXhealthchecklbXhttpsXarn": {
+      "Value": {
+        "Ref": "tgXdefaultXelbXhealthchecklbXhttps"
+      }
+    },
+    "listenerXelbXhealthchecklbXhttps": {
+      "Value": {
+        "Ref": "listenerXelbXhealthchecklbXhttps"
+      }
+    },
+    "listenerXelbXhealthchecklbXhttpsXarn": {
+      "Value": {
+        "Ref": "listenerXelbXhealthchecklbXhttps"
+      }
+    },
+    "albXelbXhealthchecklbXarn": {
+      "Value": {
+        "Ref": "albXelbXhealthchecklb"
+      }
+    },
+    "tgXdefaultXelbXhealthchecklbXhttpsXname": {
+      "Value": {
+        "Fn::GetAtt": [
+          "tgXdefaultXelbXhealthchecklbXhttps",
+          "TargetGroupFullName"
+        ]
+      }
+    },
+    "tgXelbXhealthchecklbXhttps": {
+      "Value": {
+        "Ref": "tgXelbXhealthchecklbXhttps"
+      }
+    },
+    "tgXdefaultXelbXhealthchecklbXhttps": {
+      "Value": {
+        "Ref": "tgXdefaultXelbXhealthchecklbXhttps"
+      }
+    },
+    "albXelbXhealthchecklbXdns": {
+      "Value": {
+        "Fn::GetAtt": [
+          "albXelbXhealthchecklb",
+          "DNSName"
+        ]
+      }
+    },
+    "tgXdefaultXelbXhealthchecklbXhttpXarn": {
+      "Value": {
+        "Ref": "tgXdefaultXelbXhealthchecklbXhttp"
+      }
+    },
+    "tgXelbXhealthchecklbXhttpsXname": {
+      "Value": {
+        "Fn::GetAtt": [
+          "tgXelbXhealthchecklbXhttps",
+          "TargetGroupFullName"
+        ]
+      }
+    },
+    "listenerRuleXelbXhealthchecklbXhttpsX100Xarn": {
+      "Value": {
+        "Ref": "listenerRuleXelbXhealthchecklbXhttpsX100"
+      }
+    },
+    "securityGroupXlistenerXelbXhealthchecklbXhttp": {
+      "Value": {
+        "Ref": "securityGroupXlistenerXelbXhealthchecklbXhttp"
+      }
+    },
+    "DeploymentMode": {
+      "Value": "update"
+    },
+    "securityGroupXlistenerXelbXhealthchecklbXhttps": {
+      "Value": {
+        "Ref": "securityGroupXlistenerXelbXhealthchecklbXhttps"
+      }
+    },
+    "tgXelbXhealthchecklbXhttpXname": {
+      "Value": {
+        "Fn::GetAtt": [
+          "tgXelbXhealthchecklbXhttp",
+          "TargetGroupFullName"
+        ]
+      }
+    },
+    "tgXelbXhealthchecklbXhttp": {
+      "Value": {
+        "Ref": "tgXelbXhealthchecklbXhttp"
+      }
+    },
+    "albXelbXhealthchecklbXname": {
+      "Value": {
+        "Fn::GetAtt": [
+          "albXelbXhealthchecklb",
+          "LoadBalancerFullName"
+        ]
+      }
+    },
+    "listenerRuleXelbXhealthchecklbXhttpX100Xarn": {
+      "Value": {
+        "Ref": "listenerRuleXelbXhealthchecklbXhttpX100"
+      }
+    },
+    "listenerXelbXhealthchecklbXhttpXarn": {
+      "Value": {
+        "Ref": "listenerXelbXhealthchecklbXhttp"
+      }
+    },
+    "tgXelbXhealthchecklbXhttpXarn": {
+      "Value": {
+        "Ref": "tgXelbXhealthchecklbXhttp"
+      }
+    },
+    "albXelbXhealthchecklb": {
+      "Value": {
+        "Ref": "albXelbXhealthchecklb"
+      }
+    },
+    "tgXdefaultXelbXhealthchecklbXhttpXname": {
+      "Value": {
+        "Fn::GetAtt": [
+          "tgXdefaultXelbXhealthchecklbXhttp",
+          "TargetGroupFullName"
+        ]
+      }
+    },
+    "Region": {
+      "Value": {
+        "Ref": "AWS::Region"
+      }
+    },
+    "listenerRuleXelbXhealthchecklbXhttpX100": {
+      "Value": {
+        "Ref": "listenerRuleXelbXhealthchecklbXhttpX100"
+      }
+    },
+    "listenerXelbXhealthchecklbXhttp": {
+      "Value": {
+        "Ref": "listenerXelbXhealthchecklbXhttp"
+      }
+    },
+    "DeploymentUnit": {
+      "Value": "aws-healthcheck-lb"
+    }
+  },
+  "Resources": {
+    "listenerRuleXelbXhealthchecklbXhttpsX100": {
+      "Type": "AWS::ElasticLoadBalancingV2::ListenerRule",
+      "Properties": {
+        "ListenerArn": "arn:aws:iam::123456789012:mock/listenerXelbXhealthchecklbXhttpsXarn",
+        "Actions": [
+          {
+            "TargetGroupArn": "arn:aws:iam::123456789012:mock/tgXelbXhealthchecklbXhttpsXarn",
+            "Type": "forward"
+          }
+        ],
+        "Priority": 100,
+        "Conditions": [
+          {
+            "Field": "path-pattern",
+            "Values": [
+              "*"
+            ]
+          }
+        ]
+      }
+    },
+    "tgXdefaultXelbXhealthchecklbXhttp": {
+      "Type": "AWS::ElasticLoadBalancingV2::TargetGroup",
+      "Properties": {
+        "HealthCheckIntervalSeconds": 30,
+        "VpcId": "##MockOutputXvpcXsegmentXvpcX##",
+        "HealthyThresholdCount": 3,
+        "Port": 80,
+        "HealthCheckPath": "/",
+        "HealthCheckProtocol": "HTTP",
+        "TargetGroupAttributes": [
+          {
+            "Value": "30",
+            "Key": "deregistration_delay.timeout_seconds"
+          }
+        ],
+        "HealthCheckPort": "traffic-port",
+        "Protocol": "HTTP",
+        "UnhealthyThresholdCount": 5,
+        "HealthCheckTimeoutSeconds": 5,
+        "Tags": [
+          {
+            "Value": "SRVREQ01",
+            "Key": "cot:request"
+          },
+          {
+            "Value": "configRef_v123",
+            "Key": "cot:configuration"
+          },
+          {
+            "Value": "mockten",
+            "Key": "cot:tenant"
+          },
+          {
+            "Value": "mockacct",
+            "Key": "cot:account"
+          },
+          {
+            "Value": "mockedup",
+            "Key": "cot:product"
+          },
+          {
+            "Value": "integration",
+            "Key": "cot:environment"
+          },
+          {
+            "Value": "test",
+            "Key": "cot:category"
+          },
+          {
+            "Value": "default",
+            "Key": "cot:segment"
+          },
+          {
+            "Value": "elb",
+            "Key": "cot:tier"
+          },
+          {
+            "Value": "healthchecklb",
+            "Key": "cot:component"
+          },
+          {
+            "Value": "default-mockedup-integration-elb-healthchecklb-http",
+            "Key": "Name"
+          }
+        ]
+      }
+    },
+    "securityGroupXlistenerXelbXhealthchecklbXhttps": {
+      "Type": "AWS::EC2::SecurityGroup",
+      "Properties": {
+        "GroupDescription": "mockedup-integration-elb-healthchecklb-https",
+        "VpcId": "##MockOutputXvpcXsegmentXvpcX##",
+        "Tags": [
+          {
+            "Value": "SRVREQ01",
+            "Key": "cot:request"
+          },
+          {
+            "Value": "configRef_v123",
+            "Key": "cot:configuration"
+          },
+          {
+            "Value": "mockten",
+            "Key": "cot:tenant"
+          },
+          {
+            "Value": "mockacct",
+            "Key": "cot:account"
+          },
+          {
+            "Value": "mockedup",
+            "Key": "cot:product"
+          },
+          {
+            "Value": "integration",
+            "Key": "cot:environment"
+          },
+          {
+            "Value": "test",
+            "Key": "cot:category"
+          },
+          {
+            "Value": "default",
+            "Key": "cot:segment"
+          },
+          {
+            "Value": "elb",
+            "Key": "cot:tier"
+          },
+          {
+            "Value": "healthchecklb",
+            "Key": "cot:component"
+          },
+          {
+            "Value": "mockedup-integration-elb-healthchecklb-https",
+            "Key": "Name"
+          }
+        ]
+      }
+    },
+    "tgXelbXhealthchecklbXhttp": {
+      "Type": "AWS::ElasticLoadBalancingV2::TargetGroup",
+      "Properties": {
+        "HealthCheckIntervalSeconds": 30,
+        "VpcId": "##MockOutputXvpcXsegmentXvpcX##",
+        "HealthyThresholdCount": 3,
+        "Port": 80,
+        "HealthCheckPath": "/",
+        "HealthCheckProtocol": "HTTP",
+        "TargetGroupAttributes": [
+          {
+            "Value": "30",
+            "Key": "deregistration_delay.timeout_seconds"
+          }
+        ],
+        "HealthCheckPort": "traffic-port",
+        "Protocol": "HTTP",
+        "UnhealthyThresholdCount": 5,
+        "HealthCheckTimeoutSeconds": 5,
+        "Tags": [
+          {
+            "Value": "SRVREQ01",
+            "Key": "cot:request"
+          },
+          {
+            "Value": "configRef_v123",
+            "Key": "cot:configuration"
+          },
+          {
+            "Value": "mockten",
+            "Key": "cot:tenant"
+          },
+          {
+            "Value": "mockacct",
+            "Key": "cot:account"
+          },
+          {
+            "Value": "mockedup",
+            "Key": "cot:product"
+          },
+          {
+            "Value": "integration",
+            "Key": "cot:environment"
+          },
+          {
+            "Value": "test",
+            "Key": "cot:category"
+          },
+          {
+            "Value": "default",
+            "Key": "cot:segment"
+          },
+          {
+            "Value": "elb",
+            "Key": "cot:tier"
+          },
+          {
+            "Value": "healthchecklb",
+            "Key": "cot:component"
+          },
+          {
+            "Value": "mockedup-integration-elb-healthchecklb-http",
+            "Key": "Name"
+          }
+        ]
+      }
+    },
+    "listenerXelbXhealthchecklbXhttps": {
+      "Type": "AWS::ElasticLoadBalancingV2::Listener",
+      "Properties": {
+        "SslPolicy": "ELBSecurityPolicy-TLS-1-2-2017-01",
+        "LoadBalancerArn": "##MockOutputXalbXelbXhealthchecklbX##",
+        "DefaultActions": [
+          {
+            "TargetGroupArn": "##MockOutputXtgXdefaultXelbXhealthchecklbXhttpsX##",
+            "Type": "forward"
+          }
+        ],
+        "Port": 443,
+        "Certificates": [
+          {
+            "CertificateArn": "arn:aws:iam::123456789012:mock/certificateXstarXmockXlocalXarn"
+          }
+        ],
+        "Protocol": "HTTPS"
+      }
+    },
+    "ingressXsecurityGroupXlistenerXelbXhealthchecklbXhttpXhttpX1000016": {
+      "Type": "AWS::EC2::SecurityGroupIngress",
+      "Properties": {
+        "CidrIp": "10.0.0.0/16",
+        "FromPort": 80,
+        "ToPort": 80,
+        "IpProtocol": "tcp",
+        "GroupId": "##MockOutputXsecurityGroupXlistenerXelbXhealthchecklbXhttpX##"
+      }
+    },
+    "ingressXsecurityGroupXlistenerXelbXhealthchecklbXhttpsXhttpsXsecurityGroupXmgmtXssh": {
+      "Type": "AWS::EC2::SecurityGroupIngress",
+      "Properties": {
+        "FromPort": 443,
+        "Description": "mockedup-integration-management-ssh",
+        "ToPort": 443,
+        "IpProtocol": "tcp",
+        "SourceSecurityGroupId": "##MockOutputXsecurityGroupXmgmtXsshX##",
+        "GroupId": "##MockOutputXsecurityGroupXlistenerXelbXhealthchecklbXhttpsX##"
+      }
+    },
+    "tgXelbXhealthchecklbXhttps": {
+      "Type": "AWS::ElasticLoadBalancingV2::TargetGroup",
+      "Properties": {
+        "HealthCheckIntervalSeconds": 30,
+        "VpcId": "##MockOutputXvpcXsegmentXvpcX##",
+        "HealthyThresholdCount": 3,
+        "Port": 80,
+        "HealthCheckPath": "/",
+        "HealthCheckProtocol": "HTTP",
+        "TargetGroupAttributes": [
+          {
+            "Value": "30",
+            "Key": "deregistration_delay.timeout_seconds"
+          }
+        ],
+        "HealthCheckPort": "traffic-port",
+        "Protocol": "HTTP",
+        "UnhealthyThresholdCount": 5,
+        "HealthCheckTimeoutSeconds": 5,
+        "Tags": [
+          {
+            "Value": "SRVREQ01",
+            "Key": "cot:request"
+          },
+          {
+            "Value": "configRef_v123",
+            "Key": "cot:configuration"
+          },
+          {
+            "Value": "mockten",
+            "Key": "cot:tenant"
+          },
+          {
+            "Value": "mockacct",
+            "Key": "cot:account"
+          },
+          {
+            "Value": "mockedup",
+            "Key": "cot:product"
+          },
+          {
+            "Value": "integration",
+            "Key": "cot:environment"
+          },
+          {
+            "Value": "test",
+            "Key": "cot:category"
+          },
+          {
+            "Value": "default",
+            "Key": "cot:segment"
+          },
+          {
+            "Value": "elb",
+            "Key": "cot:tier"
+          },
+          {
+            "Value": "healthchecklb",
+            "Key": "cot:component"
+          },
+          {
+            "Value": "mockedup-integration-elb-healthchecklb-https",
+            "Key": "Name"
+          }
+        ]
+      }
+    },
+    "tgXdefaultXelbXhealthchecklbXhttps": {
+      "Type": "AWS::ElasticLoadBalancingV2::TargetGroup",
+      "Properties": {
+        "HealthCheckIntervalSeconds": 30,
+        "VpcId": "##MockOutputXvpcXsegmentXvpcX##",
+        "HealthyThresholdCount": 3,
+        "Port": 80,
+        "HealthCheckPath": "/",
+        "HealthCheckProtocol": "HTTP",
+        "TargetGroupAttributes": [
+          {
+            "Value": "30",
+            "Key": "deregistration_delay.timeout_seconds"
+          }
+        ],
+        "HealthCheckPort": "traffic-port",
+        "Protocol": "HTTP",
+        "UnhealthyThresholdCount": 5,
+        "HealthCheckTimeoutSeconds": 5,
+        "Tags": [
+          {
+            "Value": "SRVREQ01",
+            "Key": "cot:request"
+          },
+          {
+            "Value": "configRef_v123",
+            "Key": "cot:configuration"
+          },
+          {
+            "Value": "mockten",
+            "Key": "cot:tenant"
+          },
+          {
+            "Value": "mockacct",
+            "Key": "cot:account"
+          },
+          {
+            "Value": "mockedup",
+            "Key": "cot:product"
+          },
+          {
+            "Value": "integration",
+            "Key": "cot:environment"
+          },
+          {
+            "Value": "test",
+            "Key": "cot:category"
+          },
+          {
+            "Value": "default",
+            "Key": "cot:segment"
+          },
+          {
+            "Value": "elb",
+            "Key": "cot:tier"
+          },
+          {
+            "Value": "healthchecklb",
+            "Key": "cot:component"
+          },
+          {
+            "Value": "default-mockedup-integration-elb-healthchecklb-https",
+            "Key": "Name"
+          }
+        ]
+      }
+    },
+    "albXelbXhealthchecklb": {
+      "Type": "AWS::ElasticLoadBalancingV2::LoadBalancer",
+      "Properties": {
+        "LoadBalancerAttributes": [
+          {
+            "Value": "60",
+            "Key": "idle_timeout.timeout_seconds"
+          }
+        ],
+        "SecurityGroups": [
+          "##MockOutputXsecurityGroupXlistenerXelbXhealthchecklbXhttpsX##",
+          "##MockOutputXsecurityGroupXlistenerXelbXhealthchecklbXhttpX##"
+        ],
+        "Subnets": [
+          "##MockOutputXsubnetXelbXaX##",
+          "##MockOutputXsubnetXelbXbX##"
+        ],
+        "Scheme": "internet-facing",
+        "Tags": [
+          {
+            "Value": "SRVREQ01",
+            "Key": "cot:request"
+          },
+          {
+            "Value": "configRef_v123",
+            "Key": "cot:configuration"
+          },
+          {
+            "Value": "mockten",
+            "Key": "cot:tenant"
+          },
+          {
+            "Value": "mockacct",
+            "Key": "cot:account"
+          },
+          {
+            "Value": "mockedup",
+            "Key": "cot:product"
+          },
+          {
+            "Value": "integration",
+            "Key": "cot:environment"
+          },
+          {
+            "Value": "test",
+            "Key": "cot:category"
+          },
+          {
+            "Value": "default",
+            "Key": "cot:segment"
+          },
+          {
+            "Value": "elb",
+            "Key": "cot:tier"
+          },
+          {
+            "Value": "healthchecklb",
+            "Key": "cot:component"
+          },
+          {
+            "Value": "mockedup-integration-elb-healthchecklb",
+            "Key": "Name"
+          }
+        ],
+        "Name": "mockedup-int-elb-healthchecklb"
+      }
+    },
+    "securityGroupXlistenerXelbXhealthchecklbXhttp": {
+      "Type": "AWS::EC2::SecurityGroup",
+      "Properties": {
+        "GroupDescription": "mockedup-integration-elb-healthchecklb-http",
+        "VpcId": "##MockOutputXvpcXsegmentXvpcX##",
+        "Tags": [
+          {
+            "Value": "SRVREQ01",
+            "Key": "cot:request"
+          },
+          {
+            "Value": "configRef_v123",
+            "Key": "cot:configuration"
+          },
+          {
+            "Value": "mockten",
+            "Key": "cot:tenant"
+          },
+          {
+            "Value": "mockacct",
+            "Key": "cot:account"
+          },
+          {
+            "Value": "mockedup",
+            "Key": "cot:product"
+          },
+          {
+            "Value": "integration",
+            "Key": "cot:environment"
+          },
+          {
+            "Value": "test",
+            "Key": "cot:category"
+          },
+          {
+            "Value": "default",
+            "Key": "cot:segment"
+          },
+          {
+            "Value": "elb",
+            "Key": "cot:tier"
+          },
+          {
+            "Value": "healthchecklb",
+            "Key": "cot:component"
+          },
+          {
+            "Value": "mockedup-integration-elb-healthchecklb-http",
+            "Key": "Name"
+          }
+        ]
+      }
+    },
+    "ingressXsecurityGroupXlistenerXelbXhealthchecklbXhttpsXhttpsX1000016": {
+      "Type": "AWS::EC2::SecurityGroupIngress",
+      "Properties": {
+        "CidrIp": "10.0.0.0/16",
+        "FromPort": 443,
+        "ToPort": 443,
+        "IpProtocol": "tcp",
+        "GroupId": "##MockOutputXsecurityGroupXlistenerXelbXhealthchecklbXhttpsX##"
+      }
+    },
+    "listenerRuleXelbXhealthchecklbXhttpX100": {
+      "Type": "AWS::ElasticLoadBalancingV2::ListenerRule",
+      "Properties": {
+        "ListenerArn": "arn:aws:iam::123456789012:mock/listenerXelbXhealthchecklbXhttpXarn",
+        "Actions": [
+          {
+            "TargetGroupArn": "arn:aws:iam::123456789012:mock/tgXelbXhealthchecklbXhttpXarn",
+            "Type": "forward"
+          }
+        ],
+        "Priority": 100,
+        "Conditions": [
+          {
+            "Field": "path-pattern",
+            "Values": [
+              "*"
+            ]
+          }
+        ]
+      }
+    },
+    "ingressXsecurityGroupXlistenerXelbXhealthchecklbXhttpXhttpXsecurityGroupXmgmtXssh": {
+      "Type": "AWS::EC2::SecurityGroupIngress",
+      "Properties": {
+        "FromPort": 80,
+        "Description": "mockedup-integration-management-ssh",
+        "ToPort": 80,
+        "IpProtocol": "tcp",
+        "SourceSecurityGroupId": "##MockOutputXsecurityGroupXmgmtXsshX##",
+        "GroupId": "##MockOutputXsecurityGroupXlistenerXelbXhealthchecklbXhttpX##"
+      }
+    },
+    "listenerXelbXhealthchecklbXhttp": {
+      "Type": "AWS::ElasticLoadBalancingV2::Listener",
+      "Properties": {
+        "LoadBalancerArn": "##MockOutputXalbXelbXhealthchecklbX##",
+        "DefaultActions": [
+          {
+            "TargetGroupArn": "##MockOutputXtgXdefaultXelbXhealthchecklbXhttpX##",
+            "Type": "forward"
+          }
+        ],
+        "Port": 80,
+        "Protocol": "HTTP"
+      }
+    }
+  }
+}

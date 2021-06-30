@@ -1,0 +1,31 @@
+{
+  "shared_internaltest_base_app_internaltestbase_internaltest_internaltestbase_core": {
+    "cfn_nag": false,
+    "filename": "deployment-internal-shared-internaltest-base-mock-region-1-config.json",
+    "cfn_lint": false,
+    "json_structure": {
+      "match": [
+        {
+          "path": "Occurrence.Core.Id",
+          "value": "appXinternaltestbase"
+        },
+        {
+          "path": "Occurrence.Core.Name",
+          "value": "application-internaltestbase"
+        },
+        {
+          "path": "Occurrence.Core.FullName",
+          "value": "mockedup-integration-application-internaltestbase"
+        },
+        {
+          "path": "Occurrence.Core.RelativePath",
+          "value": "application/internaltestbase"
+        },
+        {
+          "path": "Occurrence.Core.FullAbsolutePath",
+          "value": "/mockedup/integration/application/internaltestbase"
+        }
+      ]
+    }
+  }
+}

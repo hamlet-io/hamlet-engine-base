@@ -1,0 +1,84 @@
+{
+  "outputs": {
+    "mysqldbXdbXmysqldb": {
+      "type": "string",
+      "value": "/subscriptions/0123456789/resourceGroups/mockRG/providers/Microsoft.Mock/mockResourceType/mockName"
+    },
+    "Region": {
+      "type": "string",
+      "value": "[resourceGroup().location]"
+    },
+    "DeploymentMode": {
+      "type": "string",
+      "value": "update"
+    },
+    "mysqlserverXdbXmysqldbXurl": {
+      "type": "string",
+      "value": "https://mock.local/mysqlserverXdbXmysqldbXurl"
+    },
+    "Subscription": {
+      "type": "string",
+      "value": "[subscription().id]"
+    },
+    "DeploymentUnit": {
+      "type": "string",
+      "value": "solution-az-mysqldb"
+    },
+    "ResourceGroup": {
+      "type": "string",
+      "value": "mockedup-integration-default-soln-solution-az-mysqldb"
+    }
+  },
+  "variables": {},
+  "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
+  "resources": [
+    {
+      "apiVersion": "2017-12-01",
+      "name": "mysqlserver-db-mysqldb-/subscriptions/0123456789/resourceGroups/mockRG/providers/Microsoft.Mock/mockResourceType/mockName",
+      "location": "westus",
+      "type": "Microsoft.DBforMySQL/servers",
+      "sku": {
+        "name": "GP_Gen5_2"
+      },
+      "properties": {
+        "administratorLogin": "mockuser",
+        "sslEnforcement": "Disabled",
+        "createMode": "Default",
+        "administratorLoginPassword": "[parameters('mockedup-int-db-mysqldb-secret')]",
+        "storageProfile": {
+          "storageMB": 20480,
+          "backupRetentionDays": 35,
+          "storageAutogrow": "Disabled"
+        },
+        "version": "5.7"
+      }
+    },
+    {
+      "apiVersion": "2017-12-01",
+      "dependsOn": [
+        "/subscriptions/0123456789/resourceGroups/mockRG/providers/Microsoft.Mock/mockResourceType/mockName"
+      ],
+      "name": "mysqlserver-db-mysqldb-/subscriptions/0123456789/resourceGroups/mockRG/providers/Microsoft.Mock/mockResourceType/mockName/mockdb-/subscriptions/0123456789/resourceGroups/mockRG/providers/Microsoft.Mock/mockResourceType/mockName",
+      "type": "Microsoft.DBforMySQL/servers/databases",
+      "properties": {}
+    },
+    {
+      "apiVersion": "2017-12-01",
+      "dependsOn": [
+        "/subscriptions/0123456789/resourceGroups/mockRG/providers/Microsoft.Mock/mockResourceType/mockName"
+      ],
+      "name": "mysqlserver-db-mysqldb-/subscriptions/0123456789/resourceGroups/mockRG/providers/Microsoft.Mock/mockResourceType/mockName/mysqlvnetrule-db-mysqldb",
+      "type": "Microsoft.DBforMySQL/servers/virtualNetworkRules",
+      "properties": {
+        "ignoreMissingVnetServiceEndpoint": true,
+        "virtualNetworkSubnetId": "/subscriptions/0123456789/resourceGroups/mockRG/providers/Microsoft.Mock/mockResourceType/mockName"
+      }
+    }
+  ],
+  "contentVersion": "1.0.0.0",
+  "parameters": {
+    "mockedup-int-db-mysqldb-secret": {
+      "type": "securestring"
+    }
+  }
+}

@@ -1,0 +1,117 @@
+{
+  "AWSTemplateFormatVersion": "2010-09-09",
+  "Metadata": {
+    "ConfigurationReference": "configRef_v123",
+    "RequestReference": "SRVREQ01",
+    "Prepared": "2021-06-30T03:09:56Z",
+    "RunId": "runId098"
+  },
+  "Outputs": {
+    "apiXappXapigatewaybaseXroot": {
+      "Value": {
+        "Fn::GetAtt": [
+          "apiXappXapigatewaybase",
+          "RootResourceId"
+        ]
+      }
+    },
+    "Account": {
+      "Value": {
+        "Ref": "AWS::AccountId"
+      }
+    },
+    "apiXappXapigatewaybaseXregion": {
+      "Value": {
+        "Ref": "AWS::Region"
+      }
+    },
+    "Region": {
+      "Value": {
+        "Ref": "AWS::Region"
+      }
+    },
+    "DeploymentMode": {
+      "Value": "update"
+    },
+    "apiXappXapigatewaybase": {
+      "Value": {
+        "Ref": "apiXappXapigatewaybase"
+      }
+    },
+    "DeploymentUnit": {
+      "Value": "aws-apigateway-base"
+    }
+  },
+  "Resources": {
+    "apiDeployXappXapigatewaybaseXrunId098": {
+      "Type": "AWS::ApiGateway::Deployment",
+      "Properties": {
+        "StageName": "default",
+        "RestApiId": "##MockOutputXapiXappXapigatewaybaseX##"
+      }
+    },
+    "apiXappXapigatewaybase": {
+      "Type": "AWS::ApiGateway::RestApi",
+      "Properties": {
+        "Policy": {
+          "Version": "2012-10-17",
+          "Statement": [
+            {
+              "Action": "execute-api:Invoke",
+              "Resource": "execute-api:/default/*",
+              "Effect": "Deny",
+              "Principal": "*"
+            },
+            {
+              "Action": "execute-api:Invoke",
+              "Resource": "execute-api:/*",
+              "Effect": "Allow",
+              "Principal": "*"
+            },
+            {
+              "Condition": {
+                "NotIpAddress": {
+                  "aws:SourceIp": [
+                    "0.0.0.0/0"
+                  ]
+                }
+              },
+              "Action": "execute-api:Invoke",
+              "Resource": "execute-api:/*",
+              "Effect": "Deny",
+              "Principal": "*"
+            }
+          ]
+        },
+        "BodyS3Location": {
+          "Bucket": "##MockOutputXs3XsegmentXoperationsX##",
+          "Key": "settings/mockedup/integration/application/apigatewaybase/config/openapi_runId098.json"
+        },
+        "Parameters": {
+          "basepath": "ignore"
+        },
+        "Name": "mockedup-integration-application-apigatewaybase"
+      }
+    },
+    "apiStageXappXapigatewaybase": {
+      "Type": "AWS::ApiGateway::Stage",
+      "Properties": {
+        "DeploymentId": "##MockOutputXapiDeployXappXapigatewaybaseXrunId098X##",
+        "StageName": "application-apigatewaybase",
+        "RestApiId": "##MockOutputXapiXappXapigatewaybaseX##",
+        "MethodSettings": [
+          {
+            "ResourcePath": "/*",
+            "LoggingLevel": "INFO",
+            "DataTraceEnabled": true,
+            "HttpMethod": "*"
+          }
+        ],
+        "AccessLogSetting": {
+          "Format": "$context.identity.sourceIp $context.identity.caller $context.identity.user $context.identity.userArn [$context.requestTime] $context.apiId $context.httpMethod $context.resourcePath $context.protocol $context.status $context.responseLength $context.requestId",
+          "DestinationArn": "arn:aws:iam::123456789012:mock/lgXapiStageXappXapigatewaybaseXaccessXarn"
+        }
+      }
+    }
+  }
+}

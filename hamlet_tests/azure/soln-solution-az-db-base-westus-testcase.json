@@ -1,0 +1,15 @@
+{
+  "solution_az_db_base_db_database_db_basedbtemplate": {
+    "cfn_nag": false,
+    "filename": "soln-solution-az-db-base-westus-template.json",
+    "cfn_lint": false,
+    "json_structure": {
+      "match": [
+        {
+          "path": "outputs.postgresserverXdbXdatabaseXurl.value",
+          "value": "https://mock.local/postgresserverXdbXdatabaseXurl"
+        }
+      ]
+    }
+  }
+}

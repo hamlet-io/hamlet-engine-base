@@ -1,0 +1,30 @@
+{
+  "aws_apigateway_base_app_apigatewaybase_apigateway_apigatewaybase": {
+    "cfn_nag": false,
+    "filename": "app-aws-apigateway-base-ap-southeast-2-template.json",
+    "cfn_lint": false,
+    "cfn_structure": {
+      "output": [
+        {
+          "id": "apiXappXapigatewaybase"
+        },
+        {
+          "id": "apiXappXapigatewaybaseXroot"
+        },
+        {
+          "id": "apiXappXapigatewaybaseXregion"
+        }
+      ],
+      "resource": [
+        {
+          "id": "apiXappXapigatewaybase",
+          "type": "AWS::ApiGateway::RestApi"
+        },
+        {
+          "id": "apiDeployXappXapigatewaybaseXrunId098",
+          "type": "AWS::ApiGateway::Deployment"
+        }
+      ]
+    }
+  }
+}

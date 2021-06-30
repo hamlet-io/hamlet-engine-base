@@ -1,0 +1,456 @@
+{
+  "outputs": {
+    "subnetsXmgmt": {
+      "type": "string",
+      "value": "/subscriptions/0123456789/resourceGroups/mockRG/providers/Microsoft.Mock/mockResourceType/mockName"
+    },
+    "subnetsXdir": {
+      "type": "string",
+      "value": "/subscriptions/0123456789/resourceGroups/mockRG/providers/Microsoft.Mock/mockResourceType/mockName"
+    },
+    "vnetXmgmtXvpc": {
+      "type": "string",
+      "value": "/subscriptions/0123456789/resourceGroups/mockRG/providers/Microsoft.Mock/mockResourceType/mockName"
+    },
+    "subnetsXweb": {
+      "type": "string",
+      "value": "/subscriptions/0123456789/resourceGroups/mockRG/providers/Microsoft.Mock/mockResourceType/mockName"
+    },
+    "subnetsXdb": {
+      "type": "string",
+      "value": "/subscriptions/0123456789/resourceGroups/mockRG/providers/Microsoft.Mock/mockResourceType/mockName"
+    },
+    "subnetsXapp": {
+      "type": "string",
+      "value": "/subscriptions/0123456789/resourceGroups/mockRG/providers/Microsoft.Mock/mockResourceType/mockName"
+    },
+    "Region": {
+      "type": "string",
+      "value": "[resourceGroup().location]"
+    },
+    "DeploymentMode": {
+      "type": "string",
+      "value": "update"
+    },
+    "Subscription": {
+      "type": "string",
+      "value": "[subscription().id]"
+    },
+    "DeploymentUnit": {
+      "type": "string",
+      "value": "vpc"
+    },
+    "subnetsXapi": {
+      "type": "string",
+      "value": "/subscriptions/0123456789/resourceGroups/mockRG/providers/Microsoft.Mock/mockResourceType/mockName"
+    },
+    "ResourceGroup": {
+      "type": "string",
+      "value": "mockedup-integration-default-seg-vpc"
+    },
+    "subnetsXelb": {
+      "type": "string",
+      "value": "/subscriptions/0123456789/resourceGroups/mockRG/providers/Microsoft.Mock/mockResourceType/mockName"
+    }
+  },
+  "variables": {},
+  "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
+  "resources": [
+    {
+      "apiVersion": "2019-02-01",
+      "name": "mockedup-int-mgmt-vpc-network",
+      "location": "westus",
+      "type": "Microsoft.Network/virtualNetworks",
+      "properties": {
+        "addressSpace": {
+          "addressPrefixes": [
+            "10.0.0.0/16"
+          ]
+        }
+      }
+    },
+    {
+      "apiVersion": "2019-02-01",
+      "name": "mockedup-int-mgmt-vpc-network-nsg",
+      "location": "westus",
+      "type": "Microsoft.Network/networkSecurityGroups",
+      "properties": {}
+    },
+    {
+      "apiVersion": "2019-02-01",
+      "name": "mockedup-int-mgmt-vpc-network-nsg-elb",
+      "location": "westus",
+      "type": "Microsoft.Network/networkSecurityGroups",
+      "properties": {}
+    },
+    {
+      "apiVersion": "2019-04-01",
+      "dependsOn": [
+        "/subscriptions/0123456789/resourceGroups/mockRG/providers/Microsoft.Mock/mockResourceType/mockName"
+      ],
+      "name": "mockedup-int-mgmt-vpc-network-nsg-elb/elb-AllowGatewayManager",
+      "type": "Microsoft.Network/networkSecurityGroups/securityRules",
+      "properties": {
+        "destinationAddressPrefix": "*",
+        "protocol": "*",
+        "access": "allow",
+        "sourcePortRange": "*",
+        "sourceAddressPrefix": "*",
+        "destinationPortRange": "65200-65535",
+        "description": "Grants the GatewayManager access to App Gateway resources",
+        "priority": 100,
+        "direction": "Inbound"
+      }
+    },
+    {
+      "apiVersion": "2019-04-01",
+      "dependsOn": [
+        "/subscriptions/0123456789/resourceGroups/mockRG/providers/Microsoft.Mock/mockResourceType/mockName"
+      ],
+      "name": "mockedup-int-mgmt-vpc-network-nsg-elb/elb-AllowAzureLoadBalancer",
+      "type": "Microsoft.Network/networkSecurityGroups/securityRules",
+      "properties": {
+        "destinationAddressPrefix": "*",
+        "protocol": "*",
+        "access": "allow",
+        "sourcePortRange": "*",
+        "sourceAddressPrefix": "AzureLoadBalancer",
+        "destinationPortRange": "*",
+        "description": "Grants the GatewayManager access to App Gateway resources",
+        "priority": 110,
+        "direction": "Inbound"
+      }
+    },
+    {
+      "apiVersion": "2019-02-01",
+      "dependsOn": [
+        "/subscriptions/0123456789/resourceGroups/mockRG/providers/Microsoft.Mock/mockResourceType/mockName"
+      ],
+      "name": "mockedup-int-mgmt-vpc-network/web",
+      "type": "Microsoft.Network/virtualNetworks/subnets",
+      "properties": {
+        "addressPrefix": "10.0.0.0/20",
+        "networkSecurityGroup": {
+          "id": "/subscriptions/0123456789/resourceGroups/mockRG/providers/Microsoft.Mock/mockResourceType/mockName"
+        }
+      }
+    },
+    {
+      "apiVersion": "2019-04-01",
+      "dependsOn": [
+        "/subscriptions/0123456789/resourceGroups/mockRG/providers/Microsoft.Mock/mockResourceType/mockName"
+      ],
+      "name": "mockedup-int-mgmt-vpc-network-nsg/web-internetAccess",
+      "type": "Microsoft.Network/networkSecurityGroups/securityRules",
+      "properties": {
+        "destinationAddressPrefix": "Internet",
+        "protocol": "*",
+        "access": "allow",
+        "sourcePortRange": "*",
+        "sourceAddressPrefix": "10.0.0.0/20",
+        "destinationPortRange": "*",
+        "priority": 200,
+        "direction": "Outbound"
+      }
+    },
+    {
+      "apiVersion": "2019-04-01",
+      "dependsOn": [
+        "/subscriptions/0123456789/resourceGroups/mockRG/providers/Microsoft.Mock/mockResourceType/mockName"
+      ],
+      "name": "mockedup-int-mgmt-vpc-network-nsg/web-blockInbound",
+      "type": "Microsoft.Network/networkSecurityGroups/securityRules",
+      "properties": {
+        "destinationAddressPrefix": "10.0.0.0/20",
+        "protocol": "*",
+        "access": "deny",
+        "sourcePortRange": "*",
+        "sourceAddressPrefix": "Internet",
+        "destinationPortRange": "*",
+        "priority": 101,
+        "direction": "Inbound"
+      }
+    },
+    {
+      "apiVersion": "2019-02-01",
+      "dependsOn": [
+        "/subscriptions/0123456789/resourceGroups/mockRG/providers/Microsoft.Mock/mockResourceType/mockName",
+        "/subscriptions/0123456789/resourceGroups/mockRG/providers/Microsoft.Mock/mockResourceType/mockName"
+      ],
+      "name": "mockedup-int-mgmt-vpc-network/application",
+      "type": "Microsoft.Network/virtualNetworks/subnets",
+      "properties": {
+        "addressPrefix": "10.0.32.0/20",
+        "networkSecurityGroup": {
+          "id": "/subscriptions/0123456789/resourceGroups/mockRG/providers/Microsoft.Mock/mockResourceType/mockName"
+        }
+      }
+    },
+    {
+      "apiVersion": "2019-04-01",
+      "dependsOn": [
+        "/subscriptions/0123456789/resourceGroups/mockRG/providers/Microsoft.Mock/mockResourceType/mockName"
+      ],
+      "name": "mockedup-int-mgmt-vpc-network-nsg/app-internetAccess",
+      "type": "Microsoft.Network/networkSecurityGroups/securityRules",
+      "properties": {
+        "destinationAddressPrefix": "Internet",
+        "protocol": "*",
+        "access": "allow",
+        "sourcePortRange": "*",
+        "sourceAddressPrefix": "10.0.32.0/20",
+        "destinationPortRange": "*",
+        "priority": 201,
+        "direction": "Outbound"
+      }
+    },
+    {
+      "apiVersion": "2019-04-01",
+      "dependsOn": [
+        "/subscriptions/0123456789/resourceGroups/mockRG/providers/Microsoft.Mock/mockResourceType/mockName"
+      ],
+      "name": "mockedup-int-mgmt-vpc-network-nsg/app-blockInbound",
+      "type": "Microsoft.Network/networkSecurityGroups/securityRules",
+      "properties": {
+        "destinationAddressPrefix": "10.0.32.0/20",
+        "protocol": "*",
+        "access": "deny",
+        "sourcePortRange": "*",
+        "sourceAddressPrefix": "Internet",
+        "destinationPortRange": "*",
+        "priority": 102,
+        "direction": "Inbound"
+      }
+    },
+    {
+      "apiVersion": "2019-02-01",
+      "dependsOn": [
+        "/subscriptions/0123456789/resourceGroups/mockRG/providers/Microsoft.Mock/mockResourceType/mockName",
+        "/subscriptions/0123456789/resourceGroups/mockRG/providers/Microsoft.Mock/mockResourceType/mockName"
+      ],
+      "name": "mockedup-int-mgmt-vpc-network/database",
+      "type": "Microsoft.Network/virtualNetworks/subnets",
+      "properties": {
+        "addressPrefix": "10.0.48.0/20",
+        "networkSecurityGroup": {
+          "id": "/subscriptions/0123456789/resourceGroups/mockRG/providers/Microsoft.Mock/mockResourceType/mockName"
+        }
+      }
+    },
+    {
+      "apiVersion": "2019-04-01",
+      "dependsOn": [
+        "/subscriptions/0123456789/resourceGroups/mockRG/providers/Microsoft.Mock/mockResourceType/mockName"
+      ],
+      "name": "mockedup-int-mgmt-vpc-network-nsg/db-internetAccess",
+      "type": "Microsoft.Network/networkSecurityGroups/securityRules",
+      "properties": {
+        "destinationAddressPrefix": "Internet",
+        "protocol": "*",
+        "access": "allow",
+        "sourcePortRange": "*",
+        "sourceAddressPrefix": "10.0.48.0/20",
+        "destinationPortRange": "*",
+        "priority": 202,
+        "direction": "Outbound"
+      }
+    },
+    {
+      "apiVersion": "2019-04-01",
+      "dependsOn": [
+        "/subscriptions/0123456789/resourceGroups/mockRG/providers/Microsoft.Mock/mockResourceType/mockName"
+      ],
+      "name": "mockedup-int-mgmt-vpc-network-nsg/db-blockInbound",
+      "type": "Microsoft.Network/networkSecurityGroups/securityRules",
+      "properties": {
+        "destinationAddressPrefix": "10.0.48.0/20",
+        "protocol": "*",
+        "access": "deny",
+        "sourcePortRange": "*",
+        "sourceAddressPrefix": "Internet",
+        "destinationPortRange": "*",
+        "priority": 103,
+        "direction": "Inbound"
+      }
+    },
+    {
+      "apiVersion": "2019-02-01",
+      "dependsOn": [
+        "/subscriptions/0123456789/resourceGroups/mockRG/providers/Microsoft.Mock/mockResourceType/mockName",
+        "/subscriptions/0123456789/resourceGroups/mockRG/providers/Microsoft.Mock/mockResourceType/mockName"
+      ],
+      "name": "mockedup-int-mgmt-vpc-network/directories",
+      "type": "Microsoft.Network/virtualNetworks/subnets",
+      "properties": {
+        "addressPrefix": "10.0.64.0/20",
+        "networkSecurityGroup": {
+          "id": "/subscriptions/0123456789/resourceGroups/mockRG/providers/Microsoft.Mock/mockResourceType/mockName"
+        }
+      }
+    },
+    {
+      "apiVersion": "2019-04-01",
+      "dependsOn": [
+        "/subscriptions/0123456789/resourceGroups/mockRG/providers/Microsoft.Mock/mockResourceType/mockName"
+      ],
+      "name": "mockedup-int-mgmt-vpc-network-nsg/dir-internetAccess",
+      "type": "Microsoft.Network/networkSecurityGroups/securityRules",
+      "properties": {
+        "destinationAddressPrefix": "Internet",
+        "protocol": "*",
+        "access": "allow",
+        "sourcePortRange": "*",
+        "sourceAddressPrefix": "10.0.64.0/20",
+        "destinationPortRange": "*",
+        "priority": 203,
+        "direction": "Outbound"
+      }
+    },
+    {
+      "apiVersion": "2019-04-01",
+      "dependsOn": [
+        "/subscriptions/0123456789/resourceGroups/mockRG/providers/Microsoft.Mock/mockResourceType/mockName"
+      ],
+      "name": "mockedup-int-mgmt-vpc-network-nsg/dir-blockInbound",
+      "type": "Microsoft.Network/networkSecurityGroups/securityRules",
+      "properties": {
+        "destinationAddressPrefix": "10.0.64.0/20",
+        "protocol": "*",
+        "access": "deny",
+        "sourcePortRange": "*",
+        "sourceAddressPrefix": "Internet",
+        "destinationPortRange": "*",
+        "priority": 104,
+        "direction": "Inbound"
+      }
+    },
+    {
+      "apiVersion": "2019-02-01",
+      "dependsOn": [
+        "/subscriptions/0123456789/resourceGroups/mockRG/providers/Microsoft.Mock/mockResourceType/mockName",
+        "/subscriptions/0123456789/resourceGroups/mockRG/providers/Microsoft.Mock/mockResourceType/mockName"
+      ],
+      "name": "mockedup-int-mgmt-vpc-network/api",
+      "type": "Microsoft.Network/virtualNetworks/subnets",
+      "properties": {
+        "addressPrefix": "10.0.96.0/20",
+        "networkSecurityGroup": {
+          "id": "/subscriptions/0123456789/resourceGroups/mockRG/providers/Microsoft.Mock/mockResourceType/mockName"
+        }
+      }
+    },
+    {
+      "apiVersion": "2019-04-01",
+      "dependsOn": [
+        "/subscriptions/0123456789/resourceGroups/mockRG/providers/Microsoft.Mock/mockResourceType/mockName"
+      ],
+      "name": "mockedup-int-mgmt-vpc-network-nsg/api-internetAccess",
+      "type": "Microsoft.Network/networkSecurityGroups/securityRules",
+      "properties": {
+        "destinationAddressPrefix": "Internet",
+        "protocol": "*",
+        "access": "allow",
+        "sourcePortRange": "*",
+        "sourceAddressPrefix": "10.0.96.0/20",
+        "destinationPortRange": "*",
+        "priority": 204,
+        "direction": "Outbound"
+      }
+    },
+    {
+      "apiVersion": "2019-04-01",
+      "dependsOn": [
+        "/subscriptions/0123456789/resourceGroups/mockRG/providers/Microsoft.Mock/mockResourceType/mockName"
+      ],
+      "name": "mockedup-int-mgmt-vpc-network-nsg/api-blockInbound",
+      "type": "Microsoft.Network/networkSecurityGroups/securityRules",
+      "properties": {
+        "destinationAddressPrefix": "10.0.96.0/20",
+        "protocol": "*",
+        "access": "deny",
+        "sourcePortRange": "*",
+        "sourceAddressPrefix": "Internet",
+        "destinationPortRange": "*",
+        "priority": 105,
+        "direction": "Inbound"
+      }
+    },
+    {
+      "apiVersion": "2019-02-01",
+      "dependsOn": [
+        "/subscriptions/0123456789/resourceGroups/mockRG/providers/Microsoft.Mock/mockResourceType/mockName",
+        "/subscriptions/0123456789/resourceGroups/mockRG/providers/Microsoft.Mock/mockResourceType/mockName",
+        "/subscriptions/0123456789/resourceGroups/mockRG/providers/Microsoft.Mock/mockResourceType/mockName"
+      ],
+      "name": "mockedup-int-mgmt-vpc-network/elb",
+      "type": "Microsoft.Network/virtualNetworks/subnets",
+      "properties": {
+        "addressPrefix": "10.0.128.0/20",
+        "networkSecurityGroup": {
+          "id": "/subscriptions/0123456789/resourceGroups/mockRG/providers/Microsoft.Mock/mockResourceType/mockName"
+        }
+      }
+    },
+    {
+      "apiVersion": "2019-04-01",
+      "dependsOn": [
+        "/subscriptions/0123456789/resourceGroups/mockRG/providers/Microsoft.Mock/mockResourceType/mockName"
+      ],
+      "name": "mockedup-int-mgmt-vpc-network-nsg-elb/elb-internetAccess",
+      "type": "Microsoft.Network/networkSecurityGroups/securityRules",
+      "properties": {
+        "destinationAddressPrefix": "Internet",
+        "protocol": "*",
+        "access": "allow",
+        "sourcePortRange": "*",
+        "sourceAddressPrefix": "10.0.128.0/20",
+        "destinationPortRange": "*",
+        "priority": 205,
+        "direction": "Outbound"
+      }
+    },
+    {
+      "apiVersion": "2019-02-01",
+      "dependsOn": [
+        "/subscriptions/0123456789/resourceGroups/mockRG/providers/Microsoft.Mock/mockResourceType/mockName",
+        "/subscriptions/0123456789/resourceGroups/mockRG/providers/Microsoft.Mock/mockResourceType/mockName"
+      ],
+      "name": "mockedup-int-mgmt-vpc-network/management",
+      "type": "Microsoft.Network/virtualNetworks/subnets",
+      "properties": {
+        "addressPrefix": "10.0.240.0/20",
+        "networkSecurityGroup": {
+          "id": "/subscriptions/0123456789/resourceGroups/mockRG/providers/Microsoft.Mock/mockResourceType/mockName"
+        },
+        "serviceEndpoints": [
+          {
+            "service": "Microsoft.Storage",
+            "locations": [
+              "westus"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "apiVersion": "2019-04-01",
+      "dependsOn": [
+        "/subscriptions/0123456789/resourceGroups/mockRG/providers/Microsoft.Mock/mockResourceType/mockName"
+      ],
+      "name": "mockedup-int-mgmt-vpc-network-nsg/mgmt-internetAccess",
+      "type": "Microsoft.Network/networkSecurityGroups/securityRules",
+      "properties": {
+        "destinationAddressPrefix": "Internet",
+        "protocol": "*",
+        "access": "allow",
+        "sourcePortRange": "*",
+        "sourceAddressPrefix": "10.0.240.0/20",
+        "destinationPortRange": "*",
+        "priority": 206,
+        "direction": "Outbound"
+      }
+    }
+  ],
+  "contentVersion": "1.0.0.0",
+  "parameters": {}
+}

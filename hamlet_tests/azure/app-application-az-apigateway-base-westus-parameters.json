@@ -1,0 +1,160 @@
+{
+  "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentParameters.json#",
+  "contentVersion": "1.0.0.0",
+  "parameters": {
+    "openapi": {
+      "value": {
+        "security": [
+          {
+            "apiKeyHeader": []
+          },
+          {
+            "apiKeyQuery": []
+          }
+        ],
+        "components": {
+          "schemas": {
+            "Post401ApplicationJsonResponse": {
+              "type": "object",
+              "properties": {
+                "message": {
+                  "description": "Auth Failed",
+                  "type": "string",
+                  "example": "OK"
+                }
+              }
+            },
+            "PostRequest": {
+              "type": "object",
+              "properties": {
+                "id": {
+                  "description": "mock desc",
+                  "type": "string"
+                }
+              }
+            },
+            "Post200ApplicationJsonResponse": {
+              "type": "object",
+              "properties": {
+                "message": {
+                  "description": "Success message",
+                  "type": "string",
+                  "example": "Unauthorized Error"
+                }
+              }
+            },
+            "Post500ApplicationJsonResponse": {
+              "type": "object",
+              "properties": {
+                "message": {
+                  "description": "Submission Failed",
+                  "type": "string",
+                  "example": "Error"
+                }
+              }
+            }
+          },
+          "securitySchemes": {}
+        },
+        "servers": [
+          {
+            "description": "mockedup-integration-api-apigateway-subscriptions0/apis-api-apigateway",
+            "url": "https://mockedup-integration-api-apigateway-subscriptions0.azure-api.net/"
+          }
+        ],
+        "openapi": "3.0.1",
+        "paths": {
+          "/mockpath": {
+            "post": {
+              "summary": "Mock POST method",
+              "requestBody": {
+                "content": {
+                  "application/json": {
+                    "schema": {
+                      "$ref": "#/mock/example/ref"
+                    }
+                  }
+                }
+              },
+              "description": "mock description",
+              "operationId": "mock-example",
+              "responses": {
+                "200": {
+                  "description": "OK",
+                  "content": {
+                    "application/json": {
+                      "schema": {
+                        "$ref": "#/mock/example/ref"
+                      }
+                    }
+                  }
+                },
+                "401": {
+                  "description": "Auth Failed",
+                  "content": {
+                    "application/json": {
+                      "schema": {
+                        "$ref": "#/mock/example/ref"
+                      }
+                    }
+                  }
+                },
+                "500": {
+                  "description": "Submission failed",
+                  "content": {
+                    "application/json": {
+                      "schema": {
+                        "$ref": "#/mock/example/ref"
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "options": {
+              "summary": "CORS support",
+              "description": "Enable CORS by returning correct headers\n",
+              "responses": {
+                "200": {
+                  "headers": {
+                    "Access-Control-Allow-Origin": {
+                      "schema": {
+                        "type": "string"
+                      },
+                      "explode": false,
+                      "style": "simple"
+                    },
+                    "Access-Control-Allow-Methods": {
+                      "schema": {
+                        "type": "string"
+                      },
+                      "explode": false,
+                      "style": "simple"
+                    },
+                    "Access-Control-Allow-Headers": {
+                      "schema": {
+                        "type": "string"
+                      },
+                      "explode": false,
+                      "style": "simple"
+                    }
+                  },
+                  "description": "Default response for CORS method",
+                  "content": {}
+                }
+              },
+              "tags": [
+                "CORS"
+              ]
+            }
+          }
+        },
+        "info": {
+          "description": "API for testing hamlet",
+          "title": "Hamlet Mock API",
+          "version": "1.0-123456789#MockCommit#"
+        }
+      }
+    }
+  }
+}

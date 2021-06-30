@@ -1,0 +1,15 @@
+{
+  "solution_az_mysqldb_db_mysqldb_db_mysqldbtemplate": {
+    "cfn_nag": false,
+    "filename": "soln-solution-az-mysqldb-westus-template.json",
+    "cfn_lint": false,
+    "json_structure": {
+      "match": [
+        {
+          "path": "outputs.mysqlserverXdbXmysqldbXurl.value",
+          "value": "https://mock.local/mysqlserverXdbXmysqldbXurl"
+        }
+      ]
+    }
+  }
+}

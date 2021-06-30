@@ -1,0 +1,202 @@
+{
+  "outputs": {
+    "publicIPXmanagementXsshXbastionXip": {
+      "type": "string",
+      "value": "123.123.123.123"
+    },
+    "vmssXmanagementXsshXbastionXid": {
+      "type": "string",
+      "value": "/subscriptions/0123456789/resourceGroups/mockRG/providers/Microsoft.Mock/mockResourceType/mockName"
+    },
+    "vmssXmanagementXsshXbastionXname": {
+      "type": "string",
+      "value": "vmss-management-ssh-bastion"
+    },
+    "Region": {
+      "type": "string",
+      "value": "[resourceGroup().location]"
+    },
+    "DeploymentMode": {
+      "type": "string",
+      "value": "update"
+    },
+    "prefixXmanagementXsshXbastion": {
+      "type": "string",
+      "value": "/subscriptions/0123456789/resourceGroups/mockRG/providers/Microsoft.Mock/mockResourceType/mockName"
+    },
+    "vmssXmanagementXsshXbastion": {
+      "type": "string",
+      "value": "/subscriptions/0123456789/resourceGroups/mockRG/providers/Microsoft.Mock/mockResourceType/mockName"
+    },
+    "Subscription": {
+      "type": "string",
+      "value": "[subscription().id]"
+    },
+    "DeploymentUnit": {
+      "type": "string",
+      "value": "ssh"
+    },
+    "ResourceGroup": {
+      "type": "string",
+      "value": "mockedup-integration-default-seg-ssh"
+    }
+  },
+  "variables": {},
+  "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
+  "resources": [
+    {
+      "apiVersion": "2019-11-01",
+      "name": "prefix-management-ssh-bastion",
+      "location": "westus",
+      "type": "Microsoft.Network/publicIPPrefixes",
+      "sku": {
+        "name": "Standard"
+      },
+      "properties": {
+        "prefixLength": 28,
+        "publicIPAddressVersion": "IPv4"
+      }
+    },
+    {
+      "apiVersion": "2019-09-01",
+      "dependsOn": [
+        "/subscriptions/0123456789/resourceGroups/mockRG/providers/Microsoft.Mock/mockResourceType/mockName"
+      ],
+      "name": "publicIP-management-ssh-bastion",
+      "location": "westus",
+      "type": "Microsoft.Network/publicIPAddresses",
+      "sku": {
+        "name": "Standard"
+      },
+      "properties": {
+        "publicIPAddressVersion": "IPv4",
+        "publicIPPrefix": {
+          "id": "/subscriptions/0123456789/resourceGroups/mockRG/providers/Microsoft.Mock/mockResourceType/mockName"
+        },
+        "publicIPAllocationMethod": "Static"
+      }
+    },
+    {
+      "apiVersion": "2019-09-01",
+      "dependsOn": [
+        "/subscriptions/0123456789/resourceGroups/mockRG/providers/Microsoft.Mock/mockResourceType/mockName"
+      ],
+      "name": "nic-management-ssh-bastion",
+      "location": "westus",
+      "type": "Microsoft.Network/networkInterfaces",
+      "properties": {
+        "ipConfigurations": [
+          {
+            "name": "default",
+            "properties": {
+              "subnet": {
+                "privateIPAllocationMethod": "Dynamic",
+                "privateIPAddressVersion": "IPv4",
+                "id": "/subscriptions/0123456789/resourceGroups/mockRG/providers/Microsoft.Mock/mockResourceType/mockName"
+              },
+              "primary": true,
+              "publicIPAddress": {
+                "id": "/subscriptions/0123456789/resourceGroups/mockRG/providers/Microsoft.Mock/mockResourceType/mockName"
+              }
+            }
+          }
+        ],
+        "networkSecurityGroup": {
+          "id": "/subscriptions/0123456789/resourceGroups/mockRG/providers/Microsoft.Mock/mockResourceType/mockName"
+        }
+      }
+    },
+    {
+      "apiVersion": "2019-03-01",
+      "dependsOn": [
+        "/subscriptions/0123456789/resourceGroups/mockRG/providers/Microsoft.Mock/mockResourceType/mockName"
+      ],
+      "identity": {
+        "type": "SystemAssigned"
+      },
+      "name": "vmss-management-ssh-bastion",
+      "location": "westus",
+      "type": "Microsoft.Compute/virtualMachineScaleSets",
+      "sku": {
+        "tier": "Standard",
+        "name": "Standard_B1ms",
+        "capacity": 0
+      },
+      "properties": {
+        "upgradePolicy": {
+          "mode": "Manual"
+        },
+        "virtualMachineProfile": {
+          "storageProfile": {
+            "imageReference": {
+              "offer": "UbuntuServer",
+              "publisher": "Canonical",
+              "sku": "18.04-LTS",
+              "version": "latest"
+            },
+            "osDisk": {
+              "managedDisk": {
+                "storageAccountType": "Standard_LRS"
+              },
+              "createOption": "FromImage"
+            }
+          },
+          "networkProfile": {
+            "networkInterfaceConfigurations": [
+              {
+                "name": "nic-management-ssh-bastion",
+                "id": "/subscriptions/0123456789/resourceGroups/mockRG/providers/Microsoft.Mock/mockResourceType/mockName",
+                "properties": {
+                  "ipConfigurations": [
+                    {
+                      "name": "default",
+                      "properties": {
+                        "subnet": {
+                          "id": "/subscriptions/0123456789/resourceGroups/mockRG/providers/Microsoft.Mock/mockResourceType/mockName"
+                        },
+                        "publicIPAddressConfiguration": {
+                          "name": "default",
+                          "properties": {
+                            "publicIPAddressVersion": "IPv4",
+                            "idleTimeoutInMinutes": 15,
+                            "publicIPPrefix": {
+                              "id": "/subscriptions/0123456789/resourceGroups/mockRG/providers/Microsoft.Mock/mockResourceType/mockName"
+                            }
+                          }
+                        },
+                        "primary": true
+                      }
+                    }
+                  ],
+                  "primary": true
+                }
+              }
+            ]
+          },
+          "priority": "Regular",
+          "osProfile": {
+            "adminUsername": "bastion",
+            "linuxConfiguration": {
+              "disablePasswordAuthentication": true,
+              "ssh": {
+                "publicKeys": [
+                  {
+                    "path": "/home/bastion/.ssh/authorized_keys",
+                    "keyData": "[parameters('secret-mgmt-baseline-sshPublicKey')]"
+                  }
+                ]
+              }
+            },
+            "computerNamePrefix": "bastion"
+          }
+        }
+      }
+    }
+  ],
+  "contentVersion": "1.0.0.0",
+  "parameters": {
+    "secret-mgmt-baseline-sshPublicKey": {
+      "type": "securestring"
+    }
+  }
+}

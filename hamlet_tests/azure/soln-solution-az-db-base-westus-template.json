@@ -1,0 +1,84 @@
+{
+  "outputs": {
+    "postgresserverXdbXdatabaseXurl": {
+      "type": "string",
+      "value": "https://mock.local/postgresserverXdbXdatabaseXurl"
+    },
+    "Region": {
+      "type": "string",
+      "value": "[resourceGroup().location]"
+    },
+    "DeploymentMode": {
+      "type": "string",
+      "value": "update"
+    },
+    "postgresdbXdbXdatabase": {
+      "type": "string",
+      "value": "/subscriptions/0123456789/resourceGroups/mockRG/providers/Microsoft.Mock/mockResourceType/mockName"
+    },
+    "Subscription": {
+      "type": "string",
+      "value": "[subscription().id]"
+    },
+    "DeploymentUnit": {
+      "type": "string",
+      "value": "solution-az-db-base"
+    },
+    "ResourceGroup": {
+      "type": "string",
+      "value": "mockedup-integration-default-soln-solution-az-db-base"
+    }
+  },
+  "variables": {},
+  "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
+  "resources": [
+    {
+      "apiVersion": "2017-12-01",
+      "name": "postgresserver-db-database-/subscriptions/0123456789/resourceGroups/mockRG/providers/Microsoft.Mock/mockResourceType/mockName",
+      "location": "westus",
+      "type": "Microsoft.DBforPostgreSQL/servers",
+      "sku": {
+        "name": "GP_Gen5_2"
+      },
+      "properties": {
+        "administratorLogin": "mockuser",
+        "sslEnforcement": "Disabled",
+        "createMode": "Default",
+        "administratorLoginPassword": "[parameters('mockedup-int-db-database-secret')]",
+        "storageProfile": {
+          "storageMB": 20480,
+          "backupRetentionDays": 35,
+          "storageAutogrow": "Disabled"
+        },
+        "version": "11"
+      }
+    },
+    {
+      "apiVersion": "2017-12-01",
+      "dependsOn": [
+        "/subscriptions/0123456789/resourceGroups/mockRG/providers/Microsoft.Mock/mockResourceType/mockName"
+      ],
+      "name": "postgresserver-db-database-/subscriptions/0123456789/resourceGroups/mockRG/providers/Microsoft.Mock/mockResourceType/mockName/mockdb-/subscriptions/0123456789/resourceGroups/mockRG/providers/Microsoft.Mock/mockResourceType/mockName",
+      "type": "Microsoft.DBforPostgreSQL/servers/databases",
+      "properties": {}
+    },
+    {
+      "apiVersion": "2017-12-01",
+      "dependsOn": [
+        "/subscriptions/0123456789/resourceGroups/mockRG/providers/Microsoft.Mock/mockResourceType/mockName"
+      ],
+      "name": "postgresserver-db-database-/subscriptions/0123456789/resourceGroups/mockRG/providers/Microsoft.Mock/mockResourceType/mockName/postgresvnetrule-db-database",
+      "type": "Microsoft.DBforPostgreSQL/servers/virtualNetworkRules",
+      "properties": {
+        "ignoreMissingVnetServiceEndpoint": true,
+        "virtualNetworkSubnetId": "/subscriptions/0123456789/resourceGroups/mockRG/providers/Microsoft.Mock/mockResourceType/mockName"
+      }
+    }
+  ],
+  "contentVersion": "1.0.0.0",
+  "parameters": {
+    "mockedup-int-db-database-secret": {
+      "type": "securestring"
+    }
+  }
+}

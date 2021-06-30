@@ -1,0 +1,43 @@
+{
+  "aws_computecluster_base_app_computeclusterbase_computecluster_computeclusterbase": {
+    "cfn_nag": false,
+    "filename": "app-aws-computecluster-base-ap-southeast-2-template.json",
+    "cfn_lint": true,
+    "json_structure": {
+      "not_empty": [
+        {
+          "path": "Resources.launchConfigXappXcomputeclusterbaseXHamletFatalBuildreferencenotfound.Properties.ImageId"
+        },
+        {
+          "path": "Resources.launchConfigXappXcomputeclusterbaseXHamletFatalBuildreferencenotfound.Properties.InstanceType"
+        },
+        {
+          "path": "Resources.launchConfigXappXcomputeclusterbaseXHamletFatalBuildreferencenotfound.Properties.UserData"
+        },
+        {
+          "path": "Resources.asgXappXcomputeclusterbase.Metadata"
+        }
+      ]
+    },
+    "cfn_structure": {
+      "output": [
+        {
+          "id": "asgXappXcomputeclusterbase"
+        },
+        {
+          "id": "securityGroupXappXcomputeclusterbase"
+        }
+      ],
+      "resource": [
+        {
+          "id": "securityGroupXappXcomputeclusterbase",
+          "type": "AWS::EC2::SecurityGroup"
+        },
+        {
+          "id": "asgXappXcomputeclusterbase",
+          "type": "AWS::AutoScaling::AutoScalingGroup"
+        }
+      ]
+    }
+  }
+}
