@@ -1,0 +1,81 @@
+{
+  "engine": {
+    "name": "unicycle",
+    "description": "Latest build of the official engine parts",
+    "hidden": false,
+    "installed": false,
+    "engine_dir": "/home/runner/.hamlet/engine/engines",
+    "up_to_date": true,
+    "current_digest": null,
+    "latest_digest": null
+  },
+  "environment": {
+    "GENERATION_ENGINE_DIR": "",
+    "GENERATION_PLUGIN_DIRS": "",
+    "GENERATION_WRAPPER_JAR_FILE": "",
+    "GENERATION_BASE_DIR": "",
+    "GENERATION_DIR": "",
+    "AUTOMATION_DIR": "",
+    "AUTOMATION_BASE_DIR": ""
+  },
+  "install_state": null,
+  "sources": [
+    {
+      "name": "engine",
+      "description": "hamlet core engine",
+      "latest_digest": "sha256:ded3babc2e23c60f693dd3134f405f5f8b4648c7f5cb729ed98d26bb6ce1ce77"
+    },
+    {
+      "name": "executor-bash",
+      "description": "hamlet bash executor",
+      "latest_digest": "sha256:b03e21dcea1760fedf8b131f1b5bb9df981619b9a63ae7a0ee796447eef7918f"
+    },
+    {
+      "name": "engine-plugin-aws",
+      "description": "hamlet aws engine plugin",
+      "latest_digest": "sha256:90c951ced538b387ce6f665aa98a317e4862bb5de1626b0316d8f0d1a867c804"
+    },
+    {
+      "name": "engine-plugin-azure",
+      "description": "hamlet azure engine plugin",
+      "latest_digest": "sha256:cec3f317392cb249e547b1cd6b221151c036db5f02366c9f6aa03a264fef2f17"
+    },
+    {
+      "name": "engine-core",
+      "description": "hamlet freemarker wrapper",
+      "latest_digest": "sha256:219fc0f2d9394da40403988fd3bb496dd5a8b4bc0aa12a699c16b22cf24b0a50"
+    }
+  ],
+  "parts": [
+    {
+      "type": "engine-wrapper",
+      "description": "hamlet freemarker wrapper jar file",
+      "source_path": "",
+      "source_name": "engine-core"
+    },
+    {
+      "type": "core-engine",
+      "description": "core engine source",
+      "source_path": "",
+      "source_name": "engine"
+    },
+    {
+      "type": "executor-bash",
+      "description": "bash based executor",
+      "source_path": "",
+      "source_name": "executor-bash"
+    },
+    {
+      "type": "engine-plugin-aws",
+      "description": "default aws engine plugin",
+      "source_path": "",
+      "source_name": "engine-plugin-aws"
+    },
+    {
+      "type": "engine-plugin-azure",
+      "description": "default azure engine plugin",
+      "source_path": "",
+      "source_name": "engine-plugin-azure"
+    }
+  ]
+}
