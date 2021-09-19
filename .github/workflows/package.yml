@@ -95,12 +95,24 @@ jobs:
           username: ${{ github.repository_owner }}
           password: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Push Release
+      - name: Push Nightly
         uses: docker/build-push-action@v2
+        if: "${{steps.pick_engine.outputs.engine == "unicycle" }}"
         with:
-          push: ${{ github.event_name == 'scheduled' || startsWith(github.ref, 'refs/tags/') || github.ref == 'refs/heads/main' }}
+          push: ${{ github.event_name == 'scheduled'  || github.ref == 'refs/heads/main' }}
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
-          target: base_package
+          target: unicycle_package
+          build-args: |
+            engine=${{steps.pick_engine.outputs.engine}}
+
+      - name: Push Release
+        uses: docker/build-push-action@v2
+        if: "${{steps.pick_engine.outputs.engine != "unicycle" }}"
+        with:
+          push: startsWith(github.ref, 'refs/tags/')
+          tags: ${{ steps.meta.outputs.tags }}
+          labels: ${{ steps.meta.outputs.labels }}
+          target: release_package
           build-args: |
             engine=${{steps.pick_engine.outputs.engine}}
