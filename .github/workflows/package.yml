@@ -29,8 +29,7 @@ jobs:
 
       - name: Installs
         run: |
-          pip install hamlet-cli
-          sudo apt-get install -y jq dos2unix
+          pip install hamlet
 
       - id: pick_engine
         name: Pick Engine

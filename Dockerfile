@@ -5,8 +5,7 @@ ARG engine=unicycle
 
 USER root
 
-RUN apt-get update && apt-get install -y \
-        jq dos2unix
+RUN apt-get update && apt-get install -y jq
 
 RUN pip3 install hamlet
 
