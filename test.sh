@@ -10,8 +10,8 @@ script_dir="$( cd "$(dirname "${BASH_SOURCE[0]}")"; pwd )"
 
 tests_dir="${script_dir}/tests"
 
-export HAMLET_HOME_DIR="${script_dir}/home"
-rm -rf "${HAMLET_HOME_DIR}"
+export HAMLET_HOME_DIR="${script_dir}/.hamlet_home"
+[[ -d "${HAMLET_HOME_DIR}" ]] && rm -r "${HAMLET_HOME_DIR}"
 mkdir -p "${HAMLET_HOME_DIR}"
 
 hamlet engine install-engine "${engine}"

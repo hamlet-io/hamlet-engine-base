@@ -1,1 +1,3 @@
-home/
+.provider_tests/
+.hamlet_home/
+.generate_cmdb/

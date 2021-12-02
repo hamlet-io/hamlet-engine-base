@@ -1,7 +1,8 @@
 #!/bin/bash
 set -euo pipefail
 
-TEST_OUTPUT_DIR="${TEST_OUTPUT_DIR:-"$(pwd)"}"
+TEST_OUTPUT_DIR="${TEST_OUTPUT_DIR:-"$(pwd)/.provider_tests/"}"
+[[ -d "${TEST_OUTPUT_DIR}" ]] && rm -r "${TEST_OUTPUT_DIR}"
 
 # Test Engine and plugins
 echo "-- shared provider"
