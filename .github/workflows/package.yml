@@ -21,7 +21,7 @@ jobs:
       - uses: chrnorm/deployment-action@releases/v1
         name: Nightly deployment details
         id: nightly_deployment
-        if: github.event_name == 'scheduled'
+        if: ${{ github.event_name == 'scheduled' }}
         with:
           initial_status: "in_progress"
           token: "${{ github.token }}"
@@ -126,7 +126,7 @@ jobs:
             engine=${{steps.pick_engine.outputs.engine}}
 
       - name: Nightly deployment status (success)
-        if: github.event_name == 'scheduled' && success()
+        if: ${{ github.event_name == 'scheduled' && success() }}
         uses: chrnorm/deployment-status@releases/v1
         with:
           token: "${{ github.token }}"
@@ -134,7 +134,7 @@ jobs:
           deployment_id: ${{ steps.nightly_deployment.outputs.deployment_id }}
 
       - name: Nightly deployment status (failure)
-        if: github.event_name == 'scheduled' && failure()
+        if: ${{ github.event_name == 'scheduled' && failure() }}
         uses: chrnorm/deployment-status@releases/v1
         with:
           token: "${{ github.token }}"
