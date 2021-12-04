@@ -17,6 +17,11 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
+      # Debug the if statement for deployments
+      - name: Dump GitHub context
+        env:
+          GITHUB_CONTEXT: ${{ toJSON(github) }}
+        run: echo "$GITHUB_CONTEXT"
 
       - uses: chrnorm/deployment-action@releases/v1
         name: Nightly deployment details
