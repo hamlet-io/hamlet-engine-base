@@ -51,28 +51,10 @@ The current release is defined in the `state/release_engine_state.json` file whi
 1. Determine the current tram release that will be the candidate. You can see all of the available releases with `hamlet engine list-engines --show-hidden`
 2. Select the release from the root of this repo run `hamlet engine describe-engine < the name of the selected release> > state/release_engine_state.json`
 3. Commit the latest engine selection to the repo
-4. Run bump2version to set the latest version and tag the repo
-
-    ```bash
-    # install requirements
-    pip install -r requirements.txt
-    ```
-
-    ```bash
-    # major
-    bump2version major
-
-    # minor
-    bump2version minor
-
-    # patch
-    bump2version patch
-    ```
-
+4. Tag the repo with the version of the release
 5. Push the commit for the engine state and the tags
 
     ```bash
-    git push
     git push --tags
     ```
 
