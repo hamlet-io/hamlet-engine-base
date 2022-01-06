@@ -48,8 +48,8 @@ The current release is defined in the `state/release_engine_state.json` file whi
 
 ### Creating a release
 
-1. Determine the current tram release that will be the candidate. You can see all of the available releases with `hamlet engine list-engines --include-hidden`
-2. Select the release from the root of this repo run `hamlet engine describe-engine -n < the name of the selected release> > state/release_engine_state.json`
+1. Determine the current tram release that will be the candidate. You can see all of the available releases with `hamlet engine list-engines --show-hidden`
+2. Select the release from the root of this repo run `hamlet engine describe-engine < the name of the selected release> > state/release_engine_state.json`
 3. Commit the latest engine selection to the repo
 4. Run bump2version to set the latest version and tag the repo
 

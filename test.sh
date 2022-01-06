@@ -31,7 +31,9 @@ for f in ${tests_dir}/test_*.sh; do
         . "$f" || exit $?
     fi
   else
+    echo ""
     echo "[%] Running test script: ${f}"
+    echo ""
     . "$f" || exit $?
   fi
   popd > /dev/null
