@@ -13,8 +13,7 @@ WORKDIR /build/
 
 ENV HAMLET_HOME_DIR='/build/'
 
-RUN [ "${engine}" != "unicyle" ] && hamlet engine install-engine "unicycle"
-RUN [ "${engine}" != "tram" ] && hamlet engine install-engine "tram"
+RUN hamlet engine install-engine "${engine}"
 RUN hamlet engine set-engine "${engine}"
 
 # Copy the latest into the container
