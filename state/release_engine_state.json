@@ -1,41 +1,41 @@
 {
   "engine": {
-    "name": "tram-20220113",
+    "name": "tram-20220114",
     "description": "Scheduled build of the official hamlet engine",
     "hidden": true,
     "installed": true,
-    "engine_dir": ".hamlet/engine/engines",
+    "engine_dir": "/Users/michael/.hamlet/engine/engines",
     "up_to_date": true,
-    "current_digest": "sha256:c7867dfd9d5f52d56a253192ee29e99ef95954a86ede3fc7ba3a03c49e8d4fc4",
-    "latest_digest": "sha256:c7867dfd9d5f52d56a253192ee29e99ef95954a86ede3fc7ba3a03c49e8d4fc4"
+    "current_digest": "sha256:0bae3cb2eaee57cee1025025671ba19548baee669fe1689443da8fd962c2b3b9",
+    "latest_digest": "sha256:0bae3cb2eaee57cee1025025671ba19548baee669fe1689443da8fd962c2b3b9"
   },
   "environment": {
-    "GENERATION_ENGINE_DIR": ".hamlet/engine/engines/tram-20220113/hamlet-engine-base/engine",
-    "GENERATION_PLUGIN_DIRS": ".hamlet/engine/engines/tram-20220113/hamlet-engine-base/engine-plugin-aws;.hamlet/engine/engines/tram-20220113/hamlet-engine-base/engine-plugin-azure",
-    "GENERATION_WRAPPER_JAR_FILE": ".hamlet/engine/engines/tram-20220113/hamlet-engine-base/engine-core/freemarker-wrapper.jar",
-    "GENERATION_BASE_DIR": ".hamlet/engine/engines/tram-20220113/hamlet-engine-base/executor-bash",
-    "GENERATION_DIR": ".hamlet/engine/engines/tram-20220113/hamlet-engine-base/executor-bash/cli",
-    "AUTOMATION_DIR": ".hamlet/engine/engines/tram-20220113/hamlet-engine-base/executor-bash/automation/jenkins/aws",
-    "AUTOMATION_BASE_DIR": ".hamlet/engine/engines/tram-20220113/hamlet-engine-base/executor-bash/automation"
+    "GENERATION_ENGINE_DIR": "/Users/michael/.hamlet/engine/engines/tram-20220114/hamlet-engine-base/engine",
+    "GENERATION_PLUGIN_DIRS": "/Users/michael/.hamlet/engine/engines/tram-20220114/hamlet-engine-base/engine-plugin-aws;/Users/michael/.hamlet/engine/engines/tram-20220114/hamlet-engine-base/engine-plugin-azure",
+    "GENERATION_WRAPPER_JAR_FILE": "/Users/michael/.hamlet/engine/engines/tram-20220114/hamlet-engine-base/engine-core/freemarker-wrapper.jar",
+    "GENERATION_BASE_DIR": "/Users/michael/.hamlet/engine/engines/tram-20220114/hamlet-engine-base/executor-bash",
+    "GENERATION_DIR": "/Users/michael/.hamlet/engine/engines/tram-20220114/hamlet-engine-base/executor-bash/cli",
+    "AUTOMATION_DIR": "/Users/michael/.hamlet/engine/engines/tram-20220114/hamlet-engine-base/executor-bash/automation/jenkins/aws",
+    "AUTOMATION_BASE_DIR": "/Users/michael/.hamlet/engine/engines/tram-20220114/hamlet-engine-base/executor-bash/automation"
   },
   "install_state": {
     "part_paths": {
-      "engine-wrapper": ".hamlet/engine/engines/tram-20220113/hamlet-engine-base/engine-core/",
-      "core-engine": ".hamlet/engine/engines/tram-20220113/hamlet-engine-base/engine/",
-      "executor-bash": ".hamlet/engine/engines/tram-20220113/hamlet-engine-base/executor-bash/",
-      "engine-plugin-aws": ".hamlet/engine/engines/tram-20220113/hamlet-engine-base/engine-plugin-aws/",
-      "engine-plugin-azure": ".hamlet/engine/engines/tram-20220113/hamlet-engine-base/engine-plugin-azure/"
+      "engine-wrapper": "/Users/michael/.hamlet/engine/engines/tram-20220114/hamlet-engine-base/engine-core/",
+      "core-engine": "/Users/michael/.hamlet/engine/engines/tram-20220114/hamlet-engine-base/engine/",
+      "executor-bash": "/Users/michael/.hamlet/engine/engines/tram-20220114/hamlet-engine-base/executor-bash/",
+      "engine-plugin-aws": "/Users/michael/.hamlet/engine/engines/tram-20220114/hamlet-engine-base/engine-plugin-aws/",
+      "engine-plugin-azure": "/Users/michael/.hamlet/engine/engines/tram-20220114/hamlet-engine-base/engine-plugin-azure/"
     },
-    "digest": "sha256:c7867dfd9d5f52d56a253192ee29e99ef95954a86ede3fc7ba3a03c49e8d4fc4",
+    "digest": "sha256:0bae3cb2eaee57cee1025025671ba19548baee669fe1689443da8fd962c2b3b9",
     "source_install_state": [
       {
         "name": "hamlet-engine-base",
         "type": "ContainerEngineSource",
-        "digest": "sha256:2d47f8f8ba29a531b03d758ddcdc8fac424ebb9001ad103229bf69c8a9ebe53e",
+        "digest": "sha256:32eb8c8a0e4714a1891a1109ba9fc54eb2ce5fc156355a3d08ded124542045a2",
         "source_metadata": {
           "registry_url": "https://ghcr.io",
           "repository": "hamlet-io/hamlet-engine-base",
-          "tag": "schedule-20220113"
+          "tag": "schedule-20220114"
         },
         "build_metadata": {
           "/engine-plugin-azure/": {
@@ -73,7 +73,7 @@
           "/engine/": {
             "code_source": {
               "provider": "git",
-              "revision": "be93adaf36d66beca3bb83902d3c011ff90dcad6",
+              "revision": "26c812a11d03b4e0992bfbc0e3eb769577b6549b",
               "tag": "",
               "origin": "https://github.com/hamlet-io/engine"
             }
@@ -86,7 +86,7 @@
     {
       "name": "hamlet-engine-base",
       "description": "hamlet official engine source",
-      "latest_digest": "sha256:2d47f8f8ba29a531b03d758ddcdc8fac424ebb9001ad103229bf69c8a9ebe53e"
+      "latest_digest": "sha256:32eb8c8a0e4714a1891a1109ba9fc54eb2ce5fc156355a3d08ded124542045a2"
     }
   ],
   "parts": [
