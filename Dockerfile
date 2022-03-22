@@ -1,37 +1,30 @@
-FROM openjdk:8-slim-buster AS builder
-COPY --from=python:3.8-slim-buster / /
+FROM python:3.9-slim-buster as builder
 
-ARG engine=unicycle
+ARG HAMLET_ENGINE="unicycle"
 
 USER root
-
-RUN apt-get update && apt-get install -y jq
-
-RUN pip3 install hamlet
+RUN pip install hamlet
 
 WORKDIR /build/
-
-ENV HAMLET_HOME_DIR='/build/'
-
-RUN hamlet engine install-engine "${engine}"
-RUN hamlet engine set-engine "${engine}"
+ENV HAMLET_ENGINE_DIR='/build/'
+RUN hamlet engine install-engine
 
 # Copy the latest into the container
 FROM scratch as unicycle_package
 
-COPY --from=builder /build/engine/engines/unicycle/engine-core          /engine-core
-COPY --from=builder /build/engine/engines/unicycle/engine               /engine
-COPY --from=builder /build/engine/engines/unicycle/engine-plugin-aws    /engine-plugin-aws
-COPY --from=builder /build/engine/engines/unicycle/engine-plugin-azure  /engine-plugin-azure
-COPY --from=builder /build/engine/engines/unicycle/executor-bash        /executor-bash
+COPY --from=builder /build/engines/unicycle/engine-core          /engine-core
+COPY --from=builder /build/engines/unicycle/engine               /engine
+COPY --from=builder /build/engines/unicycle/engine-plugin-aws    /engine-plugin-aws
+COPY --from=builder /build/engines/unicycle/engine-plugin-azure  /engine-plugin-azure
+COPY --from=builder /build/engines/unicycle/executor-bash        /executor-bash
 
 # Copy the provided tram package into the repository
 FROM scratch as release_package
 
-ARG engine="tram"
+ARG HAMLET_ENGINE="unicycle"
 
-COPY --from=builder /build/engine/engines/${engine}/hamlet-engine-base/engine-core          /engine-core
-COPY --from=builder /build/engine/engines/${engine}/hamlet-engine-base/engine               /engine
-COPY --from=builder /build/engine/engines/${engine}/hamlet-engine-base/engine-plugin-aws    /engine-plugin-aws
-COPY --from=builder /build/engine/engines/${engine}/hamlet-engine-base/engine-plugin-azure  /engine-plugin-azure
-COPY --from=builder /build/engine/engines/${engine}/hamlet-engine-base/executor-bash        /executor-bash
+COPY --from=builder /build/engine/engines/${HAMLET_ENGINE}/hamlet-engine-base/engine-core          /engine-core
+COPY --from=builder /build/engine/engines/${HAMLET_ENGINE}/hamlet-engine-base/engine               /engine
+COPY --from=builder /build/engine/engines/${HAMLET_ENGINE}/hamlet-engine-base/engine-plugin-aws    /engine-plugin-aws
+COPY --from=builder /build/engine/engines/${HAMLET_ENGINE}/hamlet-engine-base/engine-plugin-azure  /engine-plugin-azure
+COPY --from=builder /build/engine/engines/${HAMLET_ENGINE}/hamlet-engine-base/executor-bash        /executor-bash
