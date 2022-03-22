@@ -18,10 +18,10 @@ COPY --from=builder /build/engines/unicycle/engine-plugin-aws    /engine-plugin-
 COPY --from=builder /build/engines/unicycle/engine-plugin-azure  /engine-plugin-azure
 COPY --from=builder /build/engines/unicycle/executor-bash        /executor-bash
 
-# Copy the provided tram package into the repository
+# Copy a consolidated image source a new container ( used for promotion from tram to train/fixed release)
 FROM scratch as release_package
 
-ARG HAMLET_ENGINE="unicycle"
+ARG HAMLET_ENGINE="tram"
 
 COPY --from=builder /build/engine/engines/${HAMLET_ENGINE}/hamlet-engine-base/engine-core          /engine-core
 COPY --from=builder /build/engine/engines/${HAMLET_ENGINE}/hamlet-engine-base/engine               /engine
