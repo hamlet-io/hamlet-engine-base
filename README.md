@@ -48,14 +48,19 @@ The current release is defined in the `state/release_engine_state.json` file whi
 
 ### Creating a release
 
-1. Determine the current tram release that will be the candidate. You can see all of the available releases with `hamlet engine list-engines --show-hidden`
-2. Select the release from the root of this repo run `hamlet engine describe-engine < the name of the selected release> > state/release_engine_state.json`
-3. Commit the latest engine selection to the repo
-4. Tag the repo with the version of the release
-5. Push the commit for the engine state and the tags
+1. Determine the current tram release that will be the candidate. You can see all of the available releases with `hamlet engine list-engines --location hidden`
+1. Install the engine into your local hamlet install and perform some basic checks on the release candidate (rc) engine
+    - `hamlet engine install-engine --location hidden`
+    - `hamlet --engine <rc engine name> -i mock -p aws -p awstest reference list-references`
+    - `hamlet --engine <rc engine name> -i mock -p aws -p awstest deploy list-deployments`
+    - `hamlet --engine <rc engine name> -i mock -p aws -p awstest layer list-layers`
+1. Select the release from the root of this repo run `hamlet engine describe-engine < the name of the selected release> --location installed > state/release_engine_state.json`
+1. Commit the latest engine selection to the repo
+1. Tag the repo with the version of the release
+1. Push the commit for the engine state and the tags
 
     ```bash
     git push --tags
     ```
 
-6. The github workflow will then create the container image, and push to both the `latest` tag and to the version tag
+1. The github workflow will then create the container image, and push to both the `latest` tag and to the version tag
