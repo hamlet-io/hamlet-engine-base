@@ -1,30 +1,36 @@
-FROM python:3.9-slim-buster as builder
-
-ARG HAMLET_ENGINE="unicycle"
+FROM python:3.9-slim-buster as base
 
 USER root
 RUN pip install hamlet
+COPY engine.ini /engine.ini
 
-WORKDIR /build/
 ENV HAMLET_ENGINE_DIR='/build/'
-RUN hamlet engine install-engine
+ENV HAMLET_ENGINE_CONFIG='/'
 
-# Copy the latest into the container
-FROM scratch as unicycle_package
 
-COPY --from=builder /build/engines/unicycle/engine-core          /engine-core
-COPY --from=builder /build/engines/unicycle/engine               /engine
-COPY --from=builder /build/engines/unicycle/engine-plugin-aws    /engine-plugin-aws
-COPY --from=builder /build/engines/unicycle/engine-plugin-azure  /engine-plugin-azure
-COPY --from=builder /build/engines/unicycle/executor-bash        /executor-bash
+# Build the tram engine
+FROM base as tram_builder
+RUN hamlet engine install-engine hamlet_tram_release
 
-# Copy a consolidated image source a new container ( used for promotion from tram to train/fixed release)
-FROM scratch as release_package
+# Generate the tram container package
+FROM scratch as tram_package
 
-ARG HAMLET_ENGINE="tram"
+COPY --from=tram_builder /build/engines/hamlet_tram_release/tram_core           /engine-core
+COPY --from=tram_builder /build/engines/hamlet_tram_release/tram_engine         /engine
+COPY --from=tram_builder /build/engines/hamlet_tram_release/tram_bash           /executor-bash
+COPY --from=tram_builder /build/engines/hamlet_tram_release/tram_plugin_aws     /engine-plugin-aws
+COPY --from=tram_builder /build/engines/hamlet_tram_release/tram_plugin_azure   /engine-plugin-azure
 
-COPY --from=builder /build/engine/engines/${HAMLET_ENGINE}/hamlet-engine-base/engine-core          /engine-core
-COPY --from=builder /build/engine/engines/${HAMLET_ENGINE}/hamlet-engine-base/engine               /engine
-COPY --from=builder /build/engine/engines/${HAMLET_ENGINE}/hamlet-engine-base/engine-plugin-aws    /engine-plugin-aws
-COPY --from=builder /build/engine/engines/${HAMLET_ENGINE}/hamlet-engine-base/engine-plugin-azure  /engine-plugin-azure
-COPY --from=builder /build/engine/engines/${HAMLET_ENGINE}/hamlet-engine-base/executor-bash        /executor-bash
+
+# Build the train engine
+FROM base as train_builder
+RUN hamlet engine install-engine hamlet_train_release
+
+# Create the train container package
+FROM scratch as train_package
+
+COPY --from=train_builder /build/engines/hamlet_train_release/train_core           /engine-core
+COPY --from=train_builder /build/engines/hamlet_train_release/train_engine         /engine
+COPY --from=train_builder /build/engines/hamlet_train_release/train_bash           /executor-bash
+COPY --from=train_builder /build/engines/hamlet_train_release/train_plugin_aws     /engine-plugin-aws
+COPY --from=train_builder /build/engines/hamlet_train_release/train_plugin_azure   /engine-plugin-azure

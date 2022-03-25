@@ -1,7 +1,7 @@
 #!/bin/bash
 set -euo pipefail
 
-engine="${1:-"unicycle"}"
+engine="${1}"
 test_script="${2:-""}"
 
 echo "[%] Setting up engine"
@@ -10,15 +10,18 @@ script_dir="$( cd "$(dirname "${BASH_SOURCE[0]}")"; pwd )"
 
 tests_dir="${script_dir}/tests"
 
-export HAMLET_HOME_DIR="${script_dir}/.hamlet_home"
-[[ -d "${HAMLET_HOME_DIR}" ]] && rm -r "${HAMLET_HOME_DIR}"
-mkdir -p "${HAMLET_HOME_DIR}"
+export HAMLET_ENGINE="${engine}"
+export HAMLET_ENGINE_DIR="${script_dir}/.hamlet_home"
+export HAMLET_ENGINE_CONFIG="${script_dir}"
 
-hamlet engine install-engine "${engine}"
+[[ -d "${HAMLET_ENGINE_DIR}" ]] && rm -r "${HAMLET_ENGINE_DIR}"
+mkdir -p "${HAMLET_ENGINE_DIR}"
+
+hamlet engine install-engine
 
 echo "[%] Environment setup"
 
-eval "$(hamlet --engine "${engine}" engine env)"
+eval "$(hamlet engine env)"
 env | egrep "(GENERATION|AUTOMATION).*" | sort
 
 echo "[%] Running testing"
