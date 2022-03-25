@@ -54,7 +54,9 @@ The current release is defined in the `state/release_engine_state.json` file whi
     - `hamlet --engine <rc engine name> -i mock -p aws -p awstest reference list-references`
     - `hamlet --engine <rc engine name> -i mock -p aws -p awstest deploy list-deployments`
     - `hamlet --engine <rc engine name> -i mock -p aws -p awstest layer list-layers`
-1. Select the release from the root of this repo run `hamlet engine describe-engine < the name of the selected release> --location installed > state/release_engine_state.json`
+1. Select the release from the root of this repo run `hamlet engine describe-engine < the name of the selected release> --location installed`
+1. From the describe results get the digest of the container image sources that will be releases
+1. Update the `engine.ini` file in the root of the repo with the digests for the `hamlet_train_release` engine
 1. Commit the latest engine selection to the repo
 1. Tag the repo with the version of the release
 1. Push the commit for the engine state and the tags
