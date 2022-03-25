@@ -29,13 +29,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v2
 
-      - name: javasetup
-        uses: actions/setup-java@v2
-        with:
-          distribution: 'adopt'
-          java-version: '8'
-
-      - name: Installs
+      - name: Install
         run: |
           pip install -q hamlet
 
@@ -43,9 +37,9 @@ jobs:
         name: Pick Engine
         run: |
           if [[ "${{ github.ref }}" == refs/tags/* ]]; then
-            echo ::set-output name=engine::"$(cat state/release_engine_state.json | jq -r '.engine.name')"
+            echo ::set-output name=engine::hamlet_train_release
           else
-            echo ::set-output name=engine::unicycle
+            echo ::set-output name=engine::hamlet_tram_release
           fi
 
       - name: Run Tests
@@ -104,23 +98,23 @@ jobs:
 
       - name: Push Nightly
         uses: docker/build-push-action@v2
-        if: steps.pick_engine.outputs.engine == 'unicycle'
+        if: steps.pick_engine.outputs.engine == 'hamlet_tram_release'
         with:
           push: ${{ github.event_name == 'schedule'  || github.ref == 'refs/heads/main' }}
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
-          target: unicycle_package
+          target: tram_package
           build-args: |
             engine=${{steps.pick_engine.outputs.engine}}
 
       - name: Push Release
         uses: docker/build-push-action@v2
-        if: steps.pick_engine.outputs.engine != 'unicycle'
+        if: steps.pick_engine.outputs.engine != 'hamlet_tram_release'
         with:
           push: ${{ startsWith(github.ref, 'refs/tags/') }}
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
-          target: release_package
+          target: train_package
           build-args: |
             engine=${{steps.pick_engine.outputs.engine}}
 
