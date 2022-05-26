@@ -44,18 +44,37 @@ The hamlet-engine-base produces a collection of images based on different requir
 An automated build of the engine is generated each night and published to the container registry. The builds are tagged based on the date the image was created.
 Each of these releases are considered as releases candidates for the next release.
 
-The current release is defined in the `state/release_engine_state.json` file which specifies the details of the specific engine version to release
+The current release is defined in the `engine.ini` file which specifies the details of the specific engine version to release
 
 ### Creating a release
 
 1. Determine the current tram release that will be the candidate. You can see all of the available releases with `hamlet engine list-engines --location hidden`
 1. Install the engine into your local hamlet install and perform some basic checks on the release candidate (rc) engine
-    - `hamlet engine install-engine --location hidden`
+    - `hamlet engine install-engine <rc engine name> --location hidden`
     - `hamlet --engine <rc engine name> -i mock -p aws -p awstest reference list-references`
     - `hamlet --engine <rc engine name> -i mock -p aws -p awstest deploy list-deployments`
     - `hamlet --engine <rc engine name> -i mock -p aws -p awstest layer list-layers`
 1. Select the release from the root of this repo run `hamlet engine describe-engine < the name of the selected release> --location installed`
-1. From the describe results get the digest of the container image sources that will be releases
+1. From the `describe-engine` result, use the `build_metadata` section to obtain the digests of the container image sources that will be included in the release. There are a few
+ways to do this based on the `code_source` `revision` attribute (git commit) value or the corresponding short commit value;
+   1. Tag the code repos with the release version
+      1. tag each repo with the `x.x.x` release version at the commit (this is also useful in mantaining the changelog information in the repos)
+      1. wait for the release action to run
+      2. follow the steps in the next alternative, but look for the image tagged with the version number
+   1. Lookup the digests in the source repos based on the revision information
+      1. Use the revision to find the image in the `Packages` section of the `Code` tab
+      1. The image will be tagged `sha-{short commit}`
+      1. Click on the elipses next to `Digest` on the entry to obtain the digest
+   1. Use docker to look up details of the image built at the time of the git commit based on the `sha-{short commit}` tag
+      1. Pull the image
+          ```bash
+          docker pull ghcr.io/hamlet-io/{repo}:sha-{short commit}
+          ```
+      1. Inspect the image
+          ```bash
+          docker inspect ghcr.io/hamlet-io/{repo}:sha-{short commit}
+          ```
+      2. Obtain the digest from the `RepoDigests` attribute
 1. Update the `engine.ini` file in the root of the repo with the digests for the `hamlet_train_release` engine
 1. Commit the latest engine selection to the repo
 1. Tag the repo with the version of the release
@@ -66,3 +85,13 @@ The current release is defined in the `state/release_engine_state.json` file whi
     ```
 
 1. The github workflow will then create the container image, and push to both the `latest` tag and to the version tag
+
+### Updating the changelogs
+
+In order to ensure the changelogs in each repo correctly reflects what was added in each release, each repo needs to be
+tagged with the release version at the commit listed in the `describe-engine` result
+
+1. Follow the instructions in the section on "Creating a release" to determine the revision
+1. Tag the repo at the revision with the `x.x.x` version
+1. Trigger the `changelog` action to update the `chore: update changelog` pull request
+1. Merge the `chore: update changelog` pull request (the next commit will trigger the recreation of this pull request)
