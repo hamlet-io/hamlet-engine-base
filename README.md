@@ -86,12 +86,12 @@ ways to do this based on the `code_source` `revision` attribute (git commit) val
 
 1. The github workflow will then create the container image, and push to both the `latest` tag and to the version tag
 
-### Updating the changelogs
+### Updating the changelog
 
-In order to ensure the changelogs in each repo correctly reflects what was added in each release, each repo needs to be
+In order to ensure the changelog in each repo correctly reflects what was added in each release, each repo needs to be
 tagged with the release version at the commit listed in the `describe-engine` result
 
 1. Follow the instructions in the section on "Creating a release" to determine the revision
 1. Tag the repo at the revision with the `x.x.x` version
-1. Trigger the `changelog` action to update the `chore: update changelog` pull request
-1. Merge the `chore: update changelog` pull request (the next commit will trigger the recreation of this pull request)
+1. Merge the `chore: update changelog` pull request (this will trigger the changelog action to recalculate the changelog on the basis of the new tag)
+1. Merge the `chore: update changelog` pull request a second time (this will update the changelog to describe the latest revision)
