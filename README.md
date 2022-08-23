@@ -60,21 +60,25 @@ ways to do this based on the `code_source` `revision` attribute (git commit) val
    1. Tag the code repos with the release version
       1. tag each repo with the `x.x.x` release version at the commit (this is also useful in mantaining the changelog information in the repos)
       1. wait for the release action to run
-      2. follow the steps in the next alternative, but look for the image tagged with the version number
+      1. follow the steps in the next alternative, but look for the image tagged with the version number
    1. Lookup the digests in the source repos based on the revision information
       1. Use the revision to find the image in the `Packages` section of the `Code` tab
       1. The image will be tagged `sha-{short commit}`
       1. Click on the elipses next to `Digest` on the entry to obtain the digest
    1. Use docker to look up details of the image built at the time of the git commit based on the `sha-{short commit}` tag
       1. Pull the image
+
           ```bash
           docker pull ghcr.io/hamlet-io/{repo}:sha-{short commit}
           ```
+
       1. Inspect the image
+
           ```bash
           docker inspect ghcr.io/hamlet-io/{repo}:sha-{short commit}
           ```
-      2. Obtain the digest from the `RepoDigests` attribute
+
+      1.. Obtain the digest from the `RepoDigests` attribute
 1. Update the `engine.ini` file in the root of the repo with the digests for the `hamlet_train_release` engine
 1. Commit the latest engine selection to the repo
 1. Tag the repo with the version of the release
