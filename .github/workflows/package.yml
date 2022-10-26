@@ -17,7 +17,7 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - uses: chrnorm/deployment-action@releases/v1
+      - uses: chrnorm/deployment-action@v2
         name: Nightly deployment details
         id: nightly_deployment
         if: ${{ github.event_name == 'schedule' }}
@@ -27,7 +27,7 @@ jobs:
           environment: nightly
 
       - name: Checkout
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
 
       - name: Install
         run: |
@@ -49,7 +49,7 @@ jobs:
           ./test.sh "${{steps.pick_engine.outputs.engine}}"
 
       - name: Shared Plugin Results
-        uses: mikepenz/action-junit-report@v2
+        uses: mikepenz/action-junit-report@v3
         with:
           report_paths: 'hamlet_tests/shared/junit.xml'
           fail_on_failure: true
@@ -57,7 +57,7 @@ jobs:
           check_name: Shared Plugin Results
 
       - name: AWS Plugin Results
-        uses: mikepenz/action-junit-report@v2
+        uses: mikepenz/action-junit-report@v3
         with:
           report_paths: 'hamlet_tests/aws/junit.xml'
           fail_on_failure: true
@@ -65,7 +65,7 @@ jobs:
           check_name: AWS Plugin Results
 
       - name: Azure Plugin Results
-        uses: mikepenz/action-junit-report@v2
+        uses: mikepenz/action-junit-report@v3
         with:
           report_paths: 'hamlet_tests/azure/junit.xml'
           fail_on_failure: true
@@ -74,7 +74,7 @@ jobs:
 
       - name: docker meta details
         id: meta
-        uses: docker/metadata-action@v3
+        uses: docker/metadata-action@v4
         with:
           images: ghcr.io/${{github.repository}}
           flavor: |
@@ -87,7 +87,7 @@ jobs:
             type=sha
 
       - name: Set up Docker
-        uses: docker/setup-buildx-action@v1
+        uses: docker/setup-buildx-action@v2
 
       - name: Login to Github Container Registry
         uses: docker/login-action@v1
@@ -97,7 +97,7 @@ jobs:
           password: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Push Nightly
-        uses: docker/build-push-action@v2
+        uses: docker/build-push-action@v3
         if: steps.pick_engine.outputs.engine == 'hamlet_tram_release'
         with:
           push: ${{ github.event_name == 'schedule'  || github.ref == 'refs/heads/main' }}
@@ -108,7 +108,7 @@ jobs:
             engine=${{steps.pick_engine.outputs.engine}}
 
       - name: Push Release
-        uses: docker/build-push-action@v2
+        uses: docker/build-push-action@v3
         if: steps.pick_engine.outputs.engine != 'hamlet_tram_release'
         with:
           push: ${{ startsWith(github.ref, 'refs/tags/') }}
@@ -120,7 +120,7 @@ jobs:
 
       - name: Nightly deployment status (success)
         if: ${{ github.event_name == 'schedule' && success() }}
-        uses: chrnorm/deployment-status@releases/v1
+        uses: chrnorm/deployment-status@v2
         with:
           token: "${{ github.token }}"
           state: "success"
@@ -128,7 +128,7 @@ jobs:
 
       - name: Nightly deployment status (failure)
         if: ${{ github.event_name == 'schedule' && failure() }}
-        uses: chrnorm/deployment-status@releases/v1
+        uses: chrnorm/deployment-status@v2
         with:
           token: "${{ github.token }}"
           state: "failure"
