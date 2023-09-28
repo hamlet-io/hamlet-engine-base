@@ -37,9 +37,9 @@ jobs:
         name: Pick Engine
         run: |
           if [[ "${{ github.ref }}" == refs/tags/* ]]; then
-            echo ::set-output name=engine::hamlet_train_release
+            echo "engine=hamlet_train_release" >> ${GITHUB_OUTPUT}
           else
-            echo ::set-output name=engine::hamlet_tram_release
+            echo "engine=hamlet_tram_release" >> ${GITHUB_OUTPUT}
           fi
 
       - name: Run Tests
