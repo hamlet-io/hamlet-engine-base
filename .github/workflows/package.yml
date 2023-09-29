@@ -27,7 +27,7 @@ jobs:
           environment: nightly
 
       - name: Checkout
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
       - name: Install
         run: |
@@ -37,9 +37,9 @@ jobs:
         name: Pick Engine
         run: |
           if [[ "${{ github.ref }}" == refs/tags/* ]]; then
-            echo ::set-output name=engine::hamlet_train_release
+            echo "engine=hamlet_train_release" >> ${GITHUB_OUTPUT}
           else
-            echo ::set-output name=engine::hamlet_tram_release
+            echo "engine=hamlet_tram_release" >> ${GITHUB_OUTPUT}
           fi
 
       - name: Run Tests
@@ -49,7 +49,7 @@ jobs:
           ./test.sh "${{steps.pick_engine.outputs.engine}}"
 
       - name: Shared Plugin Results
-        uses: mikepenz/action-junit-report@v3
+        uses: mikepenz/action-junit-report@v4
         with:
           report_paths: 'hamlet_tests/shared/junit.xml'
           fail_on_failure: true
@@ -57,7 +57,7 @@ jobs:
           check_name: Shared Plugin Results
 
       - name: AWS Plugin Results
-        uses: mikepenz/action-junit-report@v3
+        uses: mikepenz/action-junit-report@v4
         with:
           report_paths: 'hamlet_tests/aws/junit.xml'
           fail_on_failure: true
@@ -65,7 +65,7 @@ jobs:
           check_name: AWS Plugin Results
 
       - name: Azure Plugin Results
-        uses: mikepenz/action-junit-report@v3
+        uses: mikepenz/action-junit-report@v4
         with:
           report_paths: 'hamlet_tests/azure/junit.xml'
           fail_on_failure: true
@@ -74,7 +74,7 @@ jobs:
 
       - name: docker meta details
         id: meta
-        uses: docker/metadata-action@v4
+        uses: docker/metadata-action@v5
         with:
           images: ghcr.io/${{github.repository}}
           flavor: |
@@ -87,17 +87,17 @@ jobs:
             type=sha
 
       - name: Set up Docker
-        uses: docker/setup-buildx-action@v2
+        uses: docker/setup-buildx-action@v3
 
       - name: Login to Github Container Registry
-        uses: docker/login-action@v1
+        uses: docker/login-action@v3
         with:
           registry: ghcr.io
           username: ${{ github.repository_owner }}
           password: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Push Nightly
-        uses: docker/build-push-action@v3
+        uses: docker/build-push-action@v5
         if: steps.pick_engine.outputs.engine == 'hamlet_tram_release'
         with:
           push: ${{ github.event_name == 'schedule'  || github.ref == 'refs/heads/main' }}
@@ -108,7 +108,7 @@ jobs:
             engine=${{steps.pick_engine.outputs.engine}}
 
       - name: Push Release
-        uses: docker/build-push-action@v3
+        uses: docker/build-push-action@v5
         if: steps.pick_engine.outputs.engine != 'hamlet_tram_release'
         with:
           push: ${{ startsWith(github.ref, 'refs/tags/') }}

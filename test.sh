@@ -19,11 +19,6 @@ mkdir -p "${HAMLET_ENGINE_DIR}"
 
 hamlet engine install-engine
 
-echo "[%] Environment setup"
-
-eval "$(hamlet engine env)"
-env | egrep "(GENERATION|AUTOMATION).*" | sort
-
 echo "[%] Running testing"
 
 for f in ${tests_dir}/test_*.sh; do
